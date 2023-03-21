@@ -1,0 +1,31 @@
+FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED=1 \
+PYTHONDONTWRITEBYTECODE=1 \
+PYTHONFAULTHANDLER=1 \
+PYTHONHASHSEED=random \
+PIP_NO_CACHE_DIR=off \
+PIP_DISABLE_PIP_VERSION_CHECK=on \
+PIP_DEFAULT_TIMEOUT=100
+
+WORKDIR /backend
+
+RUN apt-get update && apt-get install -y \
+gcc \
+python3-dev \
+libpq-dev \
+libxml2-dev \
+libxslt-dev \
+netcat \
+&& rm -rd /var/lib/apt/lists* 
+
+COPY requirements requiremenets/
+RUN pip install -r requiremenets/development.txt
+
+COPY backend /backend
+COPY bin/entrypoint.dev.sh /bin/entrypoint.dev.sh
+
+EXPOSE 8000
+
+RUN chmod +x /bin/entrypoint.dev.sh
+CMD ["sh", "/bin/entrypoint.dev.sh"]

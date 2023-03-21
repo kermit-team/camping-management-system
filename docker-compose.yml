@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: db
+    image: postgres:15
+    ports:
+      - '5432:5432'
+    env_file:
+      - docker/.docker.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  angular:
+    container_name: angular
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile.front
+    environment:     
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - FAST_REFRESH=false
+      - NODE_ENV=development
+    ports:
+      - '4200:4200'
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
+    depends_on:
+      - django
+
+  django:
+    container_name: django
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile.back
+    env_file:
+      - docker/.docker.env
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./backend:/backend
+    depends_on:
+      - db
+    links:
+      - db
+
+volumes:
+  postgres_data:
