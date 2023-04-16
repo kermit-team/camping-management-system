@@ -1,2 +1,5 @@
 from .user_view_set import UserViewSet
 from .group_view_set import GroupViewSet
+from .email_verification_view import EmailVerificationView
+from .password_reset_view import PasswordResetView
+from .password_reset_confirm_view import PasswordResetConfirmView

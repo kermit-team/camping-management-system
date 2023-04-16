@@ -1,2 +1,4 @@
 from .group_serializer import GroupSerializer
-from .user_serializer import UserRegistrationSerializer, UserRequestSerializer, UserResponseSerializer
+from .user_registration_serializer import UserRegistrationSerializer
+from .user_request_serializer import UserRequestSerializer
+from .user_response_serializer import UserResponseSerializer

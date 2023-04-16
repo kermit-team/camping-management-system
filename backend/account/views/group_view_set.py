@@ -10,11 +10,21 @@ from account.services import GroupService
 
 class GroupViewSet(ViewSet):
 
-    group_service = GroupService()
     permission_classes = [IsAdminUser]
 
     def list(self, request):
-        queryset_of_groups = self.group_service.get_groups()
+        
+        filters = {
+            k: (v.split(',') if '__in' in k else v) 
+            for k,v in request.query_params.items()
+        }
+        order_by = filters.pop('order_by', 'id')
+        
+        queryset_of_groups = GroupService.get_groups(
+            filters=filters, 
+            order_by=order_by,
+        )
+         
         serializer_context = {
             'request': request,
         }
@@ -25,10 +35,7 @@ class GroupViewSet(ViewSet):
             context = serializer_context,
         )
 
-        return Response(
-            groups_list_serializer.data, 
-            status = status.HTTP_200_OK,
-        )
+        return Response(groups_list_serializer.data)
 
     def create(self, request):
         group_serializer = GroupSerializer(data=request.data)
@@ -37,7 +44,7 @@ class GroupViewSet(ViewSet):
             'request': request,
         }
 
-        created_group = self.group_service.create_group(group_serializer.validated_data)
+        created_group = GroupService.create_group(group_serializer.validated_data)
         response_group_serializer = GroupSerializer(
             created_group,
             context = serializer_context,
@@ -45,11 +52,11 @@ class GroupViewSet(ViewSet):
 
         return Response(
             response_group_serializer.data,
-            status = status.HTTP_201_CREATED,
+            status.HTTP_201_CREATED,
         )
 
     def retrieve(self, request, pk=None):
-        group = self.group_service.get_group(pk)
+        group = GroupService.get_group(pk)
         if not group:
             raise Http404
         self.check_object_permissions(self.request, group)
@@ -62,13 +69,10 @@ class GroupViewSet(ViewSet):
             context = serializer_context,
         )
 
-        return Response(
-            response_group_serializer.data,
-            status = status.HTTP_200_OK,
-        )
+        return Response(response_group_serializer.data)
 
     def update(self, request, pk=None):
-        group = self.group_service.get_group(pk)
+        group = GroupService.get_group(pk)
         if not group:
             raise Http404
         self.check_object_permissions(self.request, group)
@@ -82,7 +86,7 @@ class GroupViewSet(ViewSet):
         )
         group_serializer.is_valid(raise_exception=True)
 
-        updated_group = self.group_service.update_group(group_serializer.validated_data, pk)
+        updated_group = GroupService.update_group(pk, group_serializer.validated_data)
         response_group_serializer = GroupSerializer(
             updated_group,
             context = serializer_context,
@@ -90,11 +94,11 @@ class GroupViewSet(ViewSet):
 
         return Response(
             response_group_serializer.data,
-            status = status.HTTP_201_CREATED,
+            status.HTTP_201_CREATED,
         )
 
     def partial_update(self, request, pk=None):
-        group = self.group_service.get_group(pk)
+        group = GroupService.get_group(pk)
         if not group:
             raise Http404
         self.check_object_permissions(self.request, group)
@@ -109,7 +113,7 @@ class GroupViewSet(ViewSet):
         )
         group_serializer.is_valid(raise_exception=True)
 
-        updated_group = self.group_service.update_group(group_serializer.validated_data, pk)
+        updated_group = GroupService.update_group(pk, group_serializer.validated_data)
         response_group_serializer = GroupSerializer(
             updated_group,
             context = serializer_context,
@@ -117,20 +121,18 @@ class GroupViewSet(ViewSet):
 
         return Response(
             response_group_serializer.data,
-            status = status.HTTP_201_CREATED,
+            status.HTTP_201_CREATED,
         )
         
     def destroy(self, request, pk=None):
-        group = self.group_service.get_group(pk)
+        group = GroupService.get_group(pk)
         if not group:
             raise Http404
         self.check_object_permissions(self.request, group)
 
-        if self.group_service.delete_group(pk):
+        if GroupService.delete_group(pk):
             return Response(
-                {
-                    'Status': 'Group deleted'
-                },
-                status=status.HTTP_204_NO_CONTENT,
+                {'message': 'Grupa została usunięta'},
+                status.HTTP_204_NO_CONTENT,
             )
         

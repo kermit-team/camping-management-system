@@ -4,18 +4,28 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
-from account.serializers import UserRegistrationSerializer, UserRequestSerializer, UserResponseSerializer, GroupSerializer
-from account.services import UserService
+from account.serializers import UserRegistrationSerializer, UserRequestSerializer, UserResponseSerializer
+from account.services import UserService, MailService
 from account.permissions import PostAnonElseStaffOrUserPermissions
 
 
 class UserViewSet(ViewSet):
 
-    user_service = UserService()
     permission_classes = [PostAnonElseStaffOrUserPermissions]
 
     def list(self, request):
-        queryset_of_users = self.user_service.get_users()
+        
+        filters = {
+            k: (v.split(',') if '__in' in k else v) 
+            for k,v in request.query_params.items()
+        }
+        order_by = filters.pop('order_by', 'id')
+        
+        queryset_of_users = UserService.get_users(
+            filters=filters, 
+            order_by=order_by,
+        )
+        
         serializer_context = {
             'request': request,
         }
@@ -26,15 +36,11 @@ class UserViewSet(ViewSet):
             context = serializer_context,
         )
 
-        return Response(
-            users_list_serializer.data, 
-            status = status.HTTP_200_OK,
-        )
+        return Response(users_list_serializer.data)
 
     def create(self, request):
-
         if 'groups' not in request.data:
-            request.data['groups'] = list(Group.objects.filter(name='Uczniowie').values_list('id', flat=True))
+            request.data['groups'] = list(Group.objects.filter(name='Klienci').values_list('id', flat=True))
         
         user_serializer = UserRegistrationSerializer(data=request.data)
         user_serializer.is_valid(raise_exception=True)
@@ -43,20 +49,22 @@ class UserViewSet(ViewSet):
             'request': request,
         }
 
-        created_user = self.user_service.create_user(user_serializer.validated_data)
-        response_user_serializer = UserResponseSerializer(
-            created_user,
-            context = serializer_context,
-        )
-        print(response_user_serializer.data)
+        created_user = UserService.create_user(user_serializer.validated_data)
+        if created_user:
+            
+            MailService.send_email_verification_mail(created_user)        
+            response_user_serializer = UserResponseSerializer(
+                created_user,
+                context = serializer_context,
+            )
 
-        return Response(
-            response_user_serializer.data,
-            status = status.HTTP_201_CREATED,
-        )
+            return Response(
+                response_user_serializer.data,
+                status.HTTP_201_CREATED,
+            )
 
     def retrieve(self, request, pk=None):
-        user = self.user_service.get_user(pk)
+        user = UserService.get_user(pk)
         if not user:
             raise Http404
         self.check_object_permissions(self.request, user)
@@ -69,13 +77,10 @@ class UserViewSet(ViewSet):
             context = serializer_context,
         )
 
-        return Response(
-            response_user_serializer.data,
-            status = status.HTTP_200_OK,
-        )
+        return Response(response_user_serializer.data)
 
     def update(self, request, pk=None):
-        user = self.user_service.get_user(pk)
+        user = UserService.get_user(pk)
         if not user:
             raise Http404
         self.check_object_permissions(self.request, user)
@@ -89,7 +94,7 @@ class UserViewSet(ViewSet):
         )
         user_serializer.is_valid(raise_exception=True)
 
-        updated_user = self.user_service.update_user(user_serializer.validated_data, pk)
+        updated_user = UserService.update_user(pk, user_serializer.validated_data)
         response_user_serializer = UserResponseSerializer(
             updated_user,
             context = serializer_context,
@@ -97,11 +102,11 @@ class UserViewSet(ViewSet):
 
         return Response(
             response_user_serializer.data,
-            status = status.HTTP_201_CREATED,
+            status.HTTP_201_CREATED,
         )
 
     def partial_update(self, request, pk=None):
-        user = self.user_service.get_user(pk)
+        user = UserService.get_user(pk)
         if not user:
             raise Http404
         self.check_object_permissions(self.request, user)
@@ -114,12 +119,9 @@ class UserViewSet(ViewSet):
             data = request.data,
             partial = True,
         )
-        print(user_serializer.initial_data)
         user_serializer.is_valid(raise_exception=True)
-        
-        print(user_serializer.validated_data)
 
-        updated_user = self.user_service.update_user(user_serializer.validated_data, pk)
+        updated_user = UserService.update_user(pk, user_serializer.validated_data)
         response_user_serializer = UserResponseSerializer(
             updated_user,
             context = serializer_context,
@@ -127,20 +129,18 @@ class UserViewSet(ViewSet):
 
         return Response(
             response_user_serializer.data,
-            status = status.HTTP_201_CREATED,
+            status.HTTP_201_CREATED,
         )
         
     def destroy(self, request, pk=None):
-        user = self.user_service.get_user(pk)
+        user = UserService.get_user(pk)
         if not user:
             raise Http404
         self.check_object_permissions(self.request, user)
 
-        if self.user_service.delete_user(pk):
+        if UserService.delete_user(pk):
             return Response(
-                {
-                    'Status': 'User deleted'
-                },
-                status=status.HTTP_204_NO_CONTENT,
+                {'message': 'Użytkownik został usunięty'},
+                status.HTTP_204_NO_CONTENT,
             )
         
