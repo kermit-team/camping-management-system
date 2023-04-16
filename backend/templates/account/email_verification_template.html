@@ -1,0 +1,29 @@
+<body style="font-family: Arial, sans-serif;text-align: center;background-color: #f0f0f2;margin-top: 5%;">
+	<div style="display: inline-block;border-radius: 10px;padding: 20px;max-width: 500px;margin: 0 auto;background-color: #fdfdff;">
+		<h1 style="text-align: center;margin: 0;line-height: 1.5;padding: 10px;">
+            Potwierdzenie adresu e-mail
+        </h1>
+		<p style="text-align: justify;">
+            Cześć {{ name }}!</br>
+            Aby potwierdzić swój adres e-mail, proszę kliknąć w poniższy link:
+        </p>
+		<button style="display: inline-block;justify-content: center;background-color: #007bff;color: #fff;padding: 15px 20px;border-radius: 5px;margin-top: 20px;border:0;">
+            <a href="http://localhost:4200/{{ verification_url }}" style="text-decoration: None;">Potwierdź adres e-mail</a>
+        </button>
+        <p style="text-align: justify;margin: 0;line-height: 1.5;padding: 10px;">
+            <small>
+                Jeśli przycisk z jakiegokolwiek powodu nie działa, prosimy o skorzystanie z poniższego linku: </br>
+                <a href="http://localhost:4200/{{ verification_url }}">http://localhost:4200/{{ verification_url }}</a>
+            </small>
+        </p>
+		<p style="text-align: justify;margin: 0;line-height: 1.5;padding: 10px;">
+            <small>
+                Jeśli nie dokonałeś rejestracji na naszej stronie, zignoruj tę wiadomość.
+            </small>
+        </p>
+		<p style="text-align: justify;margin: 0;line-height: 1.5;padding: 10px;">
+            Pozdrawiamy</br>
+            Kermit Team 
+		</p>
+	</div>
+</body>
