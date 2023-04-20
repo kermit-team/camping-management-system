@@ -13,6 +13,7 @@ import { UserLoginStateComponent } from './landing-page/navbar/user-login-state/
 import { CarouselComponent } from './landing-page/carousel/carousel.component';
 import { ContactFormComponent } from './landing-page/contact-form/contact-form.component';
 import { FooterComponent } from './landing-page/footer/footer.component';
+import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FooterComponent } from './landing-page/footer/footer.component';
     UserLoginStateComponent,
     CarouselComponent,
     ContactFormComponent,
-    FooterComponent
+    FooterComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
