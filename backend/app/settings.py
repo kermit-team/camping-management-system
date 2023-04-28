@@ -42,22 +42,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Phone number field for user
     'phonenumber_field',
-    # Own applications
-    'account',
     # Cors headers
     'corsheaders',
     # DRF
     'rest_framework',
     'rest_framework_simplejwt',
-    # API schema generator
-    'drf_spectacular',
-    'drf_spectacular_sidecar',  # required for Django collectstatic discovery
+    # Own applications
+    'account',
+    'camping',
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -132,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
-LANGUAGE_CODE = 'pl-pl'
+LANGUAGE_CODE = 'pl-PL'
 
 TIME_ZONE = 'UTC'
 
@@ -170,17 +169,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-}
-
-SPECTACULAR_SETTINGS = {
-    'TITLE': 'Camping Management System API',
-    'DESCRIPTION': 'Projekt dotyczący systemu zarządzania polem kampingowym Bajka',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
-    'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
-    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
-    'REDOC_DIST': 'SIDECAR',
 }
 
 SIMPLE_JWT = {
