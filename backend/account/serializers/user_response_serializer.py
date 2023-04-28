@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
 from account.models import User
-from .group_serializer import GroupSerializer
+from .group_response_serializer import GroupResponseSerializer
 
 
 class UserResponseSerializer(serializers.ModelSerializer):
-    groups = GroupSerializer(many=True)
+    groups = GroupResponseSerializer(many=True)
 
     class Meta:
         model = User

@@ -1,10 +1,12 @@
 from django.http import Http404
+from django.utils.translation import gettext as _
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
 from rest_framework.viewsets import ViewSet
 
-from account.serializers import GroupSerializer
+from account.serializers import GroupRequestSerializer, GroupResponseSerializer
 from account.services import GroupService
 
 
@@ -29,7 +31,7 @@ class GroupViewSet(ViewSet):
             'request': request,
         }
 
-        groups_list_serializer = GroupSerializer(
+        groups_list_serializer = GroupResponseSerializer(
             queryset_of_groups, 
             many = True,
             context = serializer_context,
@@ -38,14 +40,14 @@ class GroupViewSet(ViewSet):
         return Response(groups_list_serializer.data)
 
     def create(self, request):
-        group_serializer = GroupSerializer(data=request.data)
+        group_serializer = GroupRequestSerializer(data=request.data)
         group_serializer.is_valid(raise_exception=True)
         serializer_context = {
             'request': request,
         }
 
         created_group = GroupService.create_group(group_serializer.validated_data)
-        response_group_serializer = GroupSerializer(
+        response_group_serializer = GroupResponseSerializer(
             created_group,
             context = serializer_context,
         )
@@ -64,7 +66,7 @@ class GroupViewSet(ViewSet):
             'request': request,
         }
 
-        response_group_serializer = GroupSerializer(
+        response_group_serializer = GroupResponseSerializer(
             group,
             context = serializer_context,
         )
@@ -80,14 +82,14 @@ class GroupViewSet(ViewSet):
             'request': request,
         }
         
-        group_serializer = GroupSerializer(
+        group_serializer = GroupRequestSerializer(
             group, 
             data = request.data,
         )
         group_serializer.is_valid(raise_exception=True)
 
         updated_group = GroupService.update_group(pk, group_serializer.validated_data)
-        response_group_serializer = GroupSerializer(
+        response_group_serializer = GroupResponseSerializer(
             updated_group,
             context = serializer_context,
         )
@@ -106,7 +108,7 @@ class GroupViewSet(ViewSet):
             'request': request,
         }
         
-        group_serializer = GroupSerializer(
+        group_serializer = GroupRequestSerializer(
             group, 
             data = request.data,
             partial = True,
@@ -114,7 +116,7 @@ class GroupViewSet(ViewSet):
         group_serializer.is_valid(raise_exception=True)
 
         updated_group = GroupService.update_group(pk, group_serializer.validated_data)
-        response_group_serializer = GroupSerializer(
+        response_group_serializer = GroupResponseSerializer(
             updated_group,
             context = serializer_context,
         )
@@ -123,7 +125,7 @@ class GroupViewSet(ViewSet):
             response_group_serializer.data,
             status.HTTP_201_CREATED,
         )
-        
+    
     def destroy(self, request, pk=None):
         group = GroupService.get_group(pk)
         if not group:
@@ -132,7 +134,7 @@ class GroupViewSet(ViewSet):
 
         if GroupService.delete_group(pk):
             return Response(
-                {'message': 'Grupa została usunięta'},
+                {'message': _('Group has been deleted')},
                 status.HTTP_204_NO_CONTENT,
             )
         

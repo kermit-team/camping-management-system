@@ -1,5 +1,7 @@
 from django.http import Http404
+from django.utils.translation import gettext as _
 from django.contrib.auth.models import Group
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
@@ -140,7 +142,7 @@ class UserViewSet(ViewSet):
 
         if UserService.delete_user(pk):
             return Response(
-                {'message': 'Użytkownik został usunięty'},
+                {'message': _('User has been deleted')},
                 status.HTTP_204_NO_CONTENT,
             )
         
