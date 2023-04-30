@@ -6,6 +6,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
+from account.models import User
 from account.serializers import UserRegistrationSerializer, UserRequestSerializer, UserResponseSerializer
 from account.services import UserService, MailService
 from account.permissions import PostAnonElseStaffOrUserPermissions
@@ -16,12 +17,25 @@ class UserViewSet(ViewSet):
     permission_classes = [PostAnonElseStaffOrUserPermissions]
 
     def list(self, request):
+        filters = {}        
+        filters_errors = {}
+        params = {k: v[0] for k, v in dict(request.query_params).items()}
+        order_by = params.pop('order_by', 'id')
         
-        filters = {
-            k: (v.split(',') if '__in' in k else v) 
-            for k,v in request.query_params.items()
-        }
-        order_by = filters.pop('order_by', 'id')
+        if not User.field_exists(order_by):
+            filters_errors['order_by'] = _('Invalid field name')
+        
+        for k, v in params.items():
+            if User.field_exists(k) if '__' not in k else User.field_exists(k.split('__')[0]):
+                filters[k] = [int(string) if string.isdigit() else string.strip() for string in v.split(',')] if (',' in v) else v
+            else:
+                filters_errors[k] = _('Field does not exist')
+        
+        if filters_errors:
+            return Response (
+                {'errors': filters_errors},
+                status.HTTP_400_BAD_REQUEST,
+            )  
         
         queryset_of_users = UserService.get_users(
             filters=filters, 

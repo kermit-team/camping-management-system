@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
 from rest_framework.viewsets import ViewSet
 
+from account.models import Group
 from account.serializers import GroupRequestSerializer, GroupResponseSerializer
 from account.services import GroupService
 
@@ -16,11 +17,25 @@ class GroupViewSet(ViewSet):
 
     def list(self, request):
         
-        filters = {
-            k: (v.split(',') if '__in' in k else v) 
-            for k,v in request.query_params.items()
-        }
-        order_by = filters.pop('order_by', 'id')
+        filters = {}        
+        filters_errors = {}
+        params = {k: v[0] for k, v in dict(request.query_params).items()}
+        order_by = params.pop('order_by', 'id')
+        
+        if not Group.field_exists(order_by):
+            filters_errors['order_by'] = _('Invalid field name')
+        
+        for k, v in params.items():
+            if Group.field_exists(k) if '__' not in k else Group.field_exists(k.split('__')[0]):
+                filters[k] = [int(string) if string.isdigit() else string.strip() for string in v.split(',')] if (',' in v) else v
+            else:
+                filters_errors[k] = _('Field does not exist')
+        
+        if filters_errors:
+            return Response (
+                {'errors': filters_errors},
+                status.HTTP_400_BAD_REQUEST,
+            )  
         
         queryset_of_groups = GroupService.get_groups(
             filters=filters, 
