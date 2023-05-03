@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
 from rest_framework.viewsets import ViewSet
 
-from account.models import Group
+from django.contrib.auth.models import Group
 from account.serializers import GroupRequestSerializer, GroupResponseSerializer
 from account.services import GroupService
 
