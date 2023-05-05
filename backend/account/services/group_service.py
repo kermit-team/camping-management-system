@@ -1,6 +1,8 @@
 from typing import Any, Dict, List, Optional, Union
+
 from django.db.models import QuerySet
-from django.core.exceptions import FieldError
+from django.db.utils import IntegrityError
+from django.core.exceptions import FieldError, FieldDoesNotExist
 from django.contrib.auth.models import Group
 
 
@@ -18,6 +20,8 @@ class GroupService:
             return groups
         except FieldError:
             return None
+        except FieldDoesNotExist:
+            return None
 
     @staticmethod
     def get_group(pk: int) -> Optional[Group]:
@@ -32,7 +36,11 @@ class GroupService:
         try:
             group = Group.objects.create(**group_data)
             return group
-        except Exception:
+        except FieldError:
+            return None
+        except FieldDoesNotExist:
+            return None
+        except IntegrityError:
             return None
 
     @staticmethod
@@ -42,9 +50,14 @@ class GroupService:
             
             if group_data:                    
                 Group.objects.filter(pk=pk).update(**group_data)
-                
+
+            group = Group.objects.get(pk=pk)  
             return group
         except Group.DoesNotExist:
+            return None
+        except FieldError:
+            return None
+        except FieldDoesNotExist:
             return None
 
     @staticmethod

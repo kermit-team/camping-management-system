@@ -27,7 +27,7 @@ class UserViewSet(ViewSet):
         
         for k, v in params.items():
             if User.field_exists(k) if '__' not in k else User.field_exists(k.split('__')[0]):
-                filters[k] = [int(string) if string.isdigit() else string.strip() for string in v.split(',')] if (',' in v) else v
+                filters[k] = [int(string) if string.isdigit() else string.strip() for string in v.split(',')] if ('__in' in k or k[-1] == 's') else v
             else:
                 filters_errors[k] = _('Field does not exist')
         
@@ -54,11 +54,11 @@ class UserViewSet(ViewSet):
 
         return Response(users_list_serializer.data)
 
-    def create(self, request):
-        if 'groups' not in request.data:
-            request.data['groups'] = list(Group.objects.filter(name='Klienci').values_list('id', flat=True))
-        
-        user_serializer = UserRegistrationSerializer(data=request.data)
+    def create(self, request):        
+        user_data = request.data.copy()
+        if 'groups' not in user_data:
+            user_data['groups'] = list(Group.objects.filter(name='Klienci').values_list('id', flat=True))
+        user_serializer = UserRegistrationSerializer(data=user_data)
         user_serializer.is_valid(raise_exception=True)
 
         serializer_context = {

@@ -5,7 +5,7 @@ from .permission_response_serializer import PermissionResponseSerializer
 
 
 class GroupResponseSerializer(serializers.ModelSerializer):
-    permissions = PermissionResponseSerializer(many=True)
+    permissions = PermissionResponseSerializer(many=True, read_only=True)
 
     class Meta:
         model = Group
