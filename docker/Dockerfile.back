@@ -17,6 +17,7 @@ libpq-dev \
 libxml2-dev \
 libxslt-dev \
 netcat \
+gettext \
 && rm -rd /var/lib/apt/lists* 
 
 COPY requirements requiremenets/

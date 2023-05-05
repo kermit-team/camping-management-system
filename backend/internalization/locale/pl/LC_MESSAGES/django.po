@@ -1,0 +1,252 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-05 16:56+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+#: account/managers.py:9
+msgid "The Email must be set"
+msgstr "Adres e-mail musi zostać podany"
+
+#: account/managers.py:29
+msgid "Superuser must have is_staff=True."
+msgstr "Superużytkownik musi posiadać atrybut is_staff=True."
+
+#: account/managers.py:31
+msgid "Superuser must have is_superuser=True."
+msgstr "Superużytkownik musi posiadać atrybut is_staff=True."
+
+#: account/validators/lowercase_validator.py:11
+msgid "The password must contain at least 1 lowercase letter, a-z."
+msgstr "Hasło musi zawierać przynajmniej 1 małą literę, a-z."
+
+#: account/validators/lowercase_validator.py:17
+msgid "Your password must contain at least 1 lowercase letter, a-z."
+msgstr "Twoje hasło musi zawierać przynajmniej 1 małą literę, a-z."
+
+#: account/validators/special_character_validator.py:11
+msgid ""
+"The password must contain at least 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-+=;:"
+"\\'\",<>./?]"
+msgstr "Hasło musi zawierać przynajmniej 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-+=;:"
+"\\'\",<>./?]"
+
+#: account/validators/special_character_validator.py:18
+msgid ""
+"Your password must contain at least 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-"
+"+=;:\\'\",<>./?]"
+msgstr "Twoje hasło musi zawierać przynajmniej 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-"
+"+=;:\\'\",<>./?]"
+
+#: account/validators/uppercase_validator.py:11
+msgid "The password must contain at least 1 uppercase letter, A-Z."
+msgstr "Hasło musi zawierać przynajmniej 1 wielką literę, A-Z."
+
+#: account/validators/uppercase_validator.py:17
+msgid "Your password must contain at least 1 uppercase letter, A-Z."
+msgstr "Twoje hasło musi zawierać przynajmniej 1 wielką literę, A-Z."
+
+#: account/views/email_verification_view.py:24
+#: account/views/password_reset_confirm_view.py:24
+msgid "Invalid link"
+msgstr "Nieprawidłowy link"
+
+#: account/views/email_verification_view.py:30
+#: account/views/password_reset_confirm_view.py:29
+msgid "Link is no longer valid"
+msgstr "Link już nie jest ważny"
+
+#: account/views/group_view_set.py:26 account/views/user_view_set.py:26
+msgid "Invalid field name"
+msgstr "Nieprawidłowa nazwa pola"
+
+#: account/views/group_view_set.py:32 account/views/user_view_set.py:32
+msgid "Field does not exist"
+msgstr "Pole nie istnieje"
+
+#: account/views/group_view_set.py:152
+msgid "Group has been deleted"
+msgstr "Grupa została usunięta"
+
+#: account/views/password_reset_confirm_view.py:44
+msgid "Password reset successfully completed"
+msgstr "Hasło zostało zresetowane pomyślnie"
+
+#: account/views/password_reset_view.py:21
+msgid "The message has been sent"
+msgstr "Wiadomość została wysłana"
+
+#: account/views/password_reset_view.py:24
+msgid "The user with the specified email address was not found"
+msgstr "Nie znaleziono użytkownika o podanym adresie e-mail"
+
+#: account/views/user_view_set.py:159
+msgid "User has been deleted"
+msgstr "Użytkownik został usunięty"
+
+#: app/settings.py:138
+msgid "Polish"
+msgstr "Polski"
+
+#: app/settings.py:139
+msgid "English"
+msgstr "Angielski"
+
+#: camping/models/opinion.py:11
+msgid "Bad"
+msgstr "Zły"
+
+#: camping/models/opinion.py:12
+msgid "Decent"
+msgstr "Średni"
+
+#: camping/models/opinion.py:13
+msgid "Ok"
+msgstr "Ok"
+
+#: camping/models/opinion.py:14
+msgid "Great"
+msgstr "Świetny"
+
+#: camping/models/opinion.py:15
+msgid "Awesome"
+msgstr "Niesamowity"
+
+#: camping/models/payment.py:10
+msgid "Paypal"
+msgstr "Paypal"
+
+#: camping/models/payment.py:11
+msgid "PayU"
+msgstr "PayU"
+
+#: camping/models/payment.py:12
+msgid "BLIK"
+msgstr "BLIK"
+
+#: camping/models/payment.py:13
+msgid "Credit card"
+msgstr "Karta kredytowa"
+
+#: camping/models/payment.py:14
+msgid "Traditional transfer"
+msgstr "Przelew tradycyjny"
+
+#: camping/models/payment.py:17
+msgid "Waiting for payment"
+msgstr "Oczekiwanie na płatność"
+
+#: camping/models/payment.py:18
+msgid "In progress"
+msgstr "W trakcie realizacji"
+
+#: camping/models/payment.py:19
+msgid "Canceled"
+msgstr "Anulowana"
+
+#: camping/models/payment.py:20
+msgid "Approved"
+msgstr "Zatwierdzona"
+
+#: camping/models/reservation.py:21
+#, python-brace-format
+msgid ""
+"{self.user.first_name} {self.user.first_name}, plot {self.camping_plot}, "
+"{self.date_from}-{self.date_from}"
+msgstr ""
+"{self.user.first_name} {self.user.first_name}, parcel {self.camping_plot}, "
+"{self.date_from}-{self.date_from}"
+
+#: templates/account/email_verification_template.html:6
+msgid "E-mail address verification"
+msgstr "Weryfikacja adresu e-mail"
+
+#: templates/account/email_verification_template.html:9
+#: templates/account/password_reset_template.html:9
+msgid "Hi {{ name }}!"
+msgstr "Cześć {{ name }}!"
+
+#: templates/account/email_verification_template.html:10
+msgid ""
+"\n"
+"                To confirm your email address, please click on the link "
+"below:\n"
+"            "
+msgstr  ""
+"\n"
+"                Aby potwierdzić swój adres e-mail, proszę kliknąć na link "
+"poniżej:\n"
+"            "
+
+#: templates/account/email_verification_template.html:15
+msgid "Verify e-mail address"
+msgstr "Zweryfikuj adres e-mail"
+
+#: templates/account/email_verification_template.html:19
+#: templates/account/password_reset_template.html:19
+msgid ""
+"\n"
+"                    If the button does not work for any reason, please use "
+"the link below:\n"
+"                "
+msgstr ""
+"\n"
+"                    Jeśli przycisk z jakiegoś powodu nie działa, proszę użyć "
+"poniższego linku:\n"
+"                "
+
+#: templates/account/email_verification_template.html:27
+msgid ""
+"\n"
+"                    If you have not registered on our site, please ignore "
+"this message.\n"
+"                "
+msgstr ""
+"\n"
+"                    Jeśli nie zarejestrowałeś się na naszej stronie, prosimy o zignorowanie "
+"tej wiadomości.\n"
+"                "
+
+#: templates/account/email_verification_template.html:33
+#: templates/account/password_reset_template.html:26
+msgid "Regards"
+msgstr "Z wyrazami szacunku"
+
+#: templates/account/password_reset_template.html:6
+msgid "Password reset"
+msgstr "Resetowanie hasła"
+
+#: templates/account/password_reset_template.html:10
+msgid ""
+"\n"
+"                We sent you this email because we received information that "
+"you want to reset your password. \n"
+"                Once you have set your password, don't forget to log in to "
+"the application.\n"
+"            "
+msgstr ""
+"\n"
+"                Wysłaliśmy Ci tego maila, ponieważ otrzymaliśmy informację, że "
+"chcesz zresetować swoje hasło. \n"
+"                Po ustawieniu hasła nie zapomnij zalogować się do "
+"aplikacji.\n"
+"            "
+
+#: templates/account/password_reset_template.html:16
+msgid "Reset password"
+msgstr "Resetowanie hasła"
