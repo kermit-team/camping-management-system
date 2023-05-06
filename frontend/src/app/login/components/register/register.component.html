@@ -1,0 +1,127 @@
+<div class="container">
+  <div *ngIf="this.message" class="login__message-box">
+    {{this.message}}
+  </div>
+  <main class="login">
+    <a [routerLink]="['/']" class="login__link-wrapper"
+      ><img src="../../../../assets/logo.svg" alt="logo" class="logo"
+    /></a>
+    <div class="login__container">
+      <h1 class="login__greeting">Stwórz konto</h1>
+      <h3 class="login__phrase">Ktoś coś tu wymyśli</h3>
+      <form
+        class="login-form"
+        name="form"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="login-form__input">
+          <input
+            type="text"
+            class="login-form__input--name"
+            placeholder="Imię"
+            name="name"
+            formControlName="name"
+            [ngClass]="{ invalid: isSubmitted && f['name'].errors }"
+          />
+
+          <input
+            type="text"
+            class="login-form__input--surname"
+            placeholder="Nazwisko"
+            name="surname"
+            formControlName="surname"
+            [ngClass]="{ invalid: isSubmitted && f['surname'].errors }"
+          />
+          
+        </div>
+        <div class="login-form__input">
+          <div
+            *ngIf="isSubmitted && f['name'].errors"
+            class="login-form__input--invalid"
+          >
+            <div *ngIf="f['name'].errors['required']">Imię jest wymagane</div>
+          </div>
+          <div
+            *ngIf="isSubmitted && f['surname'].errors"
+            class="login-form__input--invalid"
+          >
+            <div *ngIf="f['surname'].errors['required']">
+              Nazwisko jest wymagane
+            </div>
+          </div>
+        </div>
+        <input
+          type="email"
+          class="login-form__input--email"
+          placeholder="Email"
+          name="email"
+          formControlName="email"
+          [ngClass]="{ invalid: isSubmitted && f['email'].errors }"
+        />
+        <div
+          *ngIf="isSubmitted && f['email'].errors"
+          class="login-form__input--invalid"
+        >
+          <div *ngIf="f['email'].errors['required']">Email jest wymagany</div>
+          <div *ngIf="f['email'].errors['email']">Email jest nieprawidłowy</div>
+        </div>
+        <input
+          type="password"
+          class="login-form__input--password"
+          placeholder="Hasło"
+          name="password"
+          formControlName="password"
+          [ngClass]="{ invalid: isSubmitted && passwordErrors}"
+        />
+        <div
+          *ngIf="isSubmitted && passwordErrors"
+          class="login-form__input--invalid"
+        >
+        <div *ngFor="let error of passwordErrors">
+          {{error}}
+        </div>
+          <div *ngIf="f['password'].errors && f['password'].errors['required']  ">
+            Hasło jest wymagane
+          </div>
+        </div>
+        <input
+          type="password"
+          class="login-form__input--password"
+          placeholder="Powtórz hasło"
+          name="confirmPassword"
+          formControlName="confirmPassword"
+          [ngClass]="{ invalid: isSubmitted && f['confirmPassword'].errors }"
+        />
+        <div
+          *ngIf="isSubmitted && f['confirmPassword'].errors"
+          class="login-form__input--invalid"
+        >
+          <div *ngIf="f['confirmPassword'].errors['required']">
+            Powtórzenie hasła jest wymagane
+          </div>
+          <div *ngIf="f['confirmPassword'].errors['matching']">
+            Hasła nie pasują
+          </div>
+        </div>
+
+        <button class="login-form__submit">Stwórz konto</button>
+        <button class="login-form__google">
+          <img
+            src="../../../../assets/1298745_google_brand_branding_logo_network_icon.svg"
+            alt="google logo"
+            class="google-logo"
+          />
+          Zaloguj się przez Google
+        </button>
+        <span class="login__signin--text"
+          >Posiadasz konto?
+          <a [routerLink]="['/login']" class="login__signin--button"
+            >Zaloguj się</a
+          ></span
+        >
+      </form>
+    </div>
+  </main>
+  <aside class="picture"></aside>
+</div>
