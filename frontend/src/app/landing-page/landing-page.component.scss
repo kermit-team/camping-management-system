@@ -1,32 +1,156 @@
 .camper {
-    background-image: url("../../assets/camper.jpg");
-    filter: brightness(50%);
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
+  background-image: url("../../assets/camper.jpg");
+  background-position: top;
+
+  height: 10%;
+}
+
+.header-div {
+  padding: 5%;
+
+  .header {
+    font-family: CustomFont;
+    font-size: 5rem;
+    color: #ae9560;
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
-  .header-div{
-    padding: 3%;
-    .header{
-      font-family: CustomFont;
-      font-size: 5rem;
-      color: #ae9560;
-      justify-content: center;
-      align-items: center;
-      display: flex;
+
+  .header2 {
+    font-size: 1.2rem;
+    letter-spacing: 0.3rem;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+}
+
+@font-face {
+  font-family: "CustomFont";
+  src: url("../../assets/CreattionDemo.otf");
+}
+
+
+.title {
+  color: #4D4D4D;
+  font-size: 30px;
+  margin: 3% auto 0;
+  width: 60%;
+  position: relative;
+}
+
+.text {
+  color: #313131;
+  width: 70%;
+  margin: 3% auto 0;
+}
+
+.squares {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 13%;
+}
+
+.image-with-text {
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  height: 50%;
+  margin: 3% auto 0;
+
+  .header3 {
+    font-size: 36px;
+    width: 50%;
+    letter-spacing: 0.3rem;
+    color: #2C2C2C;
+    text-align: left;
+  }
+
+  .text2 {
+    text-align: justify;
+    width: 50%;
+    height: auto;
+  }
+
+  .camper2 {
+    float: right;
+    width: 30%;
+  }
+}
+
+.perks {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  width: 50%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    font-size: 3rem;
+  }
+
+  .header2 {
+    font-size: 1rem;
+  }
+
+  .title {
+    font-size: 20px;
+    width: 80%;
+    margin-top: auto;
+  }
+
+  .text {
+    width: 90%;
+  }
+
+  .squares {
+    width: 20%;
+  }
+
+
+  .image-with-text{
+    .header3 {
+      font-size: 1.3rem;
     }
-    .header2{
-      font-size: 1.2rem;
-      letter-spacing: 0.3rem;
-      color: white;
-      justify-content: center;
-      align-items: center;
-      display: flex;
+    .camper2 {
+      width: 40%;
+    }
+  
+    .text2 {
+      font-size: 0.5rem;
+      width: 50%;
     }
   }
-  @font-face {
-    font-family: "CustomFont";
-    src: url("../../assets/CreattionDemo.otf");
+
+}
+
+@media only screen and (min-width: 600px) {}
+
+@media only screen and (min-width: 768px) {}
+
+@media only screen and (min-width: 992px) {}
+
+@media only screen and (min-width: 1200px) {
+  
+  .image-with-text {
+  
+    .camper2 {
+      float: right;
+      width: 30%;
+    }
   }
+  
+  .perks {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    width: 50%;
+    margin-top: 7%;
+  }
+}
