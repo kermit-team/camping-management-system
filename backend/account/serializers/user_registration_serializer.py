@@ -4,9 +4,11 @@ from django.core import exceptions
 from rest_framework import serializers
 
 from account.models import User
+from .group_response_serializer import GroupResponseSerializer
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
+    groups = GroupResponseSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
@@ -22,7 +24,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         groups = data.pop('groups', None)
         password = data.get('password')
         user = User(**data)
-        if groups is not None:
+        if groups:
+            user.groups.set(groups)
             data['groups'] = groups        
 
         errors = dict() 

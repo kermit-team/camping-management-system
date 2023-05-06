@@ -1,0 +1,59 @@
+[
+    {
+        "model": "account.user", 
+        "pk": 1, 
+        "fields": {
+            "password": "pbkdf2_sha256$600000$WakXw3xhsEXZwvrVu3e4bW$N6jO5HTkC2Jrlxuki64N8ZSWS9MY+4aN3fWfIVb+oLw=", 
+            "last_login": null, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "is_active": true, 
+            "date_joined": "2023-04-28T22:59:29.297Z", 
+            "email": "patryk0990@gmail.com", 
+            "first_name": "Patryk", 
+            "last_name": "Beberok", 
+            "phone_number": null, 
+            "avatar": "avatar.png", 
+            "groups": [2], 
+            "user_permissions": []
+        }
+    }, 
+    {
+        "model": "account.user", 
+        "pk": 2, 
+        "fields": {
+            "password": "pbkdf2_sha256$600000$XW8qffnZ3eX9ZMmFgUqMli$xWY7HWTBt4CpcPYiZ4DJ4jvri6awGFr+e9kkjai8qqA=", 
+            "last_login": null, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "is_active": true,
+            "date_joined": "2023-05-04T17:30:37.390Z", 
+            "email": "mateuszdwyk@gmail.com", 
+            "first_name": "Mateusz", 
+            "last_name": "Dworaczyk", 
+            "phone_number": null, 
+            "avatar": "avatar.png", 
+            "groups": [3], 
+            "user_permissions": []
+        }
+    }, 
+    {
+        "model": "account.user", 
+        "pk": 3, 
+        "fields": {
+            "password": "pbkdf2_sha256$600000$t7e2DFQxHVeoVYgP9pnaJq$guZXC0Lrq4qoUo2hBZXR0j0GdjMbptNZDYphfPFaK6o=", 
+            "last_login": null, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "is_active": true, 
+            "date_joined": "2023-05-04T17:33:08.542Z", 
+            "email": "szymwal997@gmail.com", 
+            "first_name": "Szymon", 
+            "last_name": "Walasik", 
+            "phone_number": null, 
+            "avatar": "avatar.png", 
+            "groups": [1], 
+            "user_permissions": []
+        }
+    }
+]

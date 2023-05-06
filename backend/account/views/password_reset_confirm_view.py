@@ -1,4 +1,5 @@
 from django.utils.http import urlsafe_base64_decode
+from django.utils.translation import gettext as _
 
 from rest_framework.views import APIView
 from rest_framework import status
@@ -20,12 +21,12 @@ class PasswordResetConfirmView(APIView):
             
         if not (user and user.is_active):
             return Response (
-                {'message': 'Nieprawidłowy link'},
+                {'message': _('Invalid link')},
                 status.HTTP_400_BAD_REQUEST,
             ) 
         if not token_generator.check_token(user, token):
             return Response (
-                {'message': 'Link stracił ważność'},
+                {'message': _('Link is no longer valid')},
                 status.HTTP_401_UNAUTHORIZED,
             )
 
@@ -40,6 +41,6 @@ class PasswordResetConfirmView(APIView):
         user_serializer.is_valid(raise_exception=True)
         if UserService.update_user(uid, user_serializer.validated_data):
             return Response(
-                {'message': 'Reset hasła zakończony pomyślnie'},
+                {'message': _('Password reset successfully completed')},
                 status.HTTP_201_CREATED,
             )

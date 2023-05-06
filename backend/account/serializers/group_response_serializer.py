@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from django.contrib.auth.models import Group
 
-from .permission_serializer import PermissionSerializer
+from .permission_response_serializer import PermissionResponseSerializer
 
 
-class GroupSerializer(serializers.ModelSerializer):
-    permissions = PermissionSerializer(many=True)
+class GroupResponseSerializer(serializers.ModelSerializer):
+    permissions = PermissionResponseSerializer(many=True, read_only=True)
 
     class Meta:
         model = Group
