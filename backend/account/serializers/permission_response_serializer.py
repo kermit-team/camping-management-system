@@ -5,8 +5,4 @@ from django.contrib.auth.models import Permission
 class PermissionResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Permission
-        fields = (
-            'id',
-            'name', 
-            'codename',
-        )
+        fields = '__all__'

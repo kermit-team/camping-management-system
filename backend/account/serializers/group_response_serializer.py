@@ -9,8 +9,4 @@ class GroupResponseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Group
-        fields = (
-            'id',
-            'name',
-            'permissions',
-        )
+        fields = '__all__'

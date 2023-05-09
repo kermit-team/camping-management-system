@@ -9,16 +9,4 @@ class UserResponseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = (
-            'id',
-            'url',
-            'email',
-            'first_name',
-            'last_name',
-            'is_active',
-            'is_staff',
-            'is_superuser',
-            'phone_number',
-            'avatar',
-            'groups',
-        )
+        fields = '__all__'
