@@ -20,7 +20,7 @@ class Payment(models.Model):
         APPROVED = _('Approved')
     
     method = models.CharField(max_length=25, choices=Method.choices)
-    status = models.CharField(max_length=25, choices=Status.choices)
+    status = models.CharField(max_length=25, choices=Status.choices, default=Status.WAITING_FOR_PAYMENT)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     reservation = models.ForeignKey(Reservation, on_delete=models.RESTRICT)
 
