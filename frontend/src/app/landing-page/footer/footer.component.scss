@@ -1,0 +1,32 @@
+footer {
+    background-color: #5B5B5B;
+    padding: 20px;
+    
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      height: 70vh;
+    }
+    .newsletter{
+        color: white;
+        font-size: 50px;
+        font-weight: 300;
+        display: flex;
+        margin: 3% auto auto 20%;
+        position: relative;
+    }
+    .in-touch{
+        font-family: CustomFont;
+        font-size: 5rem;
+        color: #ae9560;
+        //margin: 10% 80% 0 20%;
+        display: block;
+    }
+  }
+  @font-face {
+    font-family: "CustomFont";
+    src: url("../../../assets/CreattionDemo.otf");
+  }
+  
