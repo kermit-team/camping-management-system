@@ -72,7 +72,7 @@
           placeholder="Hasło"
           name="password"
           formControlName="password"
-          [ngClass]="{ invalid: isSubmitted && passwordErrors}"
+          [ngClass]="{ invalid: isSubmitted && f['password'].errors}"
         />
         <div
           *ngIf="isSubmitted && passwordErrors"
@@ -83,6 +83,12 @@
         </div>
           <div *ngIf="f['password'].errors && f['password'].errors['required']  ">
             Hasło jest wymagane
+          </div>
+          <div *ngIf="f['password'].errors && f['password'].errors['minlength']  ">
+            Hasło musi mieć minimum 8 znaków
+          </div>
+          <div *ngIf="f['password'].errors && f['password'].errors['pattern']  ">
+            Hasło musi mieć co najmniej 1 dużą literę oraz co najmniej 1 znak specjalny
           </div>
         </div>
         <input

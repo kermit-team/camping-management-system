@@ -14,6 +14,7 @@ import { ContactFormComponent } from './landing-page/contact-form/contact-form.c
 import { FooterComponent } from './landing-page/footer/footer.component';
 import { AuthModule } from './login/auth.module';
 
+
 @NgModule({
   declarations: [
     

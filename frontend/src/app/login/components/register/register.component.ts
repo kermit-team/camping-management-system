@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit{
           [
             Validators.required,
             Validators.minLength(8),
-            Validators.maxLength(40),
+            Validators.pattern(/^(?=.*[A-Z])(?=.*[\W_]).+$/),
           ]
         ],
         confirmPassword: ['', Validators.required]
@@ -80,8 +80,6 @@ export class RegisterComponent implements OnInit{
         
       },
       (err) => {
-        if(err.error.password)
-       this.passwordErrors = err.error.password;
         this.message = err.error.details;
       }
     )
