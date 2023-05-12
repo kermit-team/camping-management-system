@@ -4,13 +4,26 @@ $primary: #ae9560;
   display: flex;
   height: 100vh;
 }
-.login__message-box {
+.login__message-box--invalid {
   width: 100%;
   padding: .7rem;
-  background-color: #d64035;
+  background-color: #f74d40;
   text-align: center;
   position: fixed;
   color: white;
+}
+.login__message-box--success {
+  width: 100%;
+  padding: .7rem;
+  background-color: #22b63b;
+  text-align: center;
+  position: fixed;
+  color: white;
+}
+.login__message-box--link{
+  color:#ffdc90;
+  text-decoration: none;
+  font-weight: 500;
 }
 .login {
   background-color: white;
@@ -124,6 +137,7 @@ $primary: #ae9560;
   width: 100%;
   color: red;
 }
+
 
 .picture {
   width: 53vw;

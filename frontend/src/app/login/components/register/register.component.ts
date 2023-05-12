@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
-import { AuthHttpService } from '../../auth-http.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
@@ -22,6 +21,7 @@ export class RegisterComponent implements OnInit{
   isSignUpFailed = false;
   message = '';
   passwordErrors = [];
+  isRegisterCorrect = false;
 
   constructor(private _authService: AuthService, private _formBuilder: FormBuilder){};
 
@@ -65,9 +65,6 @@ export class RegisterComponent implements OnInit{
     return this.form.controls;
   }
 
-
-
-
   onSubmit(): void {
     this.isSubmitted = true;
 
@@ -76,11 +73,15 @@ export class RegisterComponent implements OnInit{
     }
     this._authService.register(this.form.value.email,this.form.value.password,this.form.value.name,this.form.value.surname).subscribe(
       (res)=> {
-        this.message = 'Rejestracja pomyślna. Potwierdź teraz maila i <a [routerLink]="[\'/login\']" style="color:#ae9560">Zaloguj się</a>';
-        
+        this.isRegisterCorrect = true;
       },
       (err) => {
-        this.message = err.error.details;
+        if(err.error.email){
+         this.message = err.error.email; 
+        }
+        else {
+          this.message = err.error.details;
+        }
       }
     )
     // this._authService.register(first_name,last_name,email,password).subscribe(

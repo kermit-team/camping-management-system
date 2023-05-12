@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
-import { AuthHttpService } from '../../auth-http.service';
 import {
   AbstractControl,
-  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
@@ -24,7 +22,6 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   message = '';
-  roles: string[] = [];
 
   constructor(
     private _authService: AuthService,
@@ -33,7 +30,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this._authService.getToken()) {
       this.isLoggedIn = true;
-      //this.roles = this._authService.getUser();
     }
   }
   get f(): { [key: string]: AbstractControl } {

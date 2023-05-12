@@ -29,4 +29,13 @@ export class AuthHttpService {
       last_name,
     });
   }
+  emailConfirmation(id: string, token: string): Observable<any>{
+    return this._http.get(`${environment.baseUrl}${ApiPaths.EmailConfirmation}${id}/${token}`);
+  }
+  resetPassword(email: string): Observable<any>{
+    return this._http.post(`${environment.baseUrl}${ApiPaths.ResetPassword}`,{email}) 
+  }
+  confirmResetPassword(id: string, token: string, password: string): Observable<any>{
+    return this._http.post(`${environment.baseUrl}${ApiPaths.ConfirmResetPassword}${id}/${token}`,{password})
+  }
 }

@@ -1,5 +1,8 @@
 <div class="container">
-  <div *ngIf="this.message" class="login__message-box">
+  <div *ngIf="this.isRegisterCorrect" class="login__message-box--success">
+    <span>Rejestracja pomyślna. Potwierdź teraz maila i <a [routerLink]="['/login']" class="login__message-box--link">Zaloguj się</a></span>
+  </div>
+  <div *ngIf="this.message" class="login__message-box--invalid">
     {{this.message}}
   </div>
   <main class="login">
@@ -78,9 +81,6 @@
           *ngIf="isSubmitted && passwordErrors"
           class="login-form__input--invalid"
         >
-        <div *ngFor="let error of passwordErrors">
-          {{error}}
-        </div>
           <div *ngIf="f['password'].errors && f['password'].errors['required']  ">
             Hasło jest wymagane
           </div>

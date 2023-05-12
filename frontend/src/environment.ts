@@ -6,5 +6,8 @@ export const environment = {
 export enum ApiPaths {
     Auth = '/token/',
     Refresh = '/token/refresh/',
-    Register = '/users/'
+    Register = '/users/',
+    EmailConfirmation = '/email-verification/',
+    ResetPassword = '/password-reset/',
+    ConfirmResetPassword = '/password-reset/confirm/'
  }
