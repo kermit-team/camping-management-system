@@ -1,0 +1,160 @@
+@import url("https://fonts.cdnfonts.com/css/playfair-display");
+$primary: #ae9560;
+.container {
+  display: flex;
+  height: 100vh;
+}
+.login__message-box {
+  width: 100%;
+  padding: .7rem;
+  background-color: #d64035;
+  text-align: center;
+  position: fixed;
+  color: white;
+}
+.login {
+  background-color: white;
+  width: 47vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.logo {
+  margin-top: 4vh;
+  margin-bottom: 3vh;
+  width: 8em;
+  height: 8em;
+  filter: invert(1);
+  cursor: pointer;
+}
+.login__container {
+  width: 65%;
+}
+.login__greeting {
+  font-family: "Playfair Display", sans-serif;
+  font-size: 2.77rem;
+  margin-bottom: 2vh;
+}
+.login__phrase {
+  margin-bottom: 5vh;
+  font-size: 1.2rem;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-form__input--email,
+.login-form__input--password,
+.login__forgot-password,
+.login-form__submit,
+.login-form__google {
+  width: 100%;
+  display: block;
+  margin-bottom: 1.7rem; /* adjust this value to add space between inputs */
+}
+.login-form__input--email,
+.login-form__input--password {
+  border: 0;
+  border-bottom: 2px solid $primary;
+  outline: 0;
+  padding: 9px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+  font-size: 1.2rem;
+  /*&:required,
+  &:invalid {
+    border-bottom-color: red;
+  }*/
+  
+}
+.login__forgot-password{
+    text-align: right;
+    text-decoration: underline;
+    text-underline-offset: 7px;
+    color: $primary;
+}
+.login-form__submit{
+    margin-top: 1em;
+}
+.login-form__google{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+    background-color: white;
+    color: black;
+    border: 2px solid $primary;
+    .google-logo {
+        height: 1em;
+        width: 1em;
+        margin-right: .5em;
+    }
+}
+.login__signup--text {
+    width: 100%;
+    text-align: center;
+    .login__signup--button {
+        color: $primary;
+        text-decoration: none;
+    }
+}
+.invalid {
+  border-bottom-color: red;
+}
+.login-form__input--invalid {
+  margin-top: -1em;
+  margin-bottom: 1.3em;
+  text-align: left;
+  width: 100%;
+  color: red;
+}
+
+.picture {
+  width: 53vw;
+  background-image: url("../../../../assets/pexels-matheus-bertelli-799445.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .picture {
+        display: none;
+    }
+    .login{
+        width: 100%;
+        justify-content: center;
+    }
+    .login__container {
+        width: 80%;
+    }
+    .login__greeting {
+        font-size: 2.55em;
+    }
+    .login__phrase{
+      font-size: 1em;
+    }
+    .logo {
+        margin-top: 20px;
+    }
+    button {
+      font-size: 1em;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+@media only screen and (min-width: 992px) {
+
+}
+
+@media only screen and (min-width: 1200px) {
+
+}
