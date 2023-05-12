@@ -1,0 +1,117 @@
+<div class="container">
+  <a [routerLink]="['/']" class="login__link-wrapper"
+    ><img src="../../../../assets/logo.svg" alt="logo" class="logo"
+  /></a>
+  <div class="text-container">
+    <h1 class="heading">{{ this.message }}</h1>
+    <h3 class="heading-subtext">
+      lorem lorem lorem lorem lorem lorem lorem lorem
+    </h3>
+  </div>
+  <div class="steps-container" *ngIf="!this.isInvalid">
+    <h2 class="heading small">Co teraz?</h2>
+    <div class="card-container">
+      <div class="circle-container">
+        <div class="circle">
+          <img
+            src="../../../../assets/290134_draw_edit_pen_pencil_write_icon.svg"
+            alt="Uzupełnij swój profil"
+            class="circle-image"
+          />
+        </div>
+      </div>
+      <div class="card-text-container">
+        <p class="title">Uzupełnij swój profil</p>
+        <p class="title-subtext">
+          Uzupełnij swój profil o rodzaj i numer rejestracyjny samochodu, aby
+          ułatwić proces parkowania i zapewnić sobie wygodę podczas pobytu w
+          hotelu.
+        </p>
+        <a class="link" [routerLink]="['/profile']">Przejdź do profilu</a>
+      </div>
+    </div>
+    <div class="card-container">
+      <div class="circle-container">
+        <div class="circle">
+          <img
+            src="../../../../assets/7569457_travel_holiday_vacation_journey_trip_icon.svg"
+            alt="Uzupełnij swój profil"
+            class="circle-image"
+          />
+        </div>
+      </div>
+      <div class="card-text-container">
+        <p class="title">Zacznij korzystać!</p>
+        <p class="title-subtext">
+          Odkryj niezapomniane miejsca w hotelu Bajka! Zarezerwuj swój pobyt w
+          kilka prostych kroków na naszej stronie i zanurz się w bajkowym
+          świecie.
+        </p>
+        <a class="link" [routerLink]="['/']">Przejdź do strony głownej</a>
+      </div>
+    </div>
+  </div>
+  <div class="steps-container" *ngIf="this.isInvalid">
+    <h2 class="heading small">Co teraz?</h2>
+    <div class="card-container">
+      <div class="circle-container">
+        <div class="circle">
+          <img
+            src="../../../../assets/9165747_send_mail_icon.svg"
+            alt="Uzupełnij swój profil"
+            class="circle-image"
+          />
+        </div>
+      </div>
+      <div class="card-text-container">
+        <p class="title">Wprowadź email</p>
+        <p class="title-subtext">
+          Wpisz obok swój email, jeśli chcesz żebyśmy wysłali ponownie link
+          aktywacyjny do Twojego konta. Odebranie wiadomości może potrwać do kilku minut.
+        </p>
+        <form class="form">
+          <input type="text" class="resend-email" placeholder="Email" />
+          <button>Wyślij</button>
+        </form>
+      </div>
+    </div>
+    <div class="card-container">
+      <div class="circle-container">
+        <div class="circle">
+          <img
+            src="../../../../assets/download.svg"
+            alt="Uzupełnij swój profil"
+            class="circle-image"
+          />
+        </div>
+      </div>
+      <div class="card-text-container">
+        <p class="title">Powróć do rejestracji</p>
+        <p class="title-subtext">
+          Podczas rejestracji podałeś błędny email? Możesz powrócić i ponownie
+          się zarejestrować używając poprawnych danych.
+        </p>
+        <a class="link" [routerLink]="['/register']">Przejdź do rejestracji</a>
+      </div>
+    </div>
+    <div class="card-container">
+      <div class="circle-container">
+        <div class="circle">
+          <img
+            src="../../../../assets/4829870_arrow_back_left_icon.svg"
+            alt="Uzupełnij swój profil"
+            class="circle-image"
+          />
+        </div>
+      </div>
+      <div class="card-text-container">
+        <p class="title">Powróć do strony głownej</p>
+        <p class="title-subtext">
+          Podczas rejestracji podałeś błędny email? Możesz powrócić i ponownie
+          się zarejestrować używając poprawnych danych.
+        </p>
+        <a class="link" [routerLink]="['/']">Przejdź do strony głównej</a>
+      </div>
+    </div>
+  </div>
+</div>

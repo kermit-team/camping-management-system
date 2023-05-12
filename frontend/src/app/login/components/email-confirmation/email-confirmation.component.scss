@@ -1,0 +1,114 @@
+@import url("https://fonts.cdnfonts.com/css/playfair-display");
+
+$primary: #ae9560;
+
+.container {
+  background-color: white;
+  margin: auto;
+  width: 45vw;
+  height: auto; /* Change height to auto */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logo {
+  margin-top: 4vh;
+  margin-bottom: 3vh;
+  width: 8em;
+  height: 8em;
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.text-container {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid $primary;
+  margin-bottom: 3vh;
+}
+
+.heading {
+  font-family: "Playfair Display", sans-serif;
+  font-size: 2.77rem;
+  margin-bottom: 2vh;
+}
+
+.heading-subtext {
+  margin-bottom: 3vh;
+  font-size: 1.2rem;
+}
+
+.steps-container {
+  text-align: center;
+}
+
+.card-container {
+  display: inline-flex;
+}
+
+.circle {
+  width: 120px; /* Use viewport units for width */
+  height: 120px;
+  border-radius: 50%;
+  background-color: #ae9560;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* To prevent image from going out of circle */
+}
+
+.circle-image {
+  filter: invert(1);
+  width: 70%;
+  height: 70%;
+  display: block;
+  margin: auto;
+}
+
+.card-text-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5vh;
+  text-align: left;
+  margin-bottom: 5vh;
+}
+.title {
+  font-weight: 500;
+  font-size: 22px;
+  margin-bottom: 1vh;
+}
+
+.title-subtext {
+  margin-bottom: 1vh;
+}
+
+.link {
+  text-decoration: underline;
+  text-underline-offset: 7px;
+  color: $primary;
+}
+.small {
+  margin-bottom: 3vh;
+}
+
+.resend-email {
+  width: 50%;
+  //height: 2rem;
+  padding: 9px 0;
+  border: 0;
+  border-bottom: 2px solid $primary;
+  outline: 0;
+  font-size: 1.2rem;
+  margin-right: 2rem;
+}
+.form {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+button {
+  width: fit-content;
+}

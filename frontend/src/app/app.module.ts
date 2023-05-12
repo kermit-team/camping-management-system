@@ -3,8 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './login/register/register.component';
+
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SearchFormComponent } from './landing-page/search-form/search-form.component';
 import { NavbarComponent } from './landing-page/navbar/navbar.component';
@@ -13,13 +12,13 @@ import { UserLoginStateComponent } from './landing-page/navbar/user-login-state/
 import { CarouselComponent } from './landing-page/carousel/carousel.component';
 import { ContactFormComponent } from './landing-page/contact-form/contact-form.component';
 import { FooterComponent } from './landing-page/footer/footer.component';
-import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { AuthModule } from './login/auth.module';
+
 
 @NgModule({
   declarations: [
+    
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     LandingPageComponent,
     SearchFormComponent,
     NavbarComponent,
@@ -27,12 +26,12 @@ import { ForgotPasswordComponent } from './login/forgot-password/forgot-password
     UserLoginStateComponent,
     CarouselComponent,
     ContactFormComponent,
-    FooterComponent,
-    ForgotPasswordComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
