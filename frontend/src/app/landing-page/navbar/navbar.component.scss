@@ -8,7 +8,6 @@ nav {
     display: flex;
     vertical-align: bottom;
     border-bottom: 1px solid rgba(255, 255, 255, 0.534); //temp
-    margin-left: 10%;
     .logo {
       width: 7em;
       height: 7em;
@@ -31,29 +30,29 @@ nav {
   }
   .login{
     background-color: transparent;
-    margin-top: 4%;
   }
 }
-.active{
-  border-bottom: 2px solid #ae9560;
-}
+
 @media screen and (max-width: 600px) {
   nav {
+    flex-direction: column;
+    margin: 0;
     ul {
+      border: none;
+      margin: 0;
       li {
-        font-size: 9px;
-        padding: 0.3em;
+        width: 100%;
+        margin: 0.5em 0;
+        padding: 0.5em;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.534);
       }
       .logo {
-        width: 4em;
-        height: 4em;
         margin: 0;
       }
     }
-    .login{
-      font-size: 8px;
-    }
   }
-
+  .active{
+    border-bottom: 2px solid #ae9560;
+  }
 
 }
