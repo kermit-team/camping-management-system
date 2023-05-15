@@ -17,15 +17,18 @@ libpq-dev \
 libxml2-dev \
 libxslt-dev \
 netcat \
+gettext \
 && rm -rd /var/lib/apt/lists* 
 
 COPY requirements requiremenets/
 RUN pip install -r requiremenets/development.txt
 
+COPY bin/check.sh /check.sh
 COPY backend /backend
 COPY bin/entrypoint.dev.sh /bin/entrypoint.dev.sh
 
 EXPOSE 8000
 
+RUN chmod +x /check.sh
 RUN chmod +x /bin/entrypoint.dev.sh
 CMD ["sh", "/bin/entrypoint.dev.sh"]

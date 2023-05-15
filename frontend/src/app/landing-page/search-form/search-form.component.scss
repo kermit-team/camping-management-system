@@ -1,8 +1,37 @@
-form{
+.search-container{
+  display: flex;
+  justify-content: center;
+  padding: 3%;
+}
+
+.search-form{
     background-color: white;
     width: 50%;
     display: flex;
-    margin: auto;
+    align-self: center;
     padding: 0.5%;
     justify-content: right; //temp
+
+}
+@media screen and (max-width: 600px) {
+    .search-form {
+      width: 100%;
+      align-items: center;
+    }
+  }
+
+  @media only screen and (min-width: 600px) {
+
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+@media only screen and (min-width: 992px) {
+
+}
+
+@media only screen and (min-width: 1200px) {
+
 }

@@ -1,24 +1,12 @@
 from rest_framework import serializers
 
 from account.models import User
-from .group_serializer import GroupSerializer
+from .group_response_serializer import GroupResponseSerializer
 
 
 class UserResponseSerializer(serializers.ModelSerializer):
-    groups = GroupSerializer(many=True)
+    groups = GroupResponseSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
-        fields = (
-            'id',
-            'url',
-            'email',
-            'first_name',
-            'last_name',
-            'is_active',
-            'is_staff',
-            'is_superuser',
-            'phone_number',
-            'avatar',
-            'groups',
-        )
+        fields = '__all__'

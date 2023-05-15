@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './login/register/register.component';
-import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { ForgotPasswordComponent } from './login/components/forgot-password/forgot-password.component';
+import { LoginComponent } from './login/components/login/login.component';
+import { RegisterComponent } from './login/components/register/register.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'reset', component: ForgotPasswordComponent}
+  { path: '', component: LandingPageComponent}
+
 ];
 
 @NgModule({

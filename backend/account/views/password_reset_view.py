@@ -1,7 +1,10 @@
+from django.utils.translation import gettext as _
+
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+
 from account.services import UserService, MailService
 
 class PasswordResetView(APIView):
@@ -15,9 +18,9 @@ class PasswordResetView(APIView):
         if user:
             MailService.send_password_reset_mail(user)
             
-            return Response({'message': 'Wiadomość została wysłana'})
+            return Response({'message': _('The message has been sent')})
         
         return Response(
-            {'message': 'Nie znaleziono użytkownika o podanym adresie e-mail.'},
+            {'message': _('The user with the specified email address was not found')},
             status.HTTP_400_BAD_REQUEST,
         )

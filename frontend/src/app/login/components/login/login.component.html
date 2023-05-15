@@ -1,0 +1,66 @@
+<div class="container">
+  <div *ngIf="this.message" class="login__message-box">
+    {{this.message}}
+  </div>
+  <main class="login">
+    <a [routerLink]="['/']" class="login__link-wrapper"
+      ><img src="../../../../assets/logo.svg" alt="logo" class="logo"
+    /></a>
+    <div class="login__container">
+      <h1 class="login__greeting">Witaj ponownie!</h1>
+      <h3 class="login__phrase">
+        Zaloguj się za pomocą Google lub wpisz dane poniżej
+      </h3>
+      <form
+        name="form"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        class="login-form"
+      >
+        <input
+          type="text"
+          name="username"
+          class="login-form__input--email"
+          placeholder="Email"
+          formControlName="username"
+          [ngClass]="{'invalid': isSubmitted && f['username'].errors}"
+        />
+        <div *ngIf="isSubmitted && f['username'].errors"  class="login-form__input--invalid">
+          <div *ngIf="f['username'].errors['required']">Podaj swojego maila</div>
+        </div>
+
+        <input
+          type="password"
+          class="login-form__input--password"
+          placeholder="Hasło"
+          name="password"
+          formControlName="password"
+          [ngClass]="{'invalid': isSubmitted && f['password'].errors}"
+        />
+        <div *ngIf="isSubmitted && f['password'].errors"  class="login-form__input--invalid">
+          <div *ngIf="f['password'].errors['required']">Podaj swoje hasło</div>
+        </div>
+
+        <a [routerLink]="['/reset']" class="login__forgot-password"
+          >Zapomniałem hasła</a
+        >
+        <button type="submit" class="login-form__submit">Zaloguj</button>
+        <button class="login-form__google">
+          <img
+            src="../../../../assets/1298745_google_brand_branding_logo_network_icon.svg"
+            alt="google logo"
+            class="google-logo"
+          />
+          Zaloguj się przez Google
+        </button>
+        <span class="login__signup--text"
+          >Nie masz konta?
+          <a [routerLink]="['/register']" class="login__signup--button"
+            >Zarejestruj się za darmo</a
+          ></span
+        >
+      </form>
+    </div>
+  </main>
+  <aside class="picture"></aside>
+</div>

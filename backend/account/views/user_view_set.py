@@ -1,9 +1,12 @@
 from django.http import Http404
+from django.utils.translation import gettext as _
 from django.contrib.auth.models import Group
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
+from account.models import User
 from account.serializers import UserRegistrationSerializer, UserRequestSerializer, UserResponseSerializer
 from account.services import UserService, MailService
 from account.permissions import PostAnonElseStaffOrUserPermissions
@@ -14,12 +17,25 @@ class UserViewSet(ViewSet):
     permission_classes = [PostAnonElseStaffOrUserPermissions]
 
     def list(self, request):
+        filters = {}        
+        filters_errors = {}
+        params = {k: v[0] for k, v in dict(request.query_params).items()}
+        order_by = params.pop('order_by', 'id')
         
-        filters = {
-            k: (v.split(',') if '__in' in k else v) 
-            for k,v in request.query_params.items()
-        }
-        order_by = filters.pop('order_by', 'id')
+        if not User.field_exists(order_by):
+            filters_errors['order_by'] = _('Invalid field name')
+        
+        for k, v in params.items():
+            if User.field_exists(k) if '__' not in k else User.field_exists(k.split('__')[0]):
+                filters[k] = [int(string) if string.isdigit() else string.strip() for string in v.split(',')] if ('__in' in k or k[-1] == 's') else v
+            else:
+                filters_errors[k] = _('Field does not exist')
+        
+        if filters_errors:
+            return Response (
+                {'errors': filters_errors},
+                status.HTTP_400_BAD_REQUEST,
+            )  
         
         queryset_of_users = UserService.get_users(
             filters=filters, 
@@ -38,11 +54,11 @@ class UserViewSet(ViewSet):
 
         return Response(users_list_serializer.data)
 
-    def create(self, request):
-        if 'groups' not in request.data:
-            request.data['groups'] = list(Group.objects.filter(name='Klienci').values_list('id', flat=True))
-        
-        user_serializer = UserRegistrationSerializer(data=request.data)
+    def create(self, request):        
+        user_data = request.data.copy()
+        if 'groups' not in user_data:
+            user_data['groups'] = list(Group.objects.filter(name='Klienci').values_list('id', flat=True))
+        user_serializer = UserRegistrationSerializer(data=user_data)
         user_serializer.is_valid(raise_exception=True)
 
         serializer_context = {
@@ -140,7 +156,7 @@ class UserViewSet(ViewSet):
 
         if UserService.delete_user(pk):
             return Response(
-                {'message': 'Użytkownik został usunięty'},
+                {'message': _('User has been deleted')},
                 status.HTTP_204_NO_CONTENT,
             )
         

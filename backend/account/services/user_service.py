@@ -1,7 +1,8 @@
 from typing import Any, Dict, List, Optional, Union
 
 from django.db.models import QuerySet
-from django.core.exceptions import FieldError
+from django.db.utils import IntegrityError
+from django.core.exceptions import FieldError, FieldDoesNotExist
 
 from account.models import User
 
@@ -19,6 +20,8 @@ class UserService:
                 users = User.objects.all().order_by(order_by)
             return users
         except FieldError:
+            return None
+        except FieldDoesNotExist:
             return None
             
     @staticmethod
@@ -38,7 +41,11 @@ class UserService:
                 user.groups.set(groups)
                     
             return user
-        except Exception:
+        except FieldError:
+            return None
+        except FieldDoesNotExist:
+            return None
+        except IntegrityError:
             return None
 
     @staticmethod
@@ -56,9 +63,15 @@ class UserService:
             if user_data:                    
                 User.objects.filter(pk=pk).update(**user_data)
 
+            user = User.objects.get(pk=pk)
             return user
         except User.DoesNotExist:
             return None
+        except FieldError:
+            return None
+        except FieldDoesNotExist:
+            return None
+
 
     @staticmethod
     def delete_user(pk:int) -> bool:
