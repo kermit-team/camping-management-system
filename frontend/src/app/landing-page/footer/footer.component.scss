@@ -1,32 +1,219 @@
 footer {
-    background-color: #5B5B5B;
-    padding: 20px;
-    
+  background-color: #5B5B5B;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .footer-container {
+    //padding-bottom: 2%;
+    border-bottom: 1px solid #a19a94;
+
+    .newsletter {
+      color: white;
+      font-size: 40px;
+      font-weight: 220;
+      float: left;
+      margin: 4% auto auto 20%;
+    }
+
+    .in-touch {
+      font-family: CustomFont;
+      font-size: 70px;
+      color: #ae9560;
+      clear: both;
+      float: left;
+      margin-left: 17%;
+    }
+
+    .email-input {
+      color: white;
+      float: right;
+      margin-right: 8%;
+      border: none;
+      background-color: transparent;
+      border-bottom: 1px solid white;
+      font-size: 16px;
+      width: 20%;
+      padding: 10px;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0px 2px 5px rgba($color: #4D4D4D, $alpha: 1.0);
+      }
+    }
+
+    .privacy-info-footer {
+      color: #a19a94;
+      float: right;
+      margin-right: 8%;
+      max-width: 20%;
+      text-align: justify;
+      font-size: 10px;
+      padding: 8px;
+    }
+
+  }
+
+  .columns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0%;
+    width: 60%;
+    align-items: flex-start;
+
+    .column {
+      width: 60%;
+      padding: 10px;
+
+      ul {
+        list-style: none;
+        //padding: 0;
+
+        li {
+          margin-bottom: 10px;
+          font-size: 13px;
+          color: white;
+        }
+
+        .li-gold {
+          margin-bottom: 10px;
+          font-size: 11px;
+          color: #ae9560;
+        }
+
+        .logo-footer {
+          width: 7em;
+          height: 7em;
+        }
+
+        .map-footer {
+          width: 12em;
+          height: 12em;
+        }
+      }
+    }
+  }
+}
+
+@font-face {
+  font-family: "CustomFont";
+  src: url("../../../assets/CreattionDemo.otf");
+}
+
+@media only screen and (max-width: 600px) {
+  footer {
+    height: 70vh;
+  
     .footer-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      height: 70vh;
+      //padding-bottom: 2%;
+  
+      .newsletter {
+        font-size: 20px;
+      }
+  
+      .in-touch {
+        font-size: 35px;
+      }
+  
+      .email-input {
+        font-size: 10px;
+        padding: 5px;
+      }
+  
+      .privacy-info-footer {
+        font-size: 5px;
+        padding: 4px;
+      }
+  
     }
-    .newsletter{
-        color: white;
+    .columns {
+      width: 80%;
+      .column {
+        width: 60%;
+        padding: 8px;
+  
+        ul {
+          li {
+            margin-bottom: 6px;
+            font-size: 7px;
+          }
+  
+          .li-gold {
+            margin-bottom: 6px;
+            font-size: 6px;
+          }
+  
+          .logo-footer {
+            width: 4em;
+            height: 4em;
+          }
+  
+          .map-footer {
+            width: 6em;
+            height: 6em;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (min-width: 1600px) {
+  footer {
+    height: 70vh;
+  
+    .footer-container {
+  
+      .newsletter {
         font-size: 50px;
-        font-weight: 300;
-        display: flex;
-        margin: 3% auto auto 20%;
-        position: relative;
+      }
+  
+      .in-touch {
+        font-size: 90px;
+      }
+  
+      .email-input {
+        font-size: 20px;
+        padding: 15px;
+      }
+  
+      .privacy-info-footer {
+        font-size: 15px;
+        padding: 8px;
+      }
+  
     }
-    .in-touch{
-        font-family: CustomFont;
-        font-size: 5rem;
-        color: #ae9560;
-        //margin: 10% 80% 0 20%;
-        display: block;
+    .columns {
+      width: 70%;
+      .column {
+        width: 60%;
+        padding: 14px;
+  
+        ul {
+          li {
+            margin-bottom: 10px;
+            font-size: 18px;
+          }
+  
+          .li-gold {
+            margin-bottom: 6px;
+            font-size: 16px;
+          }
+  
+          .logo-footer {
+            width: 9em;
+            height: 9em;
+          }
+  
+          .map-footer {
+            width: 15em;
+            height: 15em;
+          }
+        }
+      }
     }
   }
-  @font-face {
-    font-family: "CustomFont";
-    src: url("../../../assets/CreattionDemo.otf");
-  }
+}
+
   
