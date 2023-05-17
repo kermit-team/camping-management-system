@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-05 16:56+0000\n"
+"POT-Creation-Date: 2023-05-17 20:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,9 +16,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
-"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
-"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
 #: account/managers.py:9
 msgid "The Email must be set"
 msgstr "Adres e-mail musi zostać podany"
@@ -43,15 +44,15 @@ msgstr "Twoje hasło musi zawierać przynajmniej 1 małą literę, a-z."
 msgid ""
 "The password must contain at least 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-+=;:"
 "\\'\",<>./?]"
-msgstr "Hasło musi zawierać przynajmniej 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-+=;:"
-"\\'\",<>./?]"
+msgstr ""
+"Hasło musi zawierać przynajmniej 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-+=;:\\'\",<>./?]"
 
 #: account/validators/special_character_validator.py:18
 msgid ""
 "Your password must contain at least 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-"
 "+=;:\\'\",<>./?]"
-msgstr "Twoje hasło musi zawierać przynajmniej 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-"
-"+=;:\\'\",<>./?]"
+msgstr ""
+"Twoje hasło musi zawierać przynajmniej 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-+=;:\\'\",<>./?]"
 
 #: account/validators/uppercase_validator.py:11
 msgid "The password must contain at least 1 uppercase letter, A-Z."
@@ -61,6 +62,20 @@ msgstr "Hasło musi zawierać przynajmniej 1 wielką literę, A-Z."
 msgid "Your password must contain at least 1 uppercase letter, A-Z."
 msgstr "Twoje hasło musi zawierać przynajmniej 1 wielką literę, A-Z."
 
+#: account/views/email_verification_resend_view.py:21
+#: account/views/password_reset_view.py:24
+msgid "The user with the specified email address was not found"
+msgstr "Nie znaleziono użytkownika o podanym adresie e-mail"
+
+#: account/views/email_verification_resend_view.py:27
+msgid "The user with the specified email address was already verified"
+msgstr "Użytkownik o podanym adresie e-mail jest już zweryfikowany"
+
+#: account/views/email_verification_resend_view.py:32
+#: account/views/password_reset_view.py:21
+msgid "The message has been sent"
+msgstr "Wiadomość została wysłana"
+
 #: account/views/email_verification_view.py:24
 #: account/views/password_reset_confirm_view.py:24
 msgid "Invalid link"
@@ -69,13 +84,23 @@ msgstr "Nieprawidłowy link"
 #: account/views/email_verification_view.py:30
 #: account/views/password_reset_confirm_view.py:29
 msgid "Link is no longer valid"
-msgstr "Link już nie jest ważny"
+msgstr "Link jest już nieważny"
 
 #: account/views/group_view_set.py:26 account/views/user_view_set.py:26
+#: camping/views/camping_plot_view_set.py:22
+#: camping/views/camping_section_view_set.py:22
+#: camping/views/car_view_set.py:22 camping/views/opinion_view_set.py:22
+#: camping/views/payment_view_set.py:22
+#: camping/views/reservation_view_set.py:22
 msgid "Invalid field name"
 msgstr "Nieprawidłowa nazwa pola"
 
 #: account/views/group_view_set.py:32 account/views/user_view_set.py:32
+#: camping/views/camping_plot_view_set.py:28
+#: camping/views/camping_section_view_set.py:28
+#: camping/views/car_view_set.py:28 camping/views/opinion_view_set.py:28
+#: camping/views/payment_view_set.py:28
+#: camping/views/reservation_view_set.py:28
 msgid "Field does not exist"
 msgstr "Pole nie istnieje"
 
@@ -86,14 +111,6 @@ msgstr "Grupa została usunięta"
 #: account/views/password_reset_confirm_view.py:44
 msgid "Password reset successfully completed"
 msgstr "Hasło zostało zresetowane pomyślnie"
-
-#: account/views/password_reset_view.py:21
-msgid "The message has been sent"
-msgstr "Wiadomość została wysłana"
-
-#: account/views/password_reset_view.py:24
-msgid "The user with the specified email address was not found"
-msgstr "Nie znaleziono użytkownika o podanym adresie e-mail"
 
 #: account/views/user_view_set.py:159
 msgid "User has been deleted"
@@ -172,14 +189,38 @@ msgstr ""
 "{self.user.first_name} {self.user.first_name}, parcel {self.camping_plot}, "
 "{self.date_from}-{self.date_from}"
 
+#: camping/views/camping_plot_view_set.py:151
+msgid "Camping plot has been deleted"
+msgstr "Parcel został usunięty"
+
+#: camping/views/camping_section_view_set.py:151
+msgid "Camping section has been deleted"
+msgstr "Sekcja kempingowa została usunięta"
+
+#: camping/views/car_view_set.py:151
+msgid "Car has been deleted"
+msgstr "Samochód został usunięty"
+
+#: camping/views/opinion_view_set.py:151
+msgid "Opinion has been deleted"
+msgstr "Opinia została usunięta"
+
+#: camping/views/payment_view_set.py:151
+msgid "Payment has been deleted"
+msgstr "Płatność została usunięta"
+
+#: camping/views/reservation_view_set.py:151
+msgid "Reservation has been deleted"
+msgstr "Rezerwacja została usunięta"
+
 #: templates/account/email_verification_template.html:6
 msgid "E-mail address verification"
 msgstr "Weryfikacja adresu e-mail"
 
 #: templates/account/email_verification_template.html:9
 #: templates/account/password_reset_template.html:9
-msgid "Hi {{ name }}!"
-msgstr "Cześć {{ name }}!"
+msgid "Hi"
+msgstr "Cześć"
 
 #: templates/account/email_verification_template.html:10
 msgid ""
@@ -187,7 +228,7 @@ msgid ""
 "                To confirm your email address, please click on the link "
 "below:\n"
 "            "
-msgstr  ""
+msgstr ""
 "\n"
 "                Aby potwierdzić swój adres e-mail, proszę kliknąć na link "
 "poniżej:\n"
@@ -218,8 +259,8 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"                    Jeśli nie zarejestrowałeś się na naszej stronie, prosimy o zignorowanie "
-"tej wiadomości.\n"
+"                    Jeśli nie zarejestrowałeś się na naszej stronie, prosimy "
+"o zignorowanie tej wiadomości.\n"
 "                "
 
 #: templates/account/email_verification_template.html:33
@@ -241,8 +282,8 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"                Wysłaliśmy Ci tego maila, ponieważ otrzymaliśmy informację, że "
-"chcesz zresetować swoje hasło. \n"
+"                Wysłaliśmy Ci tego maila, ponieważ otrzymaliśmy informację, "
+"że chcesz zresetować swoje hasło. \n"
 "                Po ustawieniu hasła nie zapomnij zalogować się do "
 "aplikacji.\n"
 "            "
@@ -250,3 +291,6 @@ msgstr ""
 #: templates/account/password_reset_template.html:16
 msgid "Reset password"
 msgstr "Resetowanie hasła"
+
+#~ msgid "Hi {{ name }}!"
+#~ msgstr "Cześć {{ name }}!"
