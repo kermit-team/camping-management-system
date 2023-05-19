@@ -28,10 +28,15 @@ class User(AbstractUser):
         default = 'avatar.png',
         upload_to = 'accounts_avatar',
     )
+    id_card = models.CharField(
+        unique = True,
+        max_length = 20,
+    )
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [
         'first_name',
         'last_name',
+        'id_card',
     ]
 
     objects = UserManager()

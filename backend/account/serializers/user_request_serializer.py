@@ -16,6 +16,7 @@ class UserRequestSerializer(serializers.ModelSerializer):
             'password',
             'first_name',
             'last_name',
+            'id_card',
             'phone_number',
             'avatar',
             'groups',
