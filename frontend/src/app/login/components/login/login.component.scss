@@ -6,7 +6,7 @@ $primary: #ae9560;
 }
 .login__message-box {
   width: 100%;
-  padding: .7rem;
+  padding: 0.7rem;
   background-color: #d64035;
   text-align: center;
   position: fixed;
@@ -68,37 +68,36 @@ $primary: #ae9560;
   &:invalid {
     border-bottom-color: red;
   }*/
-  
 }
-.login__forgot-password{
-    text-align: right;
-    text-decoration: underline;
-    text-underline-offset: 7px;
-    color: $primary;
+.login__forgot-password {
+  text-align: right;
+  text-decoration: underline;
+  text-underline-offset: 7px;
+  color: $primary;
 }
-.login-form__submit{
-    margin-top: 1em;
+.login-form__submit {
+  margin-top: 1em;
 }
-.login-form__google{
-    display: flex;
+.login-form__google {
+  display: flex;
   align-items: center;
   justify-content: center;
-    background-color: white;
-    color: black;
-    border: 2px solid $primary;
-    .google-logo {
-        height: 1em;
-        width: 1em;
-        margin-right: .5em;
-    }
+  background-color: white;
+  color: black;
+  border: 2px solid $primary;
+  .google-logo {
+    height: 1em;
+    width: 1em;
+    margin-right: 0.5em;
+  }
 }
 .login__signup--text {
-    width: 100%;
-    text-align: center;
-    .login__signup--button {
-        color: $primary;
-        text-decoration: none;
-    }
+  width: 100%;
+  text-align: center;
+  .login__signup--button {
+    color: $primary;
+    text-decoration: none;
+  }
 }
 .invalid {
   border-bottom-color: red;
@@ -118,43 +117,37 @@ $primary: #ae9560;
   background-position: center;
 }
 
+
+
+@media only screen and (max-width: 768px) {
+  .login{
+    width: 60vw;
+  }
+  .picture {
+    width: 40vw;
+  }
+}
+
 @media only screen and (max-width: 600px) {
-    .picture {
-        display: none;
-    }
-    .login{
-        width: 100%;
-        justify-content: center;
-    }
-    .login__container {
-        width: 80%;
-    }
-    .login__greeting {
-        font-size: 2.55em;
-    }
-    .login__phrase{
-      font-size: 1em;
-    }
-    .logo {
-        margin-top: 20px;
-    }
-    button {
-      font-size: 1em;
-    }
-}
-
-@media only screen and (min-width: 600px) {
-
-}
-
-@media only screen and (min-width: 768px) {
-
-}
-
-@media only screen and (min-width: 992px) {
-
-}
-
-@media only screen and (min-width: 1200px) {
-
+  .picture {
+    display: none;
+  }
+  .login {
+    width: 100%;
+  }
+  .login__container {
+    width: 80%;
+  }
+  .login__greeting {
+    font-size: 2.55em;
+  }
+  .login__phrase {
+    font-size: 1em;
+  }
+  .logo {
+    margin-top: 2vh;
+  }
+  button {
+    font-size: 1em;
+  }
 }
