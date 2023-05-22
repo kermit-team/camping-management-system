@@ -17,7 +17,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             'password',
             'first_name',
             'last_name',
-            'id_card',
             'groups',
         )
 

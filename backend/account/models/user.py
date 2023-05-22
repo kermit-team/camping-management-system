@@ -21,7 +21,6 @@ class User(AbstractUser):
     )
     phone_number = PhoneNumberField(
         null = True,
-        blank = True,
         unique = True,
     )
     avatar = models.ImageField(
@@ -29,6 +28,7 @@ class User(AbstractUser):
         upload_to = 'accounts_avatar',
     )
     id_card = models.CharField(
+        null = True,
         unique = True,
         max_length = 20,
     )
@@ -36,7 +36,6 @@ class User(AbstractUser):
     REQUIRED_FIELDS = [
         'first_name',
         'last_name',
-        'id_card',
     ]
 
     objects = UserManager()
