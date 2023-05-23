@@ -16,6 +16,7 @@ import { AuthModule } from './login/auth.module';
 import { ProfileMiniComponent } from './shared/profile-mini/profile-mini.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ProfileComponent } from './profile/profile.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

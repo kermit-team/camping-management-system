@@ -9,5 +9,6 @@ export enum ApiPaths {
     Register = '/users/',
     EmailConfirmation = '/email-verification/',
     ResetPassword = '/password-reset/',
-    ConfirmResetPassword = '/password-reset/confirm/'
+    ConfirmResetPassword = '/password-reset/confirm/',
+    GetUpdateUser = '/users/',
  }

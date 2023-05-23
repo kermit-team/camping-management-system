@@ -31,9 +31,6 @@ export class AuthService {
   }
 
 
-  signOut(): void {
-    window.sessionStorage.clear();
-  }
   public saveToken(token: LoginResponse): void {
     window.sessionStorage.setItem(TOKEN_KEY, token.access);
     window.sessionStorage.setItem(REFRESH_KEY, token.refresh);

@@ -87,6 +87,9 @@ img {
     padding-right: 2em;
     color: $primary;
   }
+  .edit {
+    cursor: pointer;
+  }
 
   .car__container{
     display: flex;

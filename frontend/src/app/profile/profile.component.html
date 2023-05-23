@@ -13,7 +13,7 @@
       <li class="navigation__list-item">
         <img
           src="../../assets/3687823_adventure_automotive_car_transport_transportation_icon.svg"
-          alt=""
+          alt="Avatar"
           class="navigation__list-item--icon"
         />
         <span class="navigation__list-item--text">Samochód</span>
@@ -28,7 +28,7 @@
       </div>
       <div class="info__photo-container">
         <img
-          src="../../assets/430085_camera_photo_icon.svg"
+          [src]="user.avatar ? user.avatar : defaultPhotoUrl"
           alt="camera"
           class="info__photo"
         />
@@ -37,28 +37,118 @@
     <div class="table">
       <div class="row">
         <div class="cell">Imię i nazwisko</div>
-        <div class="cell">Placeholder</div>
-        <div class="cell"><a class="edit">Edytuj</a></div>
+        <div class="cell" *ngIf="!isEditingName">
+          {{ user.first_name }} {{ user.last_name }}
+        </div>
+        <div class="cell" *ngIf="isEditingName">
+          <form [formGroup]="userNameForm">
+            <input type="text" formControlName="first_name" />
+            <input type="text" formControlName="last_name" />
+          </form>
+        </div>
+        <div class="cell">
+          <button
+            class="submit"
+            *ngIf="isEditingName"
+            (click)="submitForm('name')"
+          >
+            Zapisz</button
+          ><a class="edit" (click)="toggleEditingName()">{{
+            this.editOrCancelName
+          }}</a>
+        </div>
       </div>
       <div class="row">
         <div class="cell">Adres email</div>
-        <div class="cell">Placeholder email</div>
-        <div class="cell"><a class="edit">Edytuj</a></div>
+        <div class="cell" *ngIf="!isEditingEmail">
+          {{ user.email }}
+        </div>
+        <div class="cell" *ngIf="isEditingEmail">
+          <form [formGroup]="userEmailForm">
+            <input type="text" formControlName="email" />
+          </form>
+        </div>
+        <div class="cell">
+          <button
+            class="submit"
+            *ngIf="isEditingEmail"
+            (click)="submitForm('email')"
+          >
+            Zapisz</button
+          ><a class="edit" (click)="toggleEditingEmail()">{{
+            this.editOrCancelEmail
+          }}</a>
+        </div>
       </div>
       <div class="row">
         <div class="cell">Numer telefonu</div>
-        <div class="cell">Placeholder telefonu</div>
-        <div class="cell"><a class="edit">Edytuj</a></div>
+        <div class="cell" *ngIf="!isEditingPhone">
+          {{ user.phone_number ? user.phone_number : "Brak numeru telefonu" }}
+        </div>
+        <div class="cell" *ngIf="isEditingPhone">
+          <form [formGroup]="userPhoneForm">
+            <input type="text" formControlName="phone_number" />
+          </form>
+        </div>
+        <div class="cell">
+          <button
+            class="submit"
+            *ngIf="isEditingPhone"
+            (click)="submitForm('phone')"
+          >
+            Zapisz</button
+          ><a class="edit" (click)="toggleEditingPhone()">{{
+            this.editOrCancelPhone
+          }}</a>
+        </div>
       </div>
       <div class="row">
         <div class="cell">Numer dowodu</div>
-        <div class="cell">Placeholder dowodu</div>
-        <div class="cell"><a class="edit">Edytuj</a></div>
+        <div class="cell" *ngIf="!isEditingId">
+          {{
+            user.id_card
+              ? user.id_card.substr(0, 2) + "******" + user.id_card.slice(-1)
+              : "Brak numeru dowodu osobistego"
+          }}
+        </div>
+        <div class="cell" *ngIf="isEditingId">
+          <form [formGroup]="userIdForm">
+            <input type="text" formControlName="id_card" />
+          </form>
+        </div>
+        <div class="cell">
+          <button
+            class="submit"
+            *ngIf="isEditingId"
+            (click)="submitForm('id')"
+          >
+            Zapisz</button
+          ><a class="edit" (click)="toggleEditingId()">{{
+            this.editOrCancelId
+          }}</a>
+        </div>
       </div>
       <div class="row">
         <div class="cell">Hasło</div>
-        <div class="cell">**************</div>
-        <div class="cell"><a class="edit">Edytuj</a></div>
+        <div class="cell" *ngIf="!isEditingPassword">
+          *******
+        </div>
+        <div class="cell" *ngIf="isEditingPassword">
+          <form [formGroup]="userPasswordForm">
+            <input type="text" formControlName="password" />
+          </form>
+        </div>
+        <div class="cell">
+          <button
+            class="submit"
+            *ngIf="isEditingPassword"
+            (click)="submitForm('password')"
+          >
+            Zapisz</button
+          ><a class="edit" (click)="toggleEditingPassword()">{{
+            this.editOrCancelPassword
+          }}</a>
+        </div>
       </div>
     </div>
     <div class="info__container">
