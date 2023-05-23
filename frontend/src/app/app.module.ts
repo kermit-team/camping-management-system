@@ -13,6 +13,10 @@ import { CarouselComponent } from './landing-page/carousel/carousel.component';
 import { ContactFormComponent } from './landing-page/contact-form/contact-form.component';
 import { FooterComponent } from './landing-page/footer/footer.component';
 import { AuthModule } from './login/auth.module';
+import { ProfileMiniComponent } from './shared/profile-mini/profile-mini.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -26,12 +30,16 @@ import { AuthModule } from './login/auth.module';
     UserLoginStateComponent,
     CarouselComponent,
     ContactFormComponent,
-    FooterComponent
+    FooterComponent,
+    ProfileMiniComponent,
+    HeaderComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

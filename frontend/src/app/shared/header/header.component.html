@@ -1,0 +1,23 @@
+<nav class="navbar">
+  <div class="navbar-container container">
+    <input id="menu__toggle" type="checkbox" />
+    <label class="menu__btn" for="menu__toggle">
+      <div></div>
+      <div></div>
+      <div></div>
+    </label>
+    <ul class="menu-items">
+      <li class="menu-item logo-mobile"><a routerLink="/hotel" class="menu-item-link" ><img [routerLink]="['/']" src="../../../assets/logo.svg" alt="logo" /></a></li>
+      <li class="active menu-item"><a routerLink="/hotel" class="menu-item-link" >HOTEL</a></li>
+      <li class="menu-item"><a routerLink="/restauracja" class="menu-item-link" >RESTAURACJA</a></li>
+      <li class="menu-item"><a routerLink="/biznes" class="menu-item-link" >BIZNES</a></li>
+      <li class="menu-item"><a routerLink="/wesela" class="menu-item-link" >WESELA</a></li>
+      <img [routerLink]="['/']" src="../../../assets/logo.svg" alt="logo" class="logo" />
+      <li class="menu-item"><a routerLink="/zatoka" class="menu-item-link" >ZATOKA</a></li>
+      <li class="menu-item"><a routerLink="/camping" class="menu-item-link" >CAMPING</a></li>
+      <li class="menu-item"><a routerLink="/galeria" class="menu-item-link" >GALERIA</a></li>
+      <li class="menu-item"><a routerLink="/kontakt" class="menu-item-link" >KONTAKT</a></li>
+    </ul>
+  </div>
+</nav>
+<button class="login" [routerLink]="['/login']">ZALOGUJ SIĘ</button>
