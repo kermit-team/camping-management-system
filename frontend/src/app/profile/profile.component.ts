@@ -194,6 +194,7 @@ export class ProfileComponent implements OnInit {
             (res) => {
               this.user = res;
               this.isEditingName = false;
+              this.editOrCancelName = 'Edytuj';
             },
             (err) => {
               console.log(err);
@@ -209,11 +210,12 @@ export class ProfileComponent implements OnInit {
     }
     if (formType == 'phone') {
       if (this.userPhoneForm.valid) {
-        const phone = this.userPhoneForm.get('phone_number')?.value;
-        this._userService.updateUser(this.id!, { phone }).subscribe(
+        const phone_number = this.userPhoneForm.get('phone_number')?.value;
+        this._userService.updateUser(this.id!, { phone_number }).subscribe(
           (res) => {
             this.user = res;
             this.isEditingPhone = false;
+            this.editOrCancelPhone = 'Edytuj';
           },
           (err) => {
             console.log(err);
@@ -224,11 +226,12 @@ export class ProfileComponent implements OnInit {
     }
     if (formType == 'id') {
       if (this.userIdForm.valid) {
-        const id_card = this.userNameForm.get('id_card')?.value;
+        const id_card = this.userIdForm.get('id_card')?.value;
         this._userService.updateUser(this.id!, { id_card }).subscribe(
           (res) => {
             this.user = res;
             this.isEditingId = false;
+            this.editOrCancelId = 'Edytuj';
           },
           (err) => {
             console.log(err);
