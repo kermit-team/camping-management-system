@@ -3,7 +3,7 @@
 
 nav {
   display: flex;
-  width: 100vw;
+  width: auto;
 }
 .container {
   display: flex;
@@ -23,7 +23,6 @@ nav {
   width: 7em;
   height: 7em;
   margin: 0 1.5em 0.7em 1.5em;
-  //filter: invert(1);
 }
 .menu-item {
   margin-bottom: 0;
@@ -40,8 +39,8 @@ nav {
 
 .login {
   position: absolute;
-  top: 85px;
-  right: 3rem;
+  top: 7em;
+  right: 12em;
   background-color: transparent;
   font-size: 0.8em;
   margin-right: auto;
@@ -121,9 +120,6 @@ nav {
     left: 0 !important;
   }
 
-
-
-
   .menu-items {
     padding-top: 4em;
     display: flex;
@@ -140,10 +136,6 @@ nav {
     transition-duration: 0.25s;
     z-index: 5;
   }
-
-
-
-
   .menu-item {
     align-self:center;
     margin: 0 auto;
@@ -179,10 +171,10 @@ nav {
 }
 @media screen and (max-width: 600px) {
   .menu-item {
-    font-size: 1.2em;
+    font-size: 1em;
   }
   .login {
-    font-size: 0.8em;
+    font-size: 0.7em;
   }
   .menu__btn{
     width: 30px;

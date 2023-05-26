@@ -1,6 +1,6 @@
 footer {
   background-color: #5B5B5B;
-  height: 70vh;
+  height: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -104,7 +104,7 @@ footer {
 
 @media only screen and (max-width: 600px) {
   footer {
-    height: 70vh;
+    //height: 70vh;
   
     .footer-container {
       //padding-bottom: 2%;
@@ -161,7 +161,7 @@ footer {
 }
 @media only screen and (min-width: 1600px) {
   footer {
-    height: 70vh;
+    //height: 70vh;
   
     .footer-container {
   

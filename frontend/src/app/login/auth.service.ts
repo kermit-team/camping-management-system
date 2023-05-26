@@ -35,20 +35,9 @@ export class AuthService {
     window.sessionStorage.setItem(TOKEN_KEY, token.access);
     window.sessionStorage.setItem(REFRESH_KEY, token.refresh);
   }
-
-
   
   public getToken(): string | null {
     return window.sessionStorage.getItem(TOKEN_KEY);
   }
- 
-  public getUser(): any {
-    const user = window.sessionStorage.getItem(TOKEN_KEY);
-    if (user) {
-      console.log(this._jwtHelperService.decodeToken(user));
-      return this._jwtHelperService.decodeToken(user);
-    }
 
-    return {};
-  }
 }

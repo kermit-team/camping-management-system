@@ -33,8 +33,6 @@ export class UserService {
   getUserId(): number | null{
     const user = window.sessionStorage.getItem(TOKEN_KEY);
     if(user){
-      console.log(user);
-      console.log(this._jwtHelperService.decodeToken(user).user_id);
       return this._jwtHelperService.decodeToken(user).user_id;
     }
     return null;
@@ -55,6 +53,5 @@ export class UserService {
       }))
     );
   }
-
 
 }

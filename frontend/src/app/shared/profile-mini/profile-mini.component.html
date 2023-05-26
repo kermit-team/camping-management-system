@@ -1,1 +1,13 @@
-<p>profile-mini works!</p>
+<button [style.color]="color" class="profile-mini-button" [routerLink]="['/profile']">
+    <div class="circle">
+        {{ userData?.first_name?.charAt(0) }}{{ userData?.last_name?.charAt(0) }}
+    </div>
+    <div *ngIf="userData" class="user-data-profile">
+    <p>{{ userData.first_name }}</p>
+    <p>{{ userData.last_name }}</p>
+    </div>
+</button>
+
+  
+ 
+  
