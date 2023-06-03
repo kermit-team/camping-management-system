@@ -54,7 +54,7 @@
           >
             Zapisz</button
           ><a class="edit" (click)="toggleEditingName()">{{
-            this.editOrCancelName
+            this.isEditingName ? "Anuluj" : "Edytuj"
           }}</a>
         </div>
       </div>
@@ -98,7 +98,7 @@
           >
             Zapisz</button
           ><a class="edit" (click)="toggleEditingPhone()">{{
-            this.editOrCancelPhone
+            this.isEditingPhone ? "Anuluj" : "Edytuj"
           }}</a>
         </div>
       </div>
@@ -117,22 +117,16 @@
           </form>
         </div>
         <div class="cell">
-          <button
-            class="submit"
-            *ngIf="isEditingId"
-            (click)="submitForm('id')"
-          >
+          <button class="submit" *ngIf="isEditingId" (click)="submitForm('id')">
             Zapisz</button
           ><a class="edit" (click)="toggleEditingId()">{{
-            this.editOrCancelId
+            this.isEditingId ? "Anuluj" : "Edytuj"
           }}</a>
         </div>
       </div>
       <div class="row">
         <div class="cell">Hasło</div>
-        <div class="cell" *ngIf="!isEditingPassword">
-          *******
-        </div>
+        <div class="cell" *ngIf="!isEditingPassword">*******</div>
         <div class="cell" *ngIf="isEditingPassword">
           <form [formGroup]="userPasswordForm">
             <input type="text" formControlName="password" />

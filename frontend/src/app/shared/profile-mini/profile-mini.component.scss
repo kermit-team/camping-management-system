@@ -1,0 +1,37 @@
+.profile-mini-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 4.5em;
+    right: 3rem;
+    font-size: 1em;
+    background-color: transparent;
+    .circle {
+        width: auto;
+        height: auto;
+        padding: 0.6em;
+        border-radius: 50%;
+        background-color: #ae9560;
+        align-self: flex-end;
+        margin-left: 5em;
+    }
+    .user-data-profile {
+        align-self: flex-end;
+        margin-left: 1em;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .profile-mini-button{
+        top: 1em;
+        right: 1rem;
+        font-size: 0.6em;
+    }
+}
+@media only screen and (min-width: 1600px) {
+    .profile-mini-button{
+        top: 5em;
+        right: 8rem;
+    }
+}
+

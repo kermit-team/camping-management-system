@@ -1,6 +1,40 @@
 <div class="search-container">
     <form class="search-form">
+        <div class="date-range-input">
+            <input type="date" id="check-in" class="date-input" placeholder="Wybierz datę przyjazdu"/>
+            <input type="date" id="check-out" class="date-input" placeholder="Wybierz datę wyjazdu" />
+        </div>
+        <div class="guests-input">
+            <label for="adults">
+                <img src="..\..\assets\3643745_human_man_people_person_profile_icon.svg" alt=""
+                    class="guests-item-icon" />
+                Dorośli:</label>
+            <select id="adults" class="guests-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="3">4</option>
+                <option value="3">5</option>
+                <option value="3">6</option>
+                <option value="3">7</option>
+                <option value="3">8</option>
+                <option value="3">9</option>
+                <option value="3">10</option>
+                <!-- Dodaj więcej opcji, jeśli to konieczne -->
+            </select>
+            <label for="children">Dzieci:</label>
+            <select id="children" class="guests-select">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="2">3</option>
+                <option value="2">4</option>
+                <option value="2">5</option>
+                <option value="2">6</option>
+                <!-- Dodaj więcej opcji, jeśli to konieczne -->
+            </select>
+        </div>
+
         <button class="search-button">Szukaj</button>
     </form>
 </div>
-
