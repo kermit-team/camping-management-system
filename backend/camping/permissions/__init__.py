@@ -1,1 +1,1 @@
-from .post_anon_else_staff_or_user_permissions import PostAnonElseStaffOrUserPermissions
+from .user_related_to_object_or_staff_permissions import UserRelatedToObjectOrStaffPermissions

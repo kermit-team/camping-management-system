@@ -6,7 +6,7 @@ from .group_response_serializer import GroupResponseSerializer
 
 class UserResponseSerializer(serializers.ModelSerializer):
     groups = GroupResponseSerializer(many=True, read_only=True)
-    
+
     class Meta:
         model = User
         fields = (
@@ -17,6 +17,7 @@ class UserResponseSerializer(serializers.ModelSerializer):
             'phone_number',
             'avatar',
             'id_card',
+            'cars',
             'is_superuser',
             'is_staff',
             'is_active',

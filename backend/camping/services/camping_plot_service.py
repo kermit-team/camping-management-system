@@ -1,72 +1,75 @@
-from typing import Any, Dict, List, Optional, Union
+from datetime import date
+from typing import Any, Dict, Optional
 
-from django.db.models import QuerySet
-from django.db.utils import IntegrityError
-from django.core.exceptions import FieldError, FieldDoesNotExist
+from django.utils.translation import gettext as _
 
-from camping.models import CampingPlot
+from camping.models import CampingPlot, Reservation
 
 
 class CampingPlotService:
 
     @staticmethod
+    def is_camping_plot_reserved(camping_plot: CampingPlot) -> bool:
+        return Reservation.objects.filter(camping_plot=camping_plot, date_to__gte=date.today).exists()
+
+    @staticmethod
     def get_camping_plots(
         order_by: str = 'id',
-        filters: Optional[Dict[str, Any]] = None) -> Optional[Union[QuerySet, List[CampingPlot]]]:
+        filters: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
         try:
             if filters:
                 camping_plots = CampingPlot.objects.filter(**filters).order_by(order_by)
             else:
                 camping_plots = CampingPlot.objects.all().order_by(order_by)
-            return camping_plots
-        except FieldError:
-            return None
-        except FieldDoesNotExist:
-            return None
-            
-    @staticmethod
-    def get_camping_plot(pk: int) -> Optional[CampingPlot]:
-        try:
-            camping_plot = CampingPlot.objects.get(pk=pk)
-            return camping_plot
-        except CampingPlot.DoesNotExist:
-            return None
-    
-    @staticmethod
-    def create_camping_plot(camping_plot_data: Dict[str, Any]) -> Optional[CampingPlot]:
-        try:
-            camping_plot = CampingPlot.objects.create_camping_plot(**camping_plot_data)
-                    
-            return camping_plot
-        except FieldError:
-            return None
-        except FieldDoesNotExist:
-            return None
-        except IntegrityError:
-            return None
+            response = {'status': 'Success', 'content': camping_plots}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
 
     @staticmethod
-    def update_camping_plot(pk: int, camping_plot_data: Dict[str, Any]) -> Optional[CampingPlot]:
+    def get_camping_plot(pk: int) -> Dict[str, Any]:
         try:
-            if camping_plot_data:                    
+            camping_plot = CampingPlot.objects.get(pk=pk)
+            response = {'status': 'Success', 'content': camping_plot}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
+
+    @staticmethod
+    def create_camping_plot(camping_plot_data: Dict[str, Any]) -> Dict[str, Any]:
+        try:
+            camping_plot = CampingPlot.objects.create(**camping_plot_data)
+            response = {'status': 'Success', 'content': camping_plot}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
+
+    @staticmethod
+    def update_camping_plot(pk: int, camping_plot_data: Dict[str, Any]) -> Dict[str, Any]:
+        try:
+            if camping_plot_data:
                 CampingPlot.objects.filter(pk=pk).update(**camping_plot_data)
-                camping_plot = CampingPlot.objects.get(pk=pk)
-                return camping_plot
-            
-        except CampingPlot.DoesNotExist:
-            return None
-        except FieldError:
-            return None
-        except FieldDoesNotExist:
-            return None
+            camping_plot = CampingPlot.objects.get(pk=pk)
+            response = {'status': 'Success', 'content': camping_plot}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
 
+        return response
 
     @staticmethod
-    def delete_camping_plot(pk:int) -> bool:
+    def delete_camping_plot(pk: int) -> Dict[str, Any]:
         try:
             camping_plot = CampingPlot.objects.get(pk=pk)
+            if CampingPlotService.is_camping_plot_reserved(camping_plot):
+                raise Exception(_("Camping plot is used in reservations"))
+
             camping_plot.delete()
-            return True
-        except CampingPlot.DoesNotExist:
-            return False
-        
+            response = {'status': 'Success'}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response

@@ -5,16 +5,16 @@ from django.utils.translation import gettext as _
 
 
 class SpecialCharacterValidator:
-    def validate(self, password, user=None):
+    @staticmethod
+    def validate(password, user=None):
         if not re.findall(r'[()[\]{}|\\`~!@#$%^&*_\-+=;:\'",<>./?]', password):
             raise ValidationError(
-                _('The password must contain at least 1 symbol: ' +
-                  r'[()[\]{}|\\`~!@#$%^&*_\-+=;:\'",<>./?]'),
+                _(r'The password must contain at least 1 symbol: [()[\]{}|\\`~!@#$%^&*_\-+=;:\'",<>./?]'),
                 code='password_no_symbol',
             )
 
-    def get_help_text(self):
+    @staticmethod
+    def get_help_text():
         return _(
-            'Your password must contain at least 1 symbol: ' +
-            r'[()[\]{}|\\`~!@#$%^&*_\-+=;:\'",<>./?]'
+            r'Your password must contain at least 1 symbol: [()[\]{}|\\`~!@#$%^&*_\-+=;:\'",<>./?]',
         )

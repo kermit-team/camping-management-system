@@ -6,7 +6,7 @@ from .camping_section_response_serializer import CampingSectionResponseSerialize
 
 class CampingPlotResponseSerializer(serializers.ModelSerializer):
     camping_section = CampingSectionResponseSerializer(read_only=True)
-    
+
     class Meta:
         model = CampingPlot
         fields = '__all__'

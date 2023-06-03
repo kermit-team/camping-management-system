@@ -1,5 +1,5 @@
-from django.contrib.auth.models import Group
 from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 
 
@@ -7,11 +7,11 @@ class UserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError(_('The Email must be set'))
-        
-        groups = extra_fields.pop('groups', list(Group.objects.filter(name='Klienci')))  
+
+        groups = extra_fields.pop('groups', list(Group.objects.filter(name='Klienci')))
         is_activate = extra_fields.pop('is_active', False)
         email = self.normalize_email(email)
-        
+
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.is_active = is_activate

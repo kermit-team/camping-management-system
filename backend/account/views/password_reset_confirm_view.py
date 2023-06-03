@@ -1,46 +1,58 @@
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext as _
-
-from rest_framework.views import APIView
 from rest_framework import status
-from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from account.services import UserService
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from account.serializers import UserRequestSerializer
+from account.services import UserService
+
 
 class PasswordResetConfirmView(APIView):
-    
     permission_classes = [AllowAny]
 
-    def post(self, request, uidb64=None, token=None):
+    @staticmethod
+    def post(request, uidb64=None, token=None):
         uid = urlsafe_base64_decode(uidb64).decode()
-        user = UserService.get_user(pk=uid)
+        service_response = UserService.get_user(pk=uid)
         token_generator = PasswordResetTokenGenerator()
         password = request.data.get('password')
-            
+
+        if service_response['status'] == 'Error':
+            return Response(
+                {'errors': service_response['errors']},
+                status.HTTP_400_BAD_REQUEST,
+            )
+        user = service_response['content']
+
         if not (user and user.is_active):
-            return Response (
+            return Response(
                 {'message': _('Invalid link')},
                 status.HTTP_400_BAD_REQUEST,
-            ) 
+            )
         if not token_generator.check_token(user, token):
-            return Response (
+            return Response(
                 {'message': _('Link is no longer valid')},
                 status.HTTP_401_UNAUTHORIZED,
             )
 
-        user_data = {
-            'password': password,
-        }
         user_serializer = UserRequestSerializer(
-            user, 
-            data = user_data,
-            partial = True,
+            user,
+            data={'password': password},
+            partial=True,
         )
         user_serializer.is_valid(raise_exception=True)
-        if UserService.update_user(uid, user_serializer.validated_data):
+
+        service_response = UserService.update_user(uid, user_serializer.validated_data)
+        if service_response['status'] == 'Error':
             return Response(
-                {'message': _('Password reset successfully completed')},
-                status.HTTP_201_CREATED,
+                {'errors': service_response['errors']},
+                status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+
+        return Response(
+            {'message': _('Password reset successfully completed')},
+            status.HTTP_201_CREATED,
+        )

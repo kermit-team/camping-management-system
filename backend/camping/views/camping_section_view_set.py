@@ -1,6 +1,5 @@
 from django.http import Http404
 from django.utils.translation import gettext as _
-
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
@@ -11,144 +10,146 @@ from camping.services import CampingSectionService
 
 
 class CampingSectionViewSet(ViewSet):
+    queryset = CampingSection.objects.none()
 
-    def list(self, request):
-        filters = {}        
+    @staticmethod
+    def list(request):
+        filters = {}
         filters_errors = {}
         params = {k: v[0] for k, v in dict(request.query_params).items()}
         order_by = params.pop('order_by', 'id')
-        
+
         if not CampingSection.field_exists(order_by):
             filters_errors['order_by'] = _('Invalid field name')
-        
+
         for k, v in params.items():
-            if CampingSection.field_exists(k) if '__' not in k else CampingSection.field_exists(k.split('__')[0]):
-                filters[k] = [int(string) if string.isdigit() else string.strip() for string in v.split(',')] if ('__in' in k or k[-1] == 's') else v
+            field_name = k if '__' not in k else k.split('__')[0]
+            if CampingSection.field_exists(field_name):
+                if '__in' in k or k[-1] == 's':
+                    filters[k] = [
+                        int(string) if string.isdigit() else string.strip()
+                        for string in v.split(',')
+                    ]
+                else:
+                    filters[k] = v
             else:
                 filters_errors[k] = _('Field does not exist')
-        
+
         if filters_errors:
-            return Response (
+            return Response(
                 {'errors': filters_errors},
                 status.HTTP_400_BAD_REQUEST,
-            )  
-        
-        queryset_of_camping_sections = CampingSectionService.get_camping_sections(
-            filters=filters, 
+            )
+
+        service_response = CampingSectionService.get_camping_sections(
+            filters=filters,
             order_by=order_by,
         )
-        
-        serializer_context = {
-            'request': request,
-        }
+        if service_response['status'] == 'Error':
+            return Response(
+                {'errors': service_response['errors']},
+                status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
-        camping_sections_list_serializer = CampingSectionResponseSerializer(
-            queryset_of_camping_sections, 
-            many = True,
-            context = serializer_context,
-        )
-
+        camping_sections_list_serializer = CampingSectionResponseSerializer(service_response['content'], many=True)
         return Response(camping_sections_list_serializer.data)
 
-    def create(self, request):        
+    @staticmethod
+    def create(request):
         camping_section_serializer = CampingSectionRequestSerializer(data=request.data)
         camping_section_serializer.is_valid(raise_exception=True)
 
-        serializer_context = {
-            'request': request,
-        }
-
-        created_camping_section = CampingSectionService.create_camping_section(camping_section_serializer.validated_data)
-        if created_camping_section:
-            
-            response_camping_section_serializer = CampingSectionResponseSerializer(
-                created_camping_section,
-                context = serializer_context,
-            )
-
+        service_response = CampingSectionService.create_camping_section(camping_section_serializer.validated_data)
+        if service_response['status'] == 'Error':
             return Response(
-                response_camping_section_serializer.data,
-                status.HTTP_201_CREATED,
+                {'errors': service_response['errors']},
+                status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+
+        response_camping_section_serializer = CampingSectionResponseSerializer(service_response['content'])
+        return Response(
+            response_camping_section_serializer.data,
+            status.HTTP_201_CREATED,
+        )
 
     def retrieve(self, request, pk=None):
-        camping_section = CampingSectionService.get_camping_section(pk)
-        if not camping_section:
+        service_response = CampingSectionService.get_camping_section(pk)
+        if service_response['status'] == 'Error':
             raise Http404
-        self.check_object_permissions(self.request, camping_section)
-        serializer_context = {
-            'request': request,
-        }
-
-        response_camping_section_serializer = CampingSectionResponseSerializer(
-            camping_section,
-            context = serializer_context,
-        )
+        camping_section = service_response['content']
+        self.check_object_permissions(request, camping_section)
+        response_camping_section_serializer = CampingSectionResponseSerializer(camping_section)
 
         return Response(response_camping_section_serializer.data)
 
     def update(self, request, pk=None):
-        camping_section = CampingSectionService.get_camping_section(pk)
-        if not camping_section:
+        service_response = CampingSectionService.get_camping_section(pk)
+        if service_response['status'] == 'Error':
             raise Http404
-        self.check_object_permissions(self.request, camping_section)
-        serializer_context = {
-            'request': request,
-        }
-        
+        camping_section = service_response['content']
+        self.check_object_permissions(request, camping_section)
+
         camping_section_serializer = CampingSectionRequestSerializer(
-            camping_section, 
-            data = request.data,
+            camping_section,
+            data=request.data,
         )
         camping_section_serializer.is_valid(raise_exception=True)
 
-        updated_camping_section = CampingSectionService.update_camping_section(pk, camping_section_serializer.validated_data)
-        response_camping_section_serializer = CampingSectionResponseSerializer(
-            updated_camping_section,
-            context = serializer_context,
-        )
+        service_response = CampingSectionService.update_camping_section(pk, camping_section_serializer.validated_data)
+        if service_response['status'] == 'Error':
+            return Response(
+                {'errors': service_response['errors']},
+                status.HTTP_400_BAD_REQUEST,
+            )
 
+        response_camping_section_serializer = CampingSectionResponseSerializer(service_response['content'])
         return Response(
             response_camping_section_serializer.data,
             status.HTTP_201_CREATED,
         )
 
     def partial_update(self, request, pk=None):
-        camping_section = CampingSectionService.get_camping_section(pk)
-        if not camping_section:
+        service_response = CampingSectionService.get_camping_section(pk)
+        if service_response['status'] == 'Error':
             raise Http404
-        self.check_object_permissions(self.request, camping_section)
-        serializer_context = {
-            'request': request,
-        }        
+        camping_section = service_response['content']
+        self.check_object_permissions(request, camping_section)
 
         camping_section_serializer = CampingSectionRequestSerializer(
-            camping_section, 
-            data = request.data,
-            partial = True,
+            camping_section,
+            data=request.data,
+            partial=True,
         )
         camping_section_serializer.is_valid(raise_exception=True)
 
-        updated_camping_section = CampingSectionService.update_camping_section(pk, camping_section_serializer.validated_data)
-        response_camping_section_serializer = CampingSectionResponseSerializer(
-            updated_camping_section,
-            context = serializer_context,
-        )
+        service_response = CampingSectionService.update_camping_section(pk, camping_section_serializer.validated_data)
+        if service_response['status'] == 'Error':
+            return Response(
+                {'errors': service_response['errors']},
+                status.HTTP_400_BAD_REQUEST,
+            )
 
+        response_camping_section_serializer = CampingSectionResponseSerializer(service_response['content'])
         return Response(
             response_camping_section_serializer.data,
             status.HTTP_201_CREATED,
         )
-        
-    def destroy(self, request, pk=None):
-        camping_section = CampingSectionService.get_camping_section(pk)
-        if not camping_section:
-            raise Http404
-        self.check_object_permissions(self.request, camping_section)
 
-        if CampingSectionService.delete_camping_section(pk):
+    def destroy(self, request, pk=None):
+        service_response = CampingSectionService.get_camping_section(pk)
+        if service_response['status'] == 'Error':
+            raise Http404
+        camping_section = service_response['content']
+        self.check_object_permissions(request, camping_section)
+
+        service_response = CampingSectionService.delete_camping_section(pk)
+        if service_response['status'] == 'Error':
             return Response(
-                {'message': _('Camping section has been deleted')},
-                status.HTTP_204_NO_CONTENT,
+                {'errors': service_response['errors']},
+                status.HTTP_400_BAD_REQUEST,
             )
-        
+
+        return Response(
+            {'message': _('Camping section has been deleted')},
+            status.HTTP_204_NO_CONTENT,
+        )

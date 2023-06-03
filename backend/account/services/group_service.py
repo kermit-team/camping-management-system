@@ -1,8 +1,5 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional
 
-from django.db.models import QuerySet
-from django.db.utils import IntegrityError
-from django.core.exceptions import FieldError, FieldDoesNotExist
 from django.contrib.auth.models import Group
 
 
@@ -11,60 +8,60 @@ class GroupService:
     @staticmethod
     def get_groups(
         order_by: str = 'id',
-        filters: Optional[Dict[str, Any]] = None) -> Union[QuerySet, List[Group]]:
+        filters: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
         try:
             if filters:
                 groups = Group.objects.filter(**filters).order_by(order_by)
             else:
                 groups = Group.objects.all().order_by(order_by)
-            return groups
-        except FieldError:
-            return None
-        except FieldDoesNotExist:
-            return None
+
+            response = {'status': 'Success', 'content': groups}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
 
     @staticmethod
-    def get_group(pk: int) -> Optional[Group]:
+    def get_group(pk: int) -> Dict[str, Any]:
         try:
             group = Group.objects.get(pk=pk)
-            return group
-        except Group.DoesNotExist:
-            return None
+            response = {'status': 'Success', 'content': group}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
 
     @staticmethod
-    def create_group(group_data: Dict[str, Any]) -> Optional[Group]:
+    def create_group(group_data: Dict[str, Any]) -> Dict[str, Any]:
         try:
             group = Group.objects.create(**group_data)
-            return group
-        except FieldError:
-            return None
-        except FieldDoesNotExist:
-            return None
-        except IntegrityError:
-            return None
+            response = {'status': 'Success', 'content': group}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
 
     @staticmethod
-    def update_group(pk: int, group_data: Dict[str, Any]) -> Optional[Group]:
+    def update_group(pk: int, group_data: Dict[str, Any]) -> Dict[str, Any]:
         try:
-            group = Group.objects.get(pk=pk)      
-            
-            if group_data:                    
+            if group_data:
                 Group.objects.filter(pk=pk).update(**group_data)
+            group = Group.objects.get(pk=pk)
 
-            group = Group.objects.get(pk=pk)  
-            return group
-        except Group.DoesNotExist:
-            return None
-        except FieldError:
-            return None
-        except FieldDoesNotExist:
-            return None
+            response = {'status': 'Success', 'content': group}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
 
     @staticmethod
-    def delete_group(pk: int) -> bool:
+    def delete_group(pk: int) -> Dict[str, Any]:
         try:
             group = Group.objects.get(pk=pk)
             group.delete()
-            return True
-        except Group.DoesNotExist:
-            return False
+            response = {'status': 'Success'}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response

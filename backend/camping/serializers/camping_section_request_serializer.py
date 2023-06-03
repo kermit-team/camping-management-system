@@ -4,7 +4,6 @@ from camping.models import CampingSection
 
 
 class CampingSectionRequestSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = CampingSection
         fields = (

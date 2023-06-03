@@ -2,5 +2,7 @@ from .camping_plot_view_set import CampingPlotViewSet
 from .camping_section_view_set import CampingSectionViewSet
 from .car_view_set import CarViewSet
 from .opinion_view_set import OpinionViewSet
+from .payment_possible_methods_view import PaymentPossibleMethodsView
+from .payment_possible_statuses_view import PaymentPossibleStatusesView
 from .payment_view_set import PaymentViewSet
 from .reservation_view_set import ReservationViewSet

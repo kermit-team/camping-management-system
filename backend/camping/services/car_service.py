@@ -1,72 +1,88 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional
 
-from django.db.models import QuerySet
-from django.db.utils import IntegrityError
-from django.core.exceptions import FieldError, FieldDoesNotExist
-
+from account.models import User
 from camping.models import Car
 
 
 class CarService:
 
     @staticmethod
+    def add_user_to_car(pk: int, user: User) -> Dict[str, Any]:
+        try:
+            car = Car.objects.get(pk=pk)
+            car.drivers.add(user)
+            response = {'status': 'Success', 'content': car}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
+
+    @staticmethod
+    def remove_user_from_car(pk: int, user: User) -> Dict[str, Any]:
+        try:
+            car = Car.objects.get(pk=pk)
+            car.drivers.remove(user)
+            response = {'status': 'Success', 'content': car}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
+
+    @staticmethod
     def get_cars(
         order_by: str = 'id',
-        filters: Optional[Dict[str, Any]] = None) -> Optional[Union[QuerySet, List[Car]]]:
+        filters: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
         try:
             if filters:
                 cars = Car.objects.filter(**filters).order_by(order_by)
             else:
                 cars = Car.objects.all().order_by(order_by)
-            return cars
-        except FieldError:
-            return None
-        except FieldDoesNotExist:
-            return None
-            
+            response = {'status': 'Success', 'content': cars}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
+
     @staticmethod
-    def get_car(pk: int) -> Optional[Car]:
+    def get_car(pk: int) -> Dict[str, Any]:
         try:
             car = Car.objects.get(pk=pk)
-            return car
-        except Car.DoesNotExist:
-            return None
-    
-    @staticmethod
-    def create_car(car_data: Dict[str, Any]) -> Optional[Car]:
-        try:
-            car = Car.objects.create_car(**car_data)
-                    
-            return car
-        except FieldError:
-            return None
-        except FieldDoesNotExist:
-            return None
-        except IntegrityError:
-            return None
+            response = {'status': 'Success', 'content': car}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
 
     @staticmethod
-    def update_car(pk: int, car_data: Dict[str, Any]) -> Optional[Car]:
+    def create_car(car_data: Dict[str, Any]) -> Dict[str, Any]:
         try:
-            if car_data:                    
+            car = Car.objects.create(**car_data)
+            response = {'status': 'Success', 'content': car}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
+
+    @staticmethod
+    def update_car(pk: int, car_data: Dict[str, Any]) -> Dict[str, Any]:
+        try:
+            if car_data:
                 Car.objects.filter(pk=pk).update(**car_data)
-                car = Car.objects.get(pk=pk)
-                return car
-            
-        except Car.DoesNotExist:
-            return None
-        except FieldError:
-            return None
-        except FieldDoesNotExist:
-            return None
+            car = Car.objects.get(pk=pk)
+            response = {'status': 'Success', 'content': car}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
 
+        return response
 
     @staticmethod
-    def delete_car(pk:int) -> bool:
+    def delete_car(pk: int) -> Dict[str, Any]:
         try:
             car = Car.objects.get(pk=pk)
             car.delete()
-            return True
-        except Car.DoesNotExist:
-            return False
-        
+            response = {'status': 'Success'}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': [str(err)]}
+
+        return response
