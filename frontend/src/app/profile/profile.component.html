@@ -36,14 +36,13 @@
     </div>
     <div class="table">
       <div class="row">
-        <div class="cell">Imię i nazwisko</div>
+        <div class="cell">Imię</div>
         <div class="cell" *ngIf="!isEditingName">
-          {{ user.first_name }} {{ user.last_name }}
+          {{ user.first_name }}
         </div>
         <div class="cell" *ngIf="isEditingName">
           <form [formGroup]="userNameForm">
-            <input type="text" formControlName="first_name" />
-            <input type="text" formControlName="last_name" />
+            <input type="text" formControlName="first_name" class="input" />
           </form>
         </div>
         <div class="cell">
@@ -59,26 +58,34 @@
         </div>
       </div>
       <div class="row">
-        <div class="cell">Adres email</div>
-        <div class="cell" *ngIf="!isEditingEmail">
-          {{ user.email }}
+        <div class="cell">Nazwisko</div>
+        <div class="cell" *ngIf="!isEditingLastName">
+          {{ user.last_name }}
         </div>
-        <div class="cell" *ngIf="isEditingEmail">
-          <form [formGroup]="userEmailForm">
-            <input type="text" formControlName="email" />
+        <div class="cell" *ngIf="isEditingLastName">
+          <form [formGroup]="userLastNameForm" class="input-form">
+            <input type="text" formControlName="last_name" class="input"/>
           </form>
         </div>
         <div class="cell">
           <button
             class="submit"
-            *ngIf="isEditingEmail"
-            (click)="submitForm('email')"
+            *ngIf="isEditingLastName"
+            (click)="submitForm('lastname')"
           >
             Zapisz</button
-          ><a class="edit" (click)="toggleEditingEmail()">{{
-            this.editOrCancelEmail
+          ><a class="edit" (click)="toggleEditingLastName()">{{
+            this.isEditingLastName ? "Anuluj" : "Edytuj"
           }}</a>
         </div>
+      </div>
+      <div class="row">
+        <div class="cell">Adres email</div>
+        <div class="cell" >
+          {{ user.email }}
+        </div>
+        
+        <div class="cell"></div>
       </div>
       <div class="row">
         <div class="cell">Numer telefonu</div>
@@ -87,7 +94,7 @@
         </div>
         <div class="cell" *ngIf="isEditingPhone">
           <form [formGroup]="userPhoneForm">
-            <input type="text" formControlName="phone_number" />
+            <input type="text" formControlName="phone_number" class="input"/>
           </form>
         </div>
         <div class="cell">
@@ -113,7 +120,7 @@
         </div>
         <div class="cell" *ngIf="isEditingId">
           <form [formGroup]="userIdForm">
-            <input type="text" formControlName="id_card" />
+            <input type="text" formControlName="id_card" class="input"/>
           </form>
         </div>
         <div class="cell">
@@ -140,7 +147,7 @@
           >
             Zapisz</button
           ><a class="edit" (click)="toggleEditingPassword()">{{
-            this.editOrCancelPassword
+            this.isEditingPassword ? "Anuluj" : "Edytuj"
           }}</a>
         </div>
       </div>
@@ -168,3 +175,4 @@
     </div>
   </main>
 </div>
+<app-footer></app-footer>
