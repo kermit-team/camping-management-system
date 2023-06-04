@@ -5,14 +5,15 @@ $primary: #ae9560;
   padding: 3%;
   .search-form {
     background-color: white;
-    width: auto;
     display: flex;
     align-self: center;
     padding: 0.5%;
     justify-content: space-between;
+    
     .date-range-input {
       display: flex;
       align-items: center;
+      border-bottom: 1px solid $primary;
       .date-input {
         padding: 0.25rem;
         border: none;

@@ -16,6 +16,7 @@ import {
 })
 export class ProfileComponent implements OnInit {
   id: number | null = null;
+  photoUrl:string = "localhost:8000";
   defaultPhotoUrl: string =
     '../../assets/3687823_adventure_automotive_car_transport_transportation_icon.svg';
   isEditingName: boolean = false;
@@ -78,7 +79,8 @@ export class ProfileComponent implements OnInit {
           this.userPhoneForm = this._formBuilder.group({
             phone_number: [res.phone_number, Validators.required],
           });
-
+          if(this.user.avatar != "")
+            this.photoUrl += this.user.avatar;
         },
         (err) => {
           console.log(err);
@@ -88,6 +90,7 @@ export class ProfileComponent implements OnInit {
     this.userIdForm = this._formBuilder.group({
       id_card: ['', Validators.required],
     });
+    
     
   }
   toggleEditingLastName() {
