@@ -47,7 +47,7 @@ class UserViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         users_list_serializer = UserResponseSerializer(service_response['content'], many=True)
@@ -62,7 +62,7 @@ class UserViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         created_user = service_response['content']
@@ -72,7 +72,7 @@ class UserViewSet(ViewSet):
             UserService.delete_user(created_user.id)
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         response_user_serializer = UserResponseSerializer(created_user)
@@ -109,7 +109,7 @@ class UserViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
         response_user_serializer = UserResponseSerializer(service_response['content'])
 
@@ -136,7 +136,7 @@ class UserViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
         response_user_serializer = UserResponseSerializer(service_response['content'])
 
@@ -156,7 +156,7 @@ class UserViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         return Response(

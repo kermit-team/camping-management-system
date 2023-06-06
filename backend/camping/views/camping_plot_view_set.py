@@ -46,7 +46,7 @@ class CampingPlotViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         camping_plots_list_serializer = CampingPlotResponseSerializer(service_response['content'], many=True)
@@ -61,7 +61,7 @@ class CampingPlotViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         response_camping_plot_serializer = CampingPlotResponseSerializer(service_response['content'])

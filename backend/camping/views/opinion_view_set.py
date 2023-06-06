@@ -49,7 +49,7 @@ class OpinionViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         opinions_list_serializer = OpinionResponseSerializer(service_response['content'], many=True)
@@ -100,7 +100,7 @@ class OpinionViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         response_opinion_serializer = OpinionResponseSerializer(service_response['content'])
@@ -127,7 +127,7 @@ class OpinionViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         response_opinion_serializer = OpinionResponseSerializer(service_response['content'])
@@ -147,7 +147,7 @@ class OpinionViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         return Response(

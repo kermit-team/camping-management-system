@@ -48,7 +48,7 @@ class CarViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         cars_list_serializer = CarResponseSerializer(service_response['content'], many=True)
@@ -60,7 +60,7 @@ class CarViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
         cars = service_response['content']
 
@@ -69,7 +69,7 @@ class CarViewSet(ViewSet):
             if service_response['status'] == 'Error':
                 return Response(
                     json.loads(service_response['errors']),
-                    status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    status.HTTP_400_BAD_REQUEST,
                 )
             car = service_response['content']
         else:
@@ -79,13 +79,13 @@ class CarViewSet(ViewSet):
             if service_response['status'] == 'Error':
                 return Response(
                     json.loads(service_response['errors']),
-                    status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    status.HTTP_400_BAD_REQUEST,
                 )
             service_response = CarService.add_user_to_car(service_response['content'].id, request.user)
             if service_response['status'] == 'Error':
                 return Response(
                     json.loads(service_response['errors']),
-                    status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    status.HTTP_400_BAD_REQUEST,
                 )
             car = service_response['content']
 
@@ -122,7 +122,7 @@ class CarViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         response_car_serializer = CarResponseSerializer(service_response['content'])
@@ -149,7 +149,7 @@ class CarViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         response_car_serializer = CarResponseSerializer(service_response['content'])
@@ -170,7 +170,7 @@ class CarViewSet(ViewSet):
             if service_response['status'] == 'Error':
                 return Response(
                     json.loads(service_response['errors']),
-                    status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    status.HTTP_400_BAD_REQUEST,
                 )
 
             return Response(
@@ -182,7 +182,7 @@ class CarViewSet(ViewSet):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         return Response(

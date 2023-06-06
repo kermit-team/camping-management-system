@@ -50,7 +50,7 @@ class PasswordResetConfirmView(APIView):
         if service_response['status'] == 'Error':
             return Response(
                 json.loads(service_response['errors']),
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                status.HTTP_400_BAD_REQUEST,
             )
 
         return Response(
