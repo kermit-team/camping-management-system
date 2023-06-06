@@ -16,18 +16,16 @@ import {
 })
 export class ProfileComponent implements OnInit {
   id: number | null = null;
+  photoUrl:string = "localhost:8000";
   defaultPhotoUrl: string =
     '../../assets/3687823_adventure_automotive_car_transport_transportation_icon.svg';
   isEditingName: boolean = false;
+  isEditingLastName: boolean = false;
   isEditingEmail: boolean = false;
   isEditingPhone: boolean = false;
   isEditingId: boolean = false;
   isEditingPassword: boolean = false;
-  editOrCancelName: string = 'Edytuj';
-  editOrCancelEmail: string = 'Edytuj';
-  editOrCancelPhone: string = 'Edytuj';
-  editOrCancelId: string = 'Edytuj';
-  editOrCancelPassword: string = 'Edytuj';
+
 
   user: UserResponse = {
     email: '',
@@ -39,13 +37,13 @@ export class ProfileComponent implements OnInit {
   };
   editedUser: UserResponse = this.user;
 
-  userNameForm: FormGroup = new FormGroup({
-    first_name: new FormControl(''),
-    last_name: new FormControl(''),
+  userNameForm: FormGroup= new FormGroup({
+    first_name: new FormControl('')
   });
-  userEmailForm: FormGroup = new FormGroup({
-    email: new FormControl(''),
+  userLastNameForm: FormGroup = new FormGroup({
+    last_name: new FormControl('')
   });
+
   userPhoneForm: FormGroup = new FormGroup({
     phone_number: new FormControl(''),
   });
@@ -72,37 +70,53 @@ export class ProfileComponent implements OnInit {
       this._userService.getUser(this.id).subscribe(
         (res) => {
           this.user = res;
+          this.userNameForm = this._formBuilder.group({
+            first_name: [res.first_name, Validators.required]
+          });
+          this.userLastNameForm = this._formBuilder.group({
+            last_name: [res.last_name, Validators.required],
+          });
+          this.userPhoneForm = this._formBuilder.group({
+            phone_number: [res.phone_number, Validators.required],
+          });
+          if(this.user.avatar != "")
+            this.photoUrl += this.user.avatar;
         },
         (err) => {
           console.log(err);
         }
       );
     }
-    this.userNameForm = this._formBuilder.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-    });
-    this.userEmailForm = this._formBuilder.group({
-      email: ['', Validators.required],
-    });
-    this.userPhoneForm = this._formBuilder.group({
-      phone_number: ['', Validators.required],
-    });
     this.userIdForm = this._formBuilder.group({
       id_card: ['', Validators.required],
     });
-    this.userPasswordForm = this._formBuilder.group({
-      password: ['', Validators.required],
-    });
+    
+    
   }
+  toggleEditingLastName() {
+    this.isEditingLastName = !this.isEditingLastName;
+    if (this.isEditingLastName) {
+      this.editedUser = { ...this.user };
 
+    } else {
+
+      this.editedUser = {
+        email: '',
+        first_name: '',
+        last_name: '',
+        phone_number: 0,
+        avatar: '',
+        id_card: '',
+      };
+    }
+  }
   toggleEditingName() {
     this.isEditingName = !this.isEditingName;
     if (this.isEditingName) {
       this.editedUser = { ...this.user };
-      this.editOrCancelName = 'Anuluj';
+
     } else {
-      this.editOrCancelName = 'Edytuj';
+
       this.editedUser = {
         email: '',
         first_name: '',
@@ -113,30 +127,14 @@ export class ProfileComponent implements OnInit {
       };
     }
   }
-  toggleEditingEmail() {
-    this.isEditingEmail = !this.isEditingEmail;
-    if (this.isEditingEmail) {
-      this.editedUser = { ...this.user };
-      this.editOrCancelEmail = 'Anuluj';
-    } else {
-      this.editOrCancelEmail = 'Edytuj';
-      this.editedUser = {
-        email: '',
-        first_name: '',
-        last_name: '',
-        phone_number: 0,
-        avatar: '',
-        id_card: '',
-      };
-    }
-  }
+
   toggleEditingPhone() {
     this.isEditingPhone = !this.isEditingPhone;
     if (this.isEditingPhone) {
       this.editedUser = { ...this.user };
-      this.editOrCancelPhone = 'Anuluj';
+ 
     } else {
-      this.editOrCancelPhone = 'Edytuj';
+
       this.editedUser = {
         email: '',
         first_name: '',
@@ -151,9 +149,9 @@ export class ProfileComponent implements OnInit {
     this.isEditingId = !this.isEditingId;
     if (this.isEditingId) {
       this.editedUser = { ...this.user };
-      this.editOrCancelId = 'Anuluj';
+
     } else {
-      this.editOrCancelId = 'Edytuj';
+
       this.editedUser = {
         email: '',
         first_name: '',
@@ -168,9 +166,9 @@ export class ProfileComponent implements OnInit {
     this.isEditingPassword = !this.isEditingPassword;
     if (this.isEditingPassword) {
       this.editedUser = { ...this.user };
-      this.editOrCancelPassword = 'Anuluj';
+
     } else {
-      this.editOrCancelPassword = 'Edytuj';
+
       this.editedUser = {
         email: '',
         first_name: '',
@@ -194,7 +192,7 @@ export class ProfileComponent implements OnInit {
             (res) => {
               this.user = res;
               this.isEditingName = false;
-              this.editOrCancelName = 'Edytuj';
+
             },
             (err) => {
               console.log(err);
@@ -202,12 +200,25 @@ export class ProfileComponent implements OnInit {
           );
       }
     }
-    if (formType == 'email') {
-      if (this.userEmailForm.valid) {
-        this.editedUser.email = this.userEmailForm.get('email')?.value;
-        this.isEditingEmail = false;
+    if (formType == 'lastname') {
+      if (this.userLastNameForm.valid) {
+        const last_name = this.userLastNameForm.get('last_name')?.value;
+
+        this._userService
+          .updateUser(this.id!, { last_name })
+          .subscribe(
+            (res) => {
+              this.user = res;
+              this.isEditingLastName = false;
+
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
       }
     }
+
     if (formType == 'phone') {
       if (this.userPhoneForm.valid) {
         const phone_number = this.userPhoneForm.get('phone_number')?.value;
@@ -215,7 +226,7 @@ export class ProfileComponent implements OnInit {
           (res) => {
             this.user = res;
             this.isEditingPhone = false;
-            this.editOrCancelPhone = 'Edytuj';
+
           },
           (err) => {
             console.log(err);
@@ -231,7 +242,7 @@ export class ProfileComponent implements OnInit {
           (res) => {
             this.user = res;
             this.isEditingId = false;
-            this.editOrCancelId = 'Edytuj';
+
           },
           (err) => {
             console.log(err);

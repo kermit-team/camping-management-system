@@ -1,8 +1,15 @@
 <div class="search-container">
     <form class="search-form">
         <div class="date-range-input">
-            <input type="date" id="check-in" class="date-input" placeholder="Wybierz datę przyjazdu"/>
-            <input type="date" id="check-out" class="date-input" placeholder="Wybierz datę wyjazdu" />
+                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                  <input matStartDate formControlName="start" placeholder="Start date">
+                  <input matEndDate formControlName="end" placeholder="End date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              
+            <!-- <input type="date" id="check-in" class="date-input" [min]="firstDate" [value]="firstDate" [(ngModel)]="firstDate" (ngModelChange)="updateSecondDate()"/>
+            <input type="date" id="check-out" class="date-input"  [min]="minSecondDate" [value]="tomorrow"/> -->
         </div>
         <div class="guests-input">
             <label for="adults">
