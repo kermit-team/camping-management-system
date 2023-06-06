@@ -2,6 +2,7 @@ from django.http import Http404
 from django.utils.translation import gettext as _
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.utils import json
 from rest_framework.viewsets import ViewSet
 
 from account.models import User
@@ -37,10 +38,7 @@ class UserViewSet(ViewSet):
                 filters_errors[k] = _('Field does not exist')
 
         if filters_errors:
-            return Response(
-                {'errors': filters_errors},
-                status.HTTP_400_BAD_REQUEST,
-            )
+            return Response(filters_errors, status.HTTP_400_BAD_REQUEST)
 
         service_response = UserService.get_users(
             filters=filters,
@@ -48,7 +46,7 @@ class UserViewSet(ViewSet):
         )
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -63,7 +61,7 @@ class UserViewSet(ViewSet):
         service_response = UserService.create_user(user_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -73,7 +71,7 @@ class UserViewSet(ViewSet):
         if service_response['status'] == 'Error':
             UserService.delete_user(created_user.id)
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -110,7 +108,7 @@ class UserViewSet(ViewSet):
         service_response = UserService.update_user(pk, user_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
         response_user_serializer = UserResponseSerializer(service_response['content'])
@@ -137,7 +135,7 @@ class UserViewSet(ViewSet):
         service_response = UserService.update_user(pk, user_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
         response_user_serializer = UserResponseSerializer(service_response['content'])
@@ -157,7 +155,7 @@ class UserViewSet(ViewSet):
         service_response = UserService.delete_user(pk)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 

@@ -2,6 +2,7 @@ from django.http import Http404
 from django.utils.translation import gettext as _
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.utils import json
 from rest_framework.viewsets import ViewSet
 
 from camping.models import Payment
@@ -36,10 +37,7 @@ class PaymentViewSet(ViewSet):
                 filters_errors[k] = _('Field does not exist')
 
         if filters_errors:
-            return Response(
-                {'errors': filters_errors},
-                status.HTTP_400_BAD_REQUEST,
-            )
+            return Response(filters_errors, status.HTTP_400_BAD_REQUEST)
 
         service_response = PaymentService.get_payments(
             filters=filters,
@@ -47,7 +45,7 @@ class PaymentViewSet(ViewSet):
         )
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -62,7 +60,7 @@ class PaymentViewSet(ViewSet):
         service_response = PaymentService.create_payment(payment_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -98,7 +96,7 @@ class PaymentViewSet(ViewSet):
         service_response = PaymentService.update_payment(pk, payment_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -125,7 +123,7 @@ class PaymentViewSet(ViewSet):
         service_response = PaymentService.update_payment(pk, payment_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -145,7 +143,7 @@ class PaymentViewSet(ViewSet):
         service_response = PaymentService.delete_payment(pk)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 

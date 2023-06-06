@@ -2,6 +2,7 @@ from datetime import date
 from typing import Any, Dict, Optional
 
 from django.utils.translation import gettext as _
+from rest_framework.utils import json
 
 from camping.models import CampingPlot, Reservation
 
@@ -24,7 +25,7 @@ class CampingPlotService:
                 camping_plots = CampingPlot.objects.all().order_by(order_by)
             response = {'status': 'Success', 'content': camping_plots}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -34,7 +35,7 @@ class CampingPlotService:
             camping_plot = CampingPlot.objects.get(pk=pk)
             response = {'status': 'Success', 'content': camping_plot}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -44,7 +45,7 @@ class CampingPlotService:
             camping_plot = CampingPlot.objects.create(**camping_plot_data)
             response = {'status': 'Success', 'content': camping_plot}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -56,7 +57,7 @@ class CampingPlotService:
             camping_plot = CampingPlot.objects.get(pk=pk)
             response = {'status': 'Success', 'content': camping_plot}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -65,11 +66,13 @@ class CampingPlotService:
         try:
             camping_plot = CampingPlot.objects.get(pk=pk)
             if CampingPlotService.is_camping_plot_reserved(camping_plot):
-                raise Exception(_("Camping plot is used in reservations"))
+                raise Exception(json.dumps(
+                    {'camping_plot': _("Camping plot is used in reservations")},
+                ))
 
             camping_plot.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response

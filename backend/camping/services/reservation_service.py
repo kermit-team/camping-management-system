@@ -3,6 +3,7 @@ from typing import Any, Dict, Optional
 
 from django.db.models import Q as Query
 from django.utils.translation import gettext as _
+from rest_framework.utils import json
 
 from account.models import User
 from camping.models import Reservation, Payment, CampingPlot, Car
@@ -67,7 +68,7 @@ class ReservationService:
                 reservations = Reservation.objects.all().order_by(order_by)
             response = {'status': 'Success', 'content': reservations}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -77,7 +78,7 @@ class ReservationService:
             reservation = Reservation.objects.get(pk=pk)
             response = {'status': 'Success', 'content': reservation}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -125,7 +126,7 @@ class ReservationService:
                 errors['camping_plot'] = _("This parcel isn't available on the specified date")
 
             if errors:
-                raise Exception(errors)
+                raise Exception(json.dumps(errors))
 
             payment_method = reservation_data.pop('payment')['method']
             reservation = Reservation.objects.create(**reservation_data)
@@ -146,11 +147,11 @@ class ReservationService:
             service_response = PaymentService.create_payment(payment_data=payment_data)
             if service_response['status'] == 'Error':
                 reservation.delete()
-                raise Exception(service_response['errors'])
+                raise Exception(json.dumps(service_response['errors']))
 
             response = {'status': 'Success', 'content': reservation}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -218,7 +219,7 @@ class ReservationService:
                         errors['camping_plot'] = _("This parcel isn't available on the specified date")
 
                 if errors:
-                    raise Exception(errors)
+                    raise Exception(json.dumps(errors))
 
                 old_reservation_data = reservation.__dict__
                 Reservation.objects.filter(pk=pk).update(**reservation_data)
@@ -237,12 +238,12 @@ class ReservationService:
                 service_response = PaymentService.update_payment(pk=reservation.payment.id, payment_data=payment_data)
                 if service_response['status'] == 'Error':
                     Reservation.objects.filter(pk=pk).update(**old_reservation_data)
-                    raise Exception(service_response['errors'])
+                    raise Exception(json.dumps(service_response['errors']))
 
             reservation = Reservation.objects.get(pk=pk)
             response = {'status': 'Success', 'content': reservation}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -251,11 +252,13 @@ class ReservationService:
         try:
             reservation = Reservation.objects.get(pk=pk)
             if not ReservationService.is_reservation_cancelable(reservation):
-                raise Exception(_("Reservation can no longer be cancelled"))
+                raise Exception(json.dumps(
+                    {'reservation': _("Reservation can no longer be cancelled")},
+                ))
 
             reservation.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response

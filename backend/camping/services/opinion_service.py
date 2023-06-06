@@ -2,6 +2,7 @@ from datetime import date
 from typing import Any, Dict, Optional
 
 from django.utils.translation import gettext as _
+from rest_framework.utils import json
 
 from account.models import User
 from camping.models import Opinion, CampingPlot, Reservation
@@ -32,7 +33,7 @@ class OpinionService:
                 opinions = Opinion.objects.all().order_by(order_by)
             response = {'status': 'Success', 'content': opinions}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -42,7 +43,7 @@ class OpinionService:
             opinion = Opinion.objects.get(pk=pk)
             response = {'status': 'Success', 'content': opinion}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -53,12 +54,14 @@ class OpinionService:
                 author=opinion_data['author'],
                 camping_plot=opinion_data['camping_plot'],
             ):
-                raise Exception(_('User is unable to create opinion for the given camping plot'))
+                raise Exception(json.dumps(
+                    {'user': _('User is unable to create opinion for the given camping plot')},
+                ))
 
             opinion = Opinion.objects.create(**opinion_data)
             response = {'status': 'Success', 'content': opinion}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -70,7 +73,7 @@ class OpinionService:
             opinion = Opinion.objects.get(pk=pk)
             response = {'status': 'Success', 'content': opinion}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -81,6 +84,6 @@ class OpinionService:
             opinion.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response

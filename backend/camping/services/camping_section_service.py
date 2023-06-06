@@ -2,6 +2,7 @@ from datetime import date
 from typing import Any, Dict, Optional
 
 from django.utils.translation import gettext as _
+from rest_framework.utils import json
 
 from camping.models import CampingSection, Reservation
 
@@ -27,7 +28,7 @@ class CampingSectionService:
                 camping_sections = CampingSection.objects.all().order_by(order_by)
             response = {'status': 'Success', 'content': camping_sections}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -37,7 +38,7 @@ class CampingSectionService:
             camping_section = CampingSection.objects.get(pk=pk)
             response = {'status': 'Success', 'content': camping_section}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -47,7 +48,7 @@ class CampingSectionService:
             camping_section = CampingSection.objects.create(**camping_section_data)
             response = {'status': 'Success', 'content': camping_section}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -59,7 +60,7 @@ class CampingSectionService:
             camping_section = CampingSection.objects.get(pk=pk)
             response = {'status': 'Success', 'content': camping_section}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -68,11 +69,13 @@ class CampingSectionService:
         try:
             camping_section = CampingSection.objects.get(pk=pk)
             if CampingSectionService.is_camping_plot_in_section_reserved(camping_section):
-                raise Exception(_("Camping section is used in reservations"))
+                raise Exception(json.dumps(
+                    {'camping_section': _("Camping section is used in reservations")},
+                ))
 
             camping_section.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response

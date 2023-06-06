@@ -2,6 +2,7 @@ from django.http import Http404
 from django.utils.translation import gettext as _
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.utils import json
 from rest_framework.viewsets import ViewSet
 
 from camping.models import Car
@@ -38,10 +39,7 @@ class CarViewSet(ViewSet):
                 filters_errors[k] = _('Field does not exist')
 
         if filters_errors:
-            return Response(
-                {'errors': filters_errors},
-                status.HTTP_400_BAD_REQUEST,
-            )
+            return Response(filters_errors, status.HTTP_400_BAD_REQUEST)
 
         service_response = CarService.get_cars(
             filters=filters,
@@ -49,7 +47,7 @@ class CarViewSet(ViewSet):
         )
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -61,7 +59,7 @@ class CarViewSet(ViewSet):
         service_response = CarService.get_cars(filters={'registration_plate': request.data.get('registration_plate')})
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
         cars = service_response['content']
@@ -70,7 +68,7 @@ class CarViewSet(ViewSet):
             service_response = CarService.add_user_to_car(cars.first().id, request.user)
             if service_response['status'] == 'Error':
                 return Response(
-                    {'errors': service_response['errors']},
+                    json.loads(service_response['errors']),
                     status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
             car = service_response['content']
@@ -80,13 +78,13 @@ class CarViewSet(ViewSet):
             service_response = CarService.create_car(car_serializer.validated_data)
             if service_response['status'] == 'Error':
                 return Response(
-                    {'errors': service_response['errors']},
+                    json.loads(service_response['errors']),
                     status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
             service_response = CarService.add_user_to_car(service_response['content'].id, request.user)
             if service_response['status'] == 'Error':
                 return Response(
-                    {'errors': service_response['errors']},
+                    json.loads(service_response['errors']),
                     status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
             car = service_response['content']
@@ -123,7 +121,7 @@ class CarViewSet(ViewSet):
         service_response = CarService.update_car(pk, car_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -150,7 +148,7 @@ class CarViewSet(ViewSet):
         service_response = CarService.update_car(pk, car_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -171,7 +169,7 @@ class CarViewSet(ViewSet):
             service_response = CarService.delete_car(pk)
             if service_response['status'] == 'Error':
                 return Response(
-                    {'errors': service_response['errors']},
+                    json.loads(service_response['errors']),
                     status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
 
@@ -183,7 +181,7 @@ class CarViewSet(ViewSet):
         service_response = CarService.remove_user_from_car(pk, request.user)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 

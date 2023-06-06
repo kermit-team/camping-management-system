@@ -13,7 +13,7 @@ class CarService:
             car.drivers.add(user)
             response = {'status': 'Success', 'content': car}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -24,7 +24,7 @@ class CarService:
             car.drivers.remove(user)
             response = {'status': 'Success', 'content': car}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -40,7 +40,7 @@ class CarService:
                 cars = Car.objects.all().order_by(order_by)
             response = {'status': 'Success', 'content': cars}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -50,7 +50,7 @@ class CarService:
             car = Car.objects.get(pk=pk)
             response = {'status': 'Success', 'content': car}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -60,7 +60,7 @@ class CarService:
             car = Car.objects.create(**car_data)
             response = {'status': 'Success', 'content': car}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -72,7 +72,7 @@ class CarService:
             car = Car.objects.get(pk=pk)
             response = {'status': 'Success', 'content': car}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -83,6 +83,6 @@ class CarService:
             car.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
