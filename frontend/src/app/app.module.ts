@@ -22,6 +22,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core';
+import { SearchComponent } from './reservation/components/search/search.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core'
+import { ReservationModule } from './reservation/reservation.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -35,14 +39,13 @@ import {MatNativeDateModule} from '@angular/material/core';
     CarouselComponent,
     ContactFormComponent,
     FooterComponent,
-    ProfileMiniComponent,
-    HeaderComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
+    ReservationModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -50,8 +53,10 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
+    SharedModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'pl'}],
+  bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }
