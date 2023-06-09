@@ -6,7 +6,7 @@ from rest_framework.utils import json
 from rest_framework.viewsets import ViewSet
 
 from camping.models import Opinion
-from camping.permissions import UserRelatedToObjectOrStaffPermissions
+from camping.permissions import UserRelatedToObjectOrStaffAndAnonReadOnlyPermissions
 from camping.serializers import OpinionRequestSerializer, OpinionResponseSerializer
 from camping.serializers.opinion_create_serializer import OpinionCreateSerializer
 from camping.services import OpinionService
@@ -14,7 +14,7 @@ from camping.services import OpinionService
 
 class OpinionViewSet(ViewSet):
     queryset = Opinion.objects.none()
-    permission_classes = [UserRelatedToObjectOrStaffPermissions]
+    permission_classes = [UserRelatedToObjectOrStaffAndAnonReadOnlyPermissions]
 
     @staticmethod
     def list(request):

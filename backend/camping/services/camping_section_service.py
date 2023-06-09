@@ -10,7 +10,7 @@ from camping.models import CampingSection, Reservation
 class CampingSectionService:
 
     @staticmethod
-    def is_camping_plot_in_section_reserved(camping_section: CampingSection) -> bool:
+    def is_camping_section_in_incoming_reservations(camping_section: CampingSection) -> bool:
         return Reservation.objects.filter(
             camping_plot__camping_section=camping_section,
             date_to__gte=date.today(),
@@ -67,11 +67,13 @@ class CampingSectionService:
     @staticmethod
     def delete_camping_section(pk: int) -> Dict[str, Any]:
         try:
+            errors = {}
             camping_section = CampingSection.objects.get(pk=pk)
-            if CampingSectionService.is_camping_plot_in_section_reserved(camping_section):
-                raise Exception(json.dumps(
-                    {'camping_section': _("Camping section is used in reservations")},
-                ))
+            if CampingSectionService.is_camping_section_in_incoming_reservations(camping_section):
+                errors['camping_section'] = _("Camping section is used in reservations")
+
+            if errors:
+                raise Exception(json.dumps(errors))
 
             camping_section.delete()
             response = {'status': 'Success'}

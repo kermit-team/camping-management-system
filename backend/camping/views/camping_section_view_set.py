@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.utils.translation import gettext as _
 from rest_framework import status
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 from rest_framework.response import Response
 from rest_framework.utils import json
 from rest_framework.viewsets import ViewSet
@@ -12,6 +13,7 @@ from camping.services import CampingSectionService
 
 class CampingSectionViewSet(ViewSet):
     queryset = CampingSection.objects.none()
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     @staticmethod
     def list(request):

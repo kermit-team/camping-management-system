@@ -6,12 +6,14 @@ from rest_framework.utils import json
 from rest_framework.viewsets import ViewSet
 
 from camping.models import Payment
+from camping.permissions import UserRelatedToObjectOrStaffPermissions
 from camping.serializers import PaymentRequestSerializer, PaymentResponseSerializer
 from camping.services import PaymentService
 
 
 class PaymentViewSet(ViewSet):
     queryset = Payment.objects.none()
+    permission_classes = [UserRelatedToObjectOrStaffPermissions]
 
     @staticmethod
     def list(request):
