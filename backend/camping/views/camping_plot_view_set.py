@@ -1,7 +1,9 @@
 from django.http import Http404
 from django.utils.translation import gettext as _
 from rest_framework import status
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 from rest_framework.response import Response
+from rest_framework.utils import json
 from rest_framework.viewsets import ViewSet
 
 from camping.models import CampingPlot
@@ -11,6 +13,7 @@ from camping.services import CampingPlotService
 
 class CampingPlotViewSet(ViewSet):
     queryset = CampingPlot.objects.none()
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     @staticmethod
     def list(request):
@@ -36,10 +39,7 @@ class CampingPlotViewSet(ViewSet):
                 filters_errors[k] = _('Field does not exist')
 
         if filters_errors:
-            return Response(
-                {'errors': filters_errors},
-                status.HTTP_400_BAD_REQUEST,
-            )
+            return Response(filters_errors, status.HTTP_400_BAD_REQUEST)
 
         service_response = CampingPlotService.get_camping_plots(
             filters=filters,
@@ -47,8 +47,8 @@ class CampingPlotViewSet(ViewSet):
         )
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
 
         camping_plots_list_serializer = CampingPlotResponseSerializer(service_response['content'], many=True)
@@ -62,8 +62,8 @@ class CampingPlotViewSet(ViewSet):
         service_response = CampingPlotService.create_camping_plot(camping_plot_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
 
         response_camping_plot_serializer = CampingPlotResponseSerializer(service_response['content'])
@@ -98,7 +98,7 @@ class CampingPlotViewSet(ViewSet):
         service_response = CampingPlotService.update_camping_plot(pk, camping_plot_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
 
@@ -125,7 +125,7 @@ class CampingPlotViewSet(ViewSet):
         service_response = CampingPlotService.update_camping_plot(pk, camping_plot_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
 
@@ -145,7 +145,7 @@ class CampingPlotViewSet(ViewSet):
         service_response = CampingPlotService.delete_camping_plot(pk)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
 

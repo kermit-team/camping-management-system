@@ -2,6 +2,7 @@ from django.http import Http404
 from django.utils.translation import gettext as _
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.utils import json
 from rest_framework.viewsets import ViewSet
 
 from camping.models import Reservation
@@ -39,10 +40,7 @@ class ReservationViewSet(ViewSet):
                 filters_errors[k] = _('Field does not exist')
 
         if filters_errors:
-            return Response(
-                {'errors': filters_errors},
-                status.HTTP_400_BAD_REQUEST,
-            )
+            return Response(filters_errors, status.HTTP_400_BAD_REQUEST)
 
         service_response = ReservationService.get_reservations(
             filters=filters,
@@ -50,8 +48,8 @@ class ReservationViewSet(ViewSet):
         )
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
 
         reservations_list_serializer = ReservationResponseSerializer(service_response['content'], many=True)
@@ -68,7 +66,7 @@ class ReservationViewSet(ViewSet):
         service_response = ReservationService.create_reservation(reservation_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
 
@@ -104,7 +102,7 @@ class ReservationViewSet(ViewSet):
         service_response = ReservationService.update_reservation(pk, reservation_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
 
@@ -131,7 +129,7 @@ class ReservationViewSet(ViewSet):
         service_response = ReservationService.update_reservation(pk, reservation_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
 
@@ -151,7 +149,7 @@ class ReservationViewSet(ViewSet):
         service_response = ReservationService.delete_reservation(pk)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
 

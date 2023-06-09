@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.utils import json
 from rest_framework.views import APIView
 
 from account.serializers import UserRequestSerializer
@@ -22,19 +23,19 @@ class PasswordResetConfirmView(APIView):
 
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
         user = service_response['content']
 
         if not (user and user.is_active):
             return Response(
-                {'message': _('Invalid link')},
+                _('Invalid link'),
                 status.HTTP_400_BAD_REQUEST,
             )
         if not token_generator.check_token(user, token):
             return Response(
-                {'message': _('Link is no longer valid')},
+                _('Link is no longer valid'),
                 status.HTTP_401_UNAUTHORIZED,
             )
 
@@ -48,8 +49,8 @@ class PasswordResetConfirmView(APIView):
         service_response = UserService.update_user(uid, user_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
 
         return Response(

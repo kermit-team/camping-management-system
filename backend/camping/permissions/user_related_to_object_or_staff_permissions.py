@@ -1,16 +1,16 @@
-from rest_framework import permissions
+from rest_framework.permissions import DjangoModelPermissions
 
-from camping.models import Reservation, Opinion, Car
+from camping.models import Reservation, Car, Payment
 
 
-class UserRelatedToObjectOrStaffPermissions(permissions.BasePermission):
+class UserRelatedToObjectOrStaffPermissions(DjangoModelPermissions):
 
     def has_object_permission(self, request, view, obj):
         if request.user.is_staff:
             return True
-        if isinstance(obj, Reservation) and request.user == obj.user:
+        if isinstance(obj, Payment) and request.user == obj.reservation.user:
             return True
-        if isinstance(obj, Opinion) and request.user == obj.author:
+        if isinstance(obj, Reservation) and request.user == obj.user:
             return True
         if isinstance(obj, Car) and request.user in obj.drivers:
             return True

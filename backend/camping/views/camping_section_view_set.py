@@ -1,7 +1,9 @@
 from django.http import Http404
 from django.utils.translation import gettext as _
 from rest_framework import status
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 from rest_framework.response import Response
+from rest_framework.utils import json
 from rest_framework.viewsets import ViewSet
 
 from camping.models import CampingSection
@@ -11,6 +13,7 @@ from camping.services import CampingSectionService
 
 class CampingSectionViewSet(ViewSet):
     queryset = CampingSection.objects.none()
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     @staticmethod
     def list(request):
@@ -36,10 +39,7 @@ class CampingSectionViewSet(ViewSet):
                 filters_errors[k] = _('Field does not exist')
 
         if filters_errors:
-            return Response(
-                {'errors': filters_errors},
-                status.HTTP_400_BAD_REQUEST,
-            )
+            return Response(filters_errors, status.HTTP_400_BAD_REQUEST)
 
         service_response = CampingSectionService.get_camping_sections(
             filters=filters,
@@ -47,8 +47,8 @@ class CampingSectionViewSet(ViewSet):
         )
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
 
         camping_sections_list_serializer = CampingSectionResponseSerializer(service_response['content'], many=True)
@@ -62,8 +62,8 @@ class CampingSectionViewSet(ViewSet):
         service_response = CampingSectionService.create_camping_section(camping_section_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
 
         response_camping_section_serializer = CampingSectionResponseSerializer(service_response['content'])
@@ -98,7 +98,7 @@ class CampingSectionViewSet(ViewSet):
         service_response = CampingSectionService.update_camping_section(pk, camping_section_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
 
@@ -125,7 +125,7 @@ class CampingSectionViewSet(ViewSet):
         service_response = CampingSectionService.update_camping_section(pk, camping_section_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
 
@@ -145,7 +145,7 @@ class CampingSectionViewSet(ViewSet):
         service_response = CampingSectionService.delete_camping_section(pk)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
 

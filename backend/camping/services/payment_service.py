@@ -17,7 +17,7 @@ class PaymentService:
                 payments = Payment.objects.all().order_by(order_by)
             response = {'status': 'Success', 'content': payments}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -27,7 +27,7 @@ class PaymentService:
             payment = Payment.objects.get(pk=pk)
             response = {'status': 'Success', 'content': payment}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -37,7 +37,7 @@ class PaymentService:
             payment = Payment.objects.create(**payment_data)
             response = {'status': 'Success', 'content': payment}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -49,7 +49,7 @@ class PaymentService:
             payment = Payment.objects.get(pk=pk)
             response = {'status': 'Success', 'content': payment}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -60,6 +60,6 @@ class PaymentService:
             payment.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response

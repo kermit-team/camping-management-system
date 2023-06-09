@@ -18,7 +18,7 @@ class GroupService:
 
             response = {'status': 'Success', 'content': groups}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -28,7 +28,7 @@ class GroupService:
             group = Group.objects.get(pk=pk)
             response = {'status': 'Success', 'content': group}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -38,7 +38,7 @@ class GroupService:
             group = Group.objects.create(**group_data)
             response = {'status': 'Success', 'content': group}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -51,7 +51,7 @@ class GroupService:
 
             response = {'status': 'Success', 'content': group}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -62,6 +62,6 @@ class GroupService:
             group.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response

@@ -1,3 +1,4 @@
+from .available_camping_plots_request_serializer import AvailableCampingPlotsRequestSerializer
 from .camping_plot_request_serializer import CampingPlotRequestSerializer
 from .camping_plot_response_serializer import CampingPlotResponseSerializer
 from .camping_section_request_serializer import CampingSectionRequestSerializer

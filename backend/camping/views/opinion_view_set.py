@@ -2,10 +2,11 @@ from django.http import Http404
 from django.utils.translation import gettext as _
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.utils import json
 from rest_framework.viewsets import ViewSet
 
 from camping.models import Opinion
-from camping.permissions import UserRelatedToObjectOrStaffPermissions
+from camping.permissions import UserRelatedToObjectOrStaffAndAnonReadOnlyPermissions
 from camping.serializers import OpinionRequestSerializer, OpinionResponseSerializer
 from camping.serializers.opinion_create_serializer import OpinionCreateSerializer
 from camping.services import OpinionService
@@ -13,7 +14,7 @@ from camping.services import OpinionService
 
 class OpinionViewSet(ViewSet):
     queryset = Opinion.objects.none()
-    permission_classes = [UserRelatedToObjectOrStaffPermissions]
+    permission_classes = [UserRelatedToObjectOrStaffAndAnonReadOnlyPermissions]
 
     @staticmethod
     def list(request):
@@ -39,10 +40,7 @@ class OpinionViewSet(ViewSet):
                 filters_errors[k] = _('Field does not exist')
 
         if filters_errors:
-            return Response(
-                {'errors': filters_errors},
-                status.HTTP_400_BAD_REQUEST,
-            )
+            return Response(filters_errors, status.HTTP_400_BAD_REQUEST)
 
         service_response = OpinionService.get_opinions(
             filters=filters,
@@ -50,8 +48,8 @@ class OpinionViewSet(ViewSet):
         )
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
 
         opinions_list_serializer = OpinionResponseSerializer(service_response['content'], many=True)
@@ -65,7 +63,7 @@ class OpinionViewSet(ViewSet):
         service_response = OpinionService.create_opinion(opinion_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
+                json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
 
@@ -101,8 +99,8 @@ class OpinionViewSet(ViewSet):
         service_response = OpinionService.update_opinion(pk, opinion_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
 
         response_opinion_serializer = OpinionResponseSerializer(service_response['content'])
@@ -128,8 +126,8 @@ class OpinionViewSet(ViewSet):
         service_response = OpinionService.update_opinion(pk, opinion_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
 
         response_opinion_serializer = OpinionResponseSerializer(service_response['content'])
@@ -148,8 +146,8 @@ class OpinionViewSet(ViewSet):
         service_response = OpinionService.delete_opinion(pk)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
 
         return Response(

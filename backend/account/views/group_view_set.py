@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
+from rest_framework.utils import json
 from rest_framework.viewsets import ViewSet
 
 from account.serializers import GroupRequestSerializer, GroupResponseSerializer
@@ -37,10 +38,7 @@ class GroupViewSet(ViewSet):
                 filters_errors[k] = _('Field does not exist')
 
         if filters_errors:
-            return Response(
-                {'errors': filters_errors},
-                status.HTTP_400_BAD_REQUEST,
-            )
+            return Response(filters_errors, status.HTTP_400_BAD_REQUEST)
 
         service_response = GroupService.get_groups(
             filters=filters,
@@ -49,8 +47,8 @@ class GroupViewSet(ViewSet):
 
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
 
         groups_list_serializer = GroupResponseSerializer(service_response['content'], many=True)
@@ -64,8 +62,8 @@ class GroupViewSet(ViewSet):
         service_response = GroupService.create_group(group_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
 
         response_group_serializer = GroupResponseSerializer(service_response['content'])
@@ -100,8 +98,8 @@ class GroupViewSet(ViewSet):
         service_response = GroupService.update_group(pk, group_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
         response_group_serializer = GroupResponseSerializer(service_response['content'])
 
@@ -127,8 +125,8 @@ class GroupViewSet(ViewSet):
         service_response = GroupService.update_group(pk, group_serializer.validated_data)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
         response_group_serializer = GroupResponseSerializer(service_response['content'])
 
@@ -147,8 +145,8 @@ class GroupViewSet(ViewSet):
         service_response = GroupService.delete_group(pk)
         if service_response['status'] == 'Error':
             return Response(
-                {'errors': service_response['errors']},
-                status.HTTP_500_INTERNAL_SERVER_ERROR,
+                json.loads(service_response['errors']),
+                status.HTTP_400_BAD_REQUEST,
             )
         return Response(
             {'message': _('Group has been deleted')},

@@ -3,6 +3,7 @@ from typing import Any, Dict, Optional
 
 from django.db.models import Q as Query
 from django.utils.translation import gettext as _
+from rest_framework.utils import json
 
 from account.models import User
 from camping.models import Reservation, Payment, CampingPlot, Car
@@ -39,7 +40,7 @@ class ReservationService:
     @staticmethod
     def is_camping_plot_available(camping_plot: CampingPlot, date_from: date, date_to: date) -> bool:
         return not Reservation.objects.filter(
-            Query(date_from__gte=date_from, date_from__lt=date_to) | Query(date_to__gt=date_from, date_to__lte=date_to),
+            Query(date_from__lt=date_to, date_to__gt=date_from),
             ~Query(payment__status=Payment.Status.CANCELED),
             camping_plot=camping_plot,
         ).exists()
@@ -67,17 +68,17 @@ class ReservationService:
                 reservations = Reservation.objects.all().order_by(order_by)
             response = {'status': 'Success', 'content': reservations}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
     @staticmethod
     def get_reservation(pk: int) -> Dict[str, Any]:
         try:
-            reservation = Reservation.objects.get(pk=pk)
+            reservation = Reservation.objects.get(pk)
             response = {'status': 'Success', 'content': reservation}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -86,15 +87,12 @@ class ReservationService:
         try:
             errors = {}
 
-            if not ReservationService.is_user_capable_of_booking(
-                user=reservation_data['user'],
-                car=reservation_data['car'],
-            ):
+            if not ReservationService.is_user_capable_of_booking(reservation_data['user'], reservation_data['car']):
                 errors['user'] = _('User needs to have an assigned car and id card in order to make reservation')
 
             if not ReservationService.is_number_of_people_correct(
-                number_of_adults=reservation_data['number_of_adults'],
-                number_of_children=reservation_data['number_of_children'],
+                reservation_data['number_of_adults'],
+                reservation_data['number_of_children'],
             ):
                 errors['number_of_people'] = _(
                     (
@@ -103,12 +101,12 @@ class ReservationService:
                     ),
                 )
 
-            if not ReservationService.is_booking_from_date_correct(date_from=reservation_data['date_from']):
+            if not ReservationService.is_booking_from_date_correct(reservation_data['date_from']):
                 errors['date_from'] = _('Unable to create reservation for date in past tense')
 
             if not ReservationService.is_booking_period_correct(
-                date_from=reservation_data['date_from'],
-                date_to=reservation_data['date_to'],
+                reservation_data['date_from'],
+                reservation_data['date_to'],
             ):
                 errors['date_to'] = _(
                     (
@@ -118,14 +116,14 @@ class ReservationService:
                 )
 
             if not ReservationService.is_camping_plot_available(
-                camping_plot=reservation_data['camping_plot'],
-                date_from=reservation_data['date_from'],
-                date_to=reservation_data['date_to'],
+                reservation_data['camping_plot'],
+                reservation_data['date_from'],
+                reservation_data['date_to'],
             ):
                 errors['camping_plot'] = _("This parcel isn't available on the specified date")
 
             if errors:
-                raise Exception(errors)
+                raise Exception(json.dumps(errors))
 
             payment_method = reservation_data.pop('payment')['method']
             reservation = Reservation.objects.create(**reservation_data)
@@ -134,23 +132,23 @@ class ReservationService:
                 'reservation': reservation,
                 'method': payment_method,
                 'price': ReservationService.calculate_reservation_price(
-                    plot_price=reservation_data['camping_plot'].camping_section.plot_price,
-                    price_per_adult=reservation_data['camping_plot'].camping_section.price_per_adult,
-                    price_per_child=reservation_data['camping_plot'].camping_section.price_per_child,
-                    number_of_adults=reservation_data['number_of_adults'],
-                    number_of_children=reservation_data['number_of_children'],
-                    days=(reservation_data['date_to'] - reservation_data['date_from']).days,
+                    reservation_data['camping_plot'].camping_section.plot_price,
+                    reservation_data['camping_plot'].camping_section.price_per_adult,
+                    reservation_data['camping_plot'].camping_section.price_per_child,
+                    reservation_data['number_of_adults'],
+                    reservation_data['number_of_children'],
+                    (reservation_data['date_to'] - reservation_data['date_from']).days,
                 ),
             }
 
-            service_response = PaymentService.create_payment(payment_data=payment_data)
+            service_response = PaymentService.create_payment(payment_data)
             if service_response['status'] == 'Error':
                 reservation.delete()
-                raise Exception(service_response['errors'])
+                raise Exception(json.dumps(service_response['errors']))
 
             response = {'status': 'Success', 'content': reservation}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
@@ -158,7 +156,7 @@ class ReservationService:
     def update_reservation(pk: int, reservation_data: Dict[str, Any]) -> Dict[str, Any]:
         try:
             if reservation_data:
-                reservation = Reservation.objects.get(pk=pk)
+                reservation = Reservation.objects.get(pk)
                 errors = {}
 
                 if not ReservationService.is_reservation_updatable(reservation):
@@ -170,8 +168,8 @@ class ReservationService:
                     )
 
                 if not ReservationService.is_user_capable_of_booking(
-                    user=reservation.user,
-                    car=reservation_data.get('car', reservation.car),
+                    reservation.user,
+                    reservation_data.get('car', reservation.car),
                 ):
                     errors['user'] = _('User needs to have an assigned car and id card in order to make reservation')
 
@@ -179,8 +177,8 @@ class ReservationService:
                     reservation_data.get('number_of_adults') or
                     reservation_data.get('number_of_children')
                 ) and not ReservationService.is_number_of_people_correct(
-                    number_of_adults=reservation_data.get('number_of_adults', reservation.number_of_adults),
-                    number_of_children=reservation_data.get('number_of_children', reservation.number_of_children),
+                    reservation_data.get('number_of_adults', reservation.number_of_adults),
+                    reservation_data.get('number_of_children', reservation.number_of_children),
                 ):
                     errors['number_of_people'] = _(
                         (
@@ -195,13 +193,13 @@ class ReservationService:
                     reservation_data.get('date_to')
                 ):
                     if not ReservationService.is_booking_from_date_correct(
-                        date_from=reservation_data.get('date_from', reservation.date_from),
+                        reservation_data.get('date_from', reservation.date_from),
                     ):
                         errors['date_from'] = _('Unable to create reservation for date in past tense')
 
                     if not ReservationService.is_booking_period_correct(
-                        date_from=reservation_data.get('date_from', reservation.date_from),
-                        date_to=reservation_data.get('date_to', reservation.date_to),
+                        reservation_data.get('date_from', reservation.date_from),
+                        reservation_data.get('date_to', reservation.date_to),
                     ):
                         errors['date_to'] = _(
                             (
@@ -211,14 +209,14 @@ class ReservationService:
                         )
 
                     if not ReservationService.is_camping_plot_available(
-                        camping_plot=reservation_data.get('camping_plot', reservation.camping_plot),
-                        date_from=reservation_data.get('date_from', reservation.date_from),
-                        date_to=reservation_data.get('date_to', reservation.date_to),
+                        reservation_data.get('camping_plot', reservation.camping_plot),
+                        reservation_data.get('date_from', reservation.date_from),
+                        reservation_data.get('date_to', reservation.date_to),
                     ):
                         errors['camping_plot'] = _("This parcel isn't available on the specified date")
 
                 if errors:
-                    raise Exception(errors)
+                    raise Exception(json.dumps(errors))
 
                 old_reservation_data = reservation.__dict__
                 Reservation.objects.filter(pk=pk).update(**reservation_data)
@@ -226,36 +224,38 @@ class ReservationService:
 
                 payment_data = {
                     'price': ReservationService.calculate_reservation_price(
-                        plot_price=reservation.camping_plot.camping_section.plot_price,
-                        price_per_adult=reservation.camping_plot.camping_section.price_per_adult,
-                        price_per_child=reservation.camping_plot.camping_section.price_per_child,
-                        number_of_adults=reservation.number_of_adults,
-                        number_of_children=reservation.number_of_children,
-                        days=(reservation.date_to - reservation.date_from).days,
+                        reservation.camping_plot.camping_section.plot_price,
+                        reservation.camping_plot.camping_section.price_per_adult,
+                        reservation.camping_plot.camping_section.price_per_child,
+                        reservation.number_of_adults,
+                        reservation.number_of_children,
+                        (reservation.date_to - reservation.date_from).days,
                     ),
                 }
-                service_response = PaymentService.update_payment(pk=reservation.payment.id, payment_data=payment_data)
+                service_response = PaymentService.update_payment(reservation.payment.id, payment_data)
                 if service_response['status'] == 'Error':
                     Reservation.objects.filter(pk=pk).update(**old_reservation_data)
-                    raise Exception(service_response['errors'])
+                    raise Exception(json.dumps(service_response['errors']))
 
             reservation = Reservation.objects.get(pk=pk)
             response = {'status': 'Success', 'content': reservation}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
 
     @staticmethod
     def delete_reservation(pk: int) -> Dict[str, Any]:
         try:
-            reservation = Reservation.objects.get(pk=pk)
+            reservation = Reservation.objects.get(pk)
             if not ReservationService.is_reservation_cancelable(reservation):
-                raise Exception(_("Reservation can no longer be cancelled"))
+                raise Exception(json.dumps(
+                    {'reservation': _("Reservation can no longer be cancelled")},
+                ))
 
             reservation.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': [str(err)]}
+            response = {'status': 'Error', 'errors': str(err)}
 
         return response
