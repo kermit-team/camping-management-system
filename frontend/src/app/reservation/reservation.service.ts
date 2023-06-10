@@ -11,7 +11,7 @@ export class ReservationService {
 
   constructor(private _http: HttpClient) { }
 
-  getAllAvailablePlots(): Observable<PlotResponse[]>{
-    return this._http.get<PlotResponse[]>(`${environment.baseUrl}${ApiPaths.GetPlots}`);
+  getAllAvailablePlots(date_from: string, date_to: string): Observable<PlotResponse[]>{
+    return this._http.post<PlotResponse[]>(`${environment.baseUrl}${ApiPaths.GetAvailablePlots}`,{date_from,date_to});
   }
 }

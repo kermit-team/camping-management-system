@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ReservationService } from '../../reservation.service';
 import { PlotResponse } from '../../reservation.models';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -36,7 +36,11 @@ export class SearchComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this._reservationService.getAllAvailablePlots().subscribe(
+    let toLocaleEnd = this.formData.end.toLocaleDateString('en-US', { timeZone: 'Europe/Warsaw', dateStyle: 'short' }).split('/');
+    let formattedEnd = "20" + toLocaleEnd[2] + "-" + toLocaleEnd[0].toString().padStart(2, '0') + "-" + toLocaleEnd[1].toString().padStart(2, '0');
+    let toLocaleStart = this.formData.start.toLocaleDateString('en-US', { timeZone: 'Europe/Warsaw', dateStyle: 'short' }).split('/');
+    let formattedStart = "20" + toLocaleStart[2] + "-" + toLocaleStart[0].toString().padStart(2, '0') + "-" + toLocaleStart[1].toString().padStart(2, '0');
+    this._reservationService.getAllAvailablePlots(formattedStart,formattedEnd).subscribe(
       res => {
         this.allPlots = res;
         console.log(this.allPlots)
@@ -48,5 +52,18 @@ export class SearchComponent implements OnInit{
   }
   onSubmit(){
     this.formData = this.search.value;
+    let toLocaleEnd = this.formData.end.toLocaleDateString('en-US', { timeZone: 'Europe/Warsaw', dateStyle: 'short' }).split('/');
+    let formattedEnd = "20" + toLocaleEnd[2] + "-" + toLocaleEnd[0].toString().padStart(2, '0') + "-" + toLocaleEnd[1].toString().padStart(2, '0');
+    let toLocaleStart = this.formData.start.toLocaleDateString('en-US', { timeZone: 'Europe/Warsaw', dateStyle: 'short' }).split('/');
+    let formattedStart = "20" + toLocaleStart[2] + "-" + toLocaleStart[0].toString().padStart(2, '0') + "-" + toLocaleStart[1].toString().padStart(2, '0');
+    this._reservationService.getAllAvailablePlots(formattedStart,formattedEnd).subscribe(
+      res => {
+        this.allPlots = res;
+        console.log(this.allPlots)
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 }

@@ -34,6 +34,7 @@ export class ProfileComponent implements OnInit {
     phone_number: 0,
     avatar: '',
     id_card: '',
+    cars: []
   };
   editedUser: UserResponse = this.user;
 
@@ -107,6 +108,7 @@ export class ProfileComponent implements OnInit {
         phone_number: 0,
         avatar: '',
         id_card: '',
+        cars: []
       };
     }
   }
@@ -124,6 +126,7 @@ export class ProfileComponent implements OnInit {
         phone_number: 0,
         avatar: '',
         id_card: '',
+        cars: []
       };
     }
   }
@@ -142,6 +145,7 @@ export class ProfileComponent implements OnInit {
         phone_number: 0,
         avatar: '',
         id_card: '',
+        cars: []
       };
     }
   }
@@ -159,6 +163,7 @@ export class ProfileComponent implements OnInit {
         phone_number: 0,
         avatar: '',
         id_card: '',
+        cars: []
       };
     }
   }
@@ -176,6 +181,7 @@ export class ProfileComponent implements OnInit {
         phone_number: 0,
         avatar: '',
         id_card: '',
+        cars: []
       };
     }
   }
@@ -252,8 +258,5 @@ export class ProfileComponent implements OnInit {
         this.isEditingId = false;
       }
     }
-    // else if(formType == "password"){
-    //   this.editedUser.password = this.userNameForm.get('password')?.value;
-    // }
   }
 }

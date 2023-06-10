@@ -11,5 +11,6 @@ export enum ApiPaths {
     ResetPassword = '/password-reset/',
     ConfirmResetPassword = '/password-reset/confirm/',
     GetUpdateUser = '/users/',
-    GetPlots = '/camping-plots/'
+    GetPlots = '/camping-plots/',
+    GetAvailablePlots = '/camping-plots/available/'
  }
