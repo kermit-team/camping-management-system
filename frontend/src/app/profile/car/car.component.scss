@@ -1,0 +1,26 @@
+$primary: #ae9560;
+.car {
+    width:20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid $primary;
+    border-radius: 2px;
+    padding: 1em;
+    min-width: 100px;
+  }
+  .car-icon {
+    width: 60px;
+    height: 60px;
+    filter: invert(56%) sepia(68%) saturate(233%) hue-rotate(3deg) brightness(94%) contrast(91%);
+  }
+  .car-text {
+    padding-top: .5em;
+  }
+  .car__wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .car-add{
+    margin: auto;
+  }

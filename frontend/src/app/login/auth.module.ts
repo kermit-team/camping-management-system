@@ -5,12 +5,13 @@ import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { AuthRoutingModule } from "./auth-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthService } from "./auth.service";
-import { AuthInterceptor, authInterceptorProviders } from "./auth.interceptor";
+import { authInterceptorProviders } from "./auth.interceptor";
 import { EmailConfirmationComponent } from './components/email-confirmation/email-confirmation.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
       FormsModule,
       ReactiveFormsModule,
       HttpClientModule,
+      SharedModule,
       JwtModule.forRoot({
         config: {
             tokenGetter: null!!

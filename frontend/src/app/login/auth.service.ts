@@ -12,7 +12,6 @@ const REFRESH_KEY = 'refresh';
 })
 export class AuthService {
   constructor(
-    private _jwtHelperService: JwtHelperService,
     private _authHttpService: AuthHttpService
   ) {}
 

@@ -1,0 +1,52 @@
+$primary: #ae9560;
+ .plot__container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $primary;
+    border-radius: 2px;
+    margin-bottom: 2vh;
+    width: 100%;
+ }
+ .plot__wrapper {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 1px #d3d3d3 solid;
+ }
+ .plot__photo {
+    width: 13vw;
+    height: auto;
+ }
+ .plot__info {
+    padding: 20px;
+ }
+ .plot__info--number {
+    font-weight: 500;
+ }
+ .plot__info--additional {
+    color: #6d6d6d;
+    margin: 20px 0 20px 0;
+ }
+ .plot__info--show-more {
+    color: $primary;
+ }
+ .plot__date-container {
+   padding: 20px;
+   display: flex;
+   align-items: center;
+ }
+ .plot__date-container--date {
+   font-weight: 500;
+ }
+ .plot__date-cost {
+   display: flex;
+   margin-left: auto;
+   align-items: center;
+ }
+ .plot__date-cost--number {
+   margin-right: 20px;
+   font-size: 24px;
+   font-weight: 500;
+ }
+ button {
+   box-shadow: 8px 8px 36px -11px rgba(174, 149, 96, 1);
+ }

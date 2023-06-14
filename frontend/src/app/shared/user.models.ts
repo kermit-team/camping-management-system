@@ -5,4 +5,5 @@ export type UserResponse = {
     phone_number: number;
     avatar: string;
     id_card: string;
+    cars: number[];
 }

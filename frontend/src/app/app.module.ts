@@ -13,8 +13,6 @@ import { CarouselComponent } from './landing-page/carousel/carousel.component';
 import { ContactFormComponent } from './landing-page/contact-form/contact-form.component';
 import { FooterComponent } from './landing-page/footer/footer.component';
 import { AuthModule } from './login/auth.module';
-import { ProfileMiniComponent } from './shared/profile-mini/profile-mini.component';
-import { HeaderComponent } from './shared/header/header.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +20,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core';
+import { SearchComponent } from './reservation/components/search/search.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core'
+import { ReservationModule } from './reservation/reservation.module';
+import { SharedModule } from './shared/shared.module';
+import { CarComponent } from './profile/car/car.component';
 
 
 @NgModule({
@@ -35,14 +38,14 @@ import {MatNativeDateModule} from '@angular/material/core';
     CarouselComponent,
     ContactFormComponent,
     FooterComponent,
-    ProfileMiniComponent,
-    HeaderComponent,
-    ProfileComponent
+    ProfileComponent,
+    CarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
+    ReservationModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -50,8 +53,10 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
+    SharedModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'pl'}],
+  bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }

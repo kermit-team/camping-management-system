@@ -162,14 +162,8 @@
     </div>
     <div class="car__wrap">
       <div class="car__container">
-        <div class="car">
-          <img
-            src="../../assets/3687823_adventure_automotive_car_transport_transportation_icon.svg"
-            alt="car"
-            class="car-icon"
-          />
-          <div class="car-text">SJ67435</div>
-        </div>
+        <app-car *ngFor="let carEl of user.cars" [carId]="carEl"></app-car>
+        
       </div>
       <button class="car-add">Dodaj</button>
     </div>

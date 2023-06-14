@@ -25,7 +25,8 @@ export class UserService {
         last_name: response.last_name,
         phone_number: response.phone_number,
         avatar: response.avatar,
-        id_card: response.id_card
+        id_card: response.id_card,
+        cars: response.cars
       }))
     );
   }
@@ -49,7 +50,8 @@ export class UserService {
         last_name: response.last_name,
         phone_number: response.phone_number,
         avatar: response.avatar,
-        id_card: response.id_card
+        id_card: response.id_card,
+        cars: response.cars
       }))
     );
   }
