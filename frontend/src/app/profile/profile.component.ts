@@ -1,3 +1,4 @@
+//FIXME: Error handling
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/user.service';
 import { UserResponse } from '../shared/user.models';
@@ -17,6 +18,7 @@ import {
 export class ProfileComponent implements OnInit {
   id: number | null = null;
   photoUrl:string = "localhost:8000";
+  mode: number = 0;
   defaultPhotoUrl: string =
     '../../assets/3687823_adventure_automotive_car_transport_transportation_icon.svg';
   isEditingName: boolean = false;
@@ -53,6 +55,9 @@ export class ProfileComponent implements OnInit {
   });
   userPasswordForm: FormGroup = new FormGroup({
     password: new FormControl(''),
+  });
+  carAddForm: FormGroup= new FormGroup({
+    registration_plate: new FormControl('')
   });
 
   constructor(
@@ -258,5 +263,26 @@ export class ProfileComponent implements OnInit {
         this.isEditingId = false;
       }
     }
+  }
+  addCarMode(){
+    this.mode = this.mode == 0 || this.mode == 1 ? 2 : 0; 
+  }
+  deleteCarMode(){
+    this.mode = this.mode == 0 || this.mode == 2 ? 1 : 0;
+  }
+  addCar(){
+    const plate = this.carAddForm.get('registration_plate')?.value;
+    this._userService.addUserCar(plate).subscribe(
+      res => {
+        this.user = res;
+        this.mode = 0;
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+  onCarDeleted(deletedCarId: number){
+    this.user.cars = this.user.cars.filter(car => car !== deletedCarId)
   }
 }

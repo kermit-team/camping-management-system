@@ -114,10 +114,63 @@ img {
     display: flex;
     flex-direction: column;
   }
-  .car-add{
+  .car__button {
     margin: auto;
   }
-
+  .car__button--add{
+    margin-right: 15px;
+  }
+  .car__button--delete {
+    background-color: white;
+    color: $primary;
+    border: 1px solid $primary;
+  }
+.car {
+  position: relative;
+    width:110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid $primary;
+    border-radius: 2px;
+    padding: 1.2em;
+    min-width: 100px;
+  }
+  .car-icon {
+    width: 60px;
+    height: 60px;
+    filter: invert(56%) sepia(68%) saturate(233%) hue-rotate(3deg) brightness(94%) contrast(91%);
+    margin-bottom: .5em;
+  }
+  .car-input {
+    
+    width: 95%;
+    border: 0;
+    border: 1px solid $primary;
+    outline: 0;
+    //padding: 2px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+    font-size: 16px;
+  }
+  .car__add {
+    position: absolute;
+    background-color: rgb(59, 141, 73);
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    right: -7px;
+    top: -7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+.car-check {
+  filter: invert(1);
+  width: 15px;
+  height: 15px;
+}
   @media only screen and (max-width: 1400px) {
     .navigation {
         display: none;

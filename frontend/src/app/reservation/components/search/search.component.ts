@@ -14,6 +14,8 @@ export class SearchComponent implements OnInit{
   allPlots: PlotResponse[]= [];
   minDate: Date;
   search: FormGroup;
+  numberOfAdults: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
+  numberOfChildren: number[] = Array.from({ length: 6 }, (_, i) => i);
 
   constructor(
     private _router: Router,
@@ -25,13 +27,13 @@ export class SearchComponent implements OnInit{
     } else {
       this._router.navigate(['/']);
     }
-    
     this.minDate = new Date();
     this.search = new FormGroup({
       start: new FormControl<Date>(this.formData.start),
       end: new FormControl<Date>(this.formData.end),
-      adults: new FormControl(1),
-      children: new FormControl(0),
+      adults: new FormControl<number>(this.formData.adults),
+      children: new FormControl<number>(this.formData.children),
+      babies: new FormControl<number>(0)
     });
   }
 
@@ -43,7 +45,6 @@ export class SearchComponent implements OnInit{
     this._reservationService.getAllAvailablePlots(formattedStart,formattedEnd).subscribe(
       res => {
         this.allPlots = res;
-        console.log(this.allPlots)
       },
       err => {
         console.log(err);
@@ -59,7 +60,6 @@ export class SearchComponent implements OnInit{
     this._reservationService.getAllAvailablePlots(formattedStart,formattedEnd).subscribe(
       res => {
         this.allPlots = res;
-        console.log(this.allPlots)
       },
       err => {
         console.log(err);

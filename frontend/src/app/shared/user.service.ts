@@ -56,4 +56,28 @@ export class UserService {
     );
   }
 
+  isUserExpired(){
+    const user = window.sessionStorage.getItem(TOKEN_KEY);
+    if(this._jwtHelperService.isTokenExpired(user)){
+      this.signOut();
+      return true;
+    }
+    return false;
+  }
+
+  addUserCar(registration_plate: string){
+    return this._http.post<any>(`${environment.baseUrl}${ApiPaths.CreateCar}`,{registration_plate}).pipe(
+      map(response => ({
+        email: response.drivers[0].email,
+        first_name: response.drivers[0].first_name,
+        last_name: response.drivers[0].last_name,
+        phone_number: response.drivers[0].phone_number,
+        avatar: response.drivers[0].avatar,
+        id_card: response.drivers[0].id_card,
+        cars: response.drivers[0].cars
+      }))
+    );
+    }
+
+
 }

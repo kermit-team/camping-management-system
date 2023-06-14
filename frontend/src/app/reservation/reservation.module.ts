@@ -10,13 +10,15 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReservationSummaryComponent } from './components/reservation-summary/reservation-summary.component';
 
 
 
 @NgModule({
   declarations: [
     PlotComponent,
-    SearchComponent
+    SearchComponent,
+    ReservationSummaryComponent
   ],
   imports: [
     CommonModule,

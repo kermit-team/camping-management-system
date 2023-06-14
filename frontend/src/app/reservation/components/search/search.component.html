@@ -10,10 +10,7 @@
             formControlName="start"
             [value]="minDate"
           />
-          <input
-            matEndDate
-            formControlName="end"
-          />
+          <input matEndDate formControlName="end" />
         </mat-date-range-input>
         <mat-datepicker-toggle
           matIconSuffix
@@ -25,16 +22,9 @@
         <div class="guests-wrapper">
           <label for="adults"> Dorośli:</label>
           <select id="adults" class="guests-select" formControlName="adults">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="3">4</option>
-            <option value="3">5</option>
-            <option value="3">6</option>
-            <option value="3">7</option>
-            <option value="3">8</option>
-            <option value="3">9</option>
-            <option value="3">10</option>
+            <option *ngFor="let number of numberOfAdults" [value]="number">
+              {{ number }}
+            </option>
           </select>
         </div>
         <div class="guests-wrapper">
@@ -44,13 +34,17 @@
             class="guests-select"
             formControlName="children"
           >
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="2">3</option>
-            <option value="2">4</option>
-            <option value="2">5</option>
-            <option value="2">6</option>
+            <option *ngFor="let number of numberOfChildren" [value]="number">
+              {{ number }}
+            </option>
+          </select>
+        </div>
+        <div class="guests-wrapper">
+          <label for="babies"> Dzieci poniżej 3 roku życia:</label>
+          <select id="babies" class="guests-select" formControlName="babies">
+            <option *ngFor="let number of numberOfChildren" [value]="number">
+              {{ number }}
+            </option>
           </select>
         </div>
       </div>

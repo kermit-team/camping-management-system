@@ -34,29 +34,9 @@ export class SearchFormComponent {
     this.tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1)
   }
   onSubmit(){
-
-    const queryParams = { formData: JSON.stringify(this.search.value) };
     this._router.navigate(['/searchresults'], { state: { formData: this.search.value } });
 
 
-    // const { start, end, adults, children } = this.search.value;
-    // console.log(this.search.value)
-    //const startWithoutTime = new Date(start).setHours(0, 0, 0, 0);
-    // const endWithoutTime = new Date(end).setHours(0, 0, 0, 0);
-
-    // const queryParams = {
-    //   start: startWithoutTime,
-    //   end: endWithoutTime,
-    //   adults,
-    //   children,
-    // };
-
-    // const navigationExtras: NavigationExtras = {
-    //   queryParams,
-    // };
-
-    // Navigate to the next component with the query parameters in the URL
-    //this._router.navigate(['/searchresults'], navigationExtras);
   }
 }
 
