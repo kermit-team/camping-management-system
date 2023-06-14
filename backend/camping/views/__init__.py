@@ -1,6 +1,7 @@
 from .available_camping_plots_view import AvailableCampingPlotsView
 from .camping_plot_view_set import CampingPlotViewSet
 from .camping_section_view_set import CampingSectionViewSet
+from .car_able_to_enter_camping import CarAbleToEnterCampingView
 from .car_view_set import CarViewSet
 from .opinion_view_set import OpinionViewSet
 from .payment_possible_methods_view import PaymentPossibleMethodsView

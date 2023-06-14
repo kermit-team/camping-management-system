@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from account.models.user import User
 from .camping_plot import CampingPlot
 from .car import Car
+from .payment import Payment
 
 
 class Reservation(models.Model):
@@ -15,6 +16,7 @@ class Reservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.RESTRICT)
     car = models.ForeignKey(Car, on_delete=models.RESTRICT)
     camping_plot = models.ForeignKey(CampingPlot, on_delete=models.RESTRICT)
+    payment = models.OneToOneField(Payment, on_delete=models.RESTRICT)
 
     def __str__(self):
         return _(
