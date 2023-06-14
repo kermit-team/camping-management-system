@@ -19,7 +19,11 @@
         </div>
         <div class="plot__date-cost">
             <p class="plot__date-cost--number">{{price}}zł</p>
-            <button class="plot__date-cost--book">Zarezerwuj teraz</button>
+            <div class="plot__date-cost-button">
+                <button class="plot__date-cost-button--book" [disabled]="!isSumOfPeopleRight" (click)="createReservation()">Zarezerwuj</button>
+                <p class="plot__date-cost-button--error" *ngIf="!isSumOfPeopleRight">Liczba osób nie może przekraczać 10</p>
+            </div>
+            
         </div>
     </div>
 </div>

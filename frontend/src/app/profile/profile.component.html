@@ -27,11 +27,7 @@
         <h3 class="info__subtitle">Zaktualizuj swoje dane</h3>
       </div>
       <div class="info__photo-container">
-        <img
-          [src]=" defaultPhotoUrl"
-          alt="camera"
-          class="info__photo"
-        />
+        <img [src]="defaultPhotoUrl" alt="camera" class="info__photo" />
       </div>
     </div>
     <div class="table">
@@ -64,7 +60,7 @@
         </div>
         <div class="cell" *ngIf="isEditingLastName">
           <form [formGroup]="userLastNameForm" class="input-form">
-            <input type="text" formControlName="last_name" class="input"/>
+            <input type="text" formControlName="last_name" class="input" />
           </form>
         </div>
         <div class="cell">
@@ -81,10 +77,10 @@
       </div>
       <div class="row">
         <div class="cell">Adres email</div>
-        <div class="cell" >
+        <div class="cell">
           {{ user.email }}
         </div>
-        
+
         <div class="cell"></div>
       </div>
       <div class="row">
@@ -94,7 +90,7 @@
         </div>
         <div class="cell" *ngIf="isEditingPhone">
           <form [formGroup]="userPhoneForm">
-            <input type="text" formControlName="phone_number" class="input"/>
+            <input type="text" formControlName="phone_number" class="input" />
           </form>
         </div>
         <div class="cell">
@@ -120,7 +116,7 @@
         </div>
         <div class="cell" *ngIf="isEditingId">
           <form [formGroup]="userIdForm">
-            <input type="text" formControlName="id_card" class="input"/>
+            <input type="text" formControlName="id_card" class="input" />
           </form>
         </div>
         <div class="cell">
@@ -162,10 +158,36 @@
     </div>
     <div class="car__wrap">
       <div class="car__container">
-        <app-car *ngFor="let carEl of user.cars" [carId]="carEl"></app-car>
-        
+        <app-car
+          *ngFor="let carEl of user.cars"
+          [carId]="carEl"
+          [mode]="mode"
+          (carDeleted)="onCarDeleted($event)"
+        ></app-car>
+        <div class="car" *ngIf="mode == 2">
+          <div class="car__add" (click)="addCar()">
+            <img
+              src="../../assets/8666749_plus_add_icon.svg"
+              class="car-check"
+              alt="X"
+            />
+          </div>
+          <img
+            src="../../assets/3687823_adventure_automotive_car_transport_transportation_icon.svg"
+            alt="car"
+            class="car-icon"
+          />
+          <form  class="car__add-form" [formGroup]="carAddForm">
+            <input type="text" class="car-input" formControlName="registration_plate"/>
+          </form>
+        </div>
       </div>
-      <button class="car-add">Dodaj</button>
+      <div class="car__button">
+        <button class="car__button--add" (click)="addCarMode()">Dodaj</button>
+        <button class="car__button--delete" (click)="deleteCarMode()">
+          Usuń
+        </button>
+      </div>
     </div>
   </main>
 </div>
