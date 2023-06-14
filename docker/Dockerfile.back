@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.11-bullseye
 
 ENV PYTHONUNBUFFERED=1 \
 PYTHONDONTWRITEBYTECODE=1 \
@@ -10,7 +10,8 @@ PIP_DEFAULT_TIMEOUT=100
 
 WORKDIR /backend
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update \
+&& apt-get install -y \
 gcc \
 python3-dev \
 libpq-dev \
@@ -18,7 +19,7 @@ libxml2-dev \
 libxslt-dev \
 netcat \
 gettext \
-&& rm -rd /var/lib/apt/lists* 
+&& rm -rd /var/lib/apt/lists*
 
 COPY requirements requiremenets/
 RUN pip install -r requiremenets/development.txt
