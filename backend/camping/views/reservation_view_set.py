@@ -65,6 +65,7 @@ class ReservationViewSet(ViewSet):
 
         service_response = ReservationService.create_reservation(reservation_data)
         if service_response['status'] == 'Error':
+            print(service_response['errors'])
             return Response(
                 json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,

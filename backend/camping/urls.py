@@ -1,8 +1,9 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from camping.views import AvailableCampingPlotsView, CampingPlotViewSet, CampingSectionViewSet, CarViewSet, \
-    OpinionViewSet, PaymentViewSet, ReservationViewSet, PaymentPossibleMethodsView, PaymentPossibleStatusesView
+from camping.views import AvailableCampingPlotsView, CampingPlotViewSet, CampingSectionViewSet, \
+    CarViewSet, CarAbleToEnterCampingView, OpinionViewSet, PaymentViewSet, ReservationViewSet, \
+    PaymentPossibleMethodsView, PaymentPossibleStatusesView
 
 router = DefaultRouter()
 router.register('camping-plots', CampingPlotViewSet, basename='camping-plot')
@@ -16,5 +17,6 @@ urlpatterns = [
     path('payments/methods/', PaymentPossibleMethodsView.as_view(), name='payment-methods'),
     path('payments/statuses/', PaymentPossibleStatusesView.as_view(), name='payment-statuses'),
     path('camping-plots/available/', AvailableCampingPlotsView.as_view(), name='available-camping-plots'),
+    path('cars/able-to-enter-camping/', CarAbleToEnterCampingView.as_view(), name='car-able-to-enter-camping'),
     path('', include(router.urls)),
 ]

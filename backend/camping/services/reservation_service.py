@@ -35,7 +35,7 @@ class ReservationService:
 
     @staticmethod
     def is_reservation_updatable(reservation: Reservation) -> bool:
-        return reservation.payment.status in {Payment.Status.WAITING_FOR_PAYMENT, Payment.Status.CANCELED}
+        return reservation.payment.status == Payment.Status.WAITING_FOR_PAYMENT
 
     @staticmethod
     def is_camping_plot_available(camping_plot: CampingPlot, date_from: date, date_to: date) -> bool:
@@ -125,12 +125,7 @@ class ReservationService:
             if errors:
                 raise Exception(json.dumps(errors))
 
-            payment_method = reservation_data.pop('payment')['method']
-            reservation = Reservation.objects.create(**reservation_data)
-
             payment_data = {
-                'reservation': reservation,
-                'method': payment_method,
                 'price': ReservationService.calculate_reservation_price(
                     reservation_data['camping_plot'].camping_section.plot_price,
                     reservation_data['camping_plot'].camping_section.price_per_adult,
@@ -143,8 +138,10 @@ class ReservationService:
 
             service_response = PaymentService.create_payment(payment_data)
             if service_response['status'] == 'Error':
-                reservation.delete()
                 raise Exception(json.dumps(service_response['errors']))
+
+            reservation_data['payment'] = service_response['content']
+            reservation = Reservation.objects.create(**reservation_data)
 
             response = {'status': 'Success', 'content': reservation}
         except Exception as err:
