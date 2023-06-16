@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../user.service';
 import { UserResponse } from '../user.models';
+import { AuthService } from 'src/app/login/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,8 +14,10 @@ export class ProfileMiniComponent implements OnInit {
   @Input() color: string = 'black'; 
 
   userData: UserResponse | null = null;
+  showDropdown: boolean = false;
+  isAdmin: boolean = false;
 
-  constructor(private _userService: UserService) {}
+  constructor(private _userService: UserService,  private _authService: AuthService, private _router: Router) {}
 
   ngOnInit() {
     const userId: number | null = this._userService.getUserId();
@@ -21,6 +25,8 @@ export class ProfileMiniComponent implements OnInit {
       this._userService.getUser(userId).subscribe(
         (response: UserResponse) => {
           this.userData = response;
+          this.isAdmin = response.groups.some(group => group.name === 'Administratorzy');
+
         },
         (error: any) => {
           console.error('Error while fetching user data:', error);
@@ -28,4 +34,14 @@ export class ProfileMiniComponent implements OnInit {
       );
     }
   }
+  logout() {
+    this._authService.logout(); 
+    if (window.location.href === 'http://localhost:4200/') {
+      location.reload();
+    }
+  }
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
+
 }
