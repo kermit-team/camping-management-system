@@ -1,13 +1,26 @@
-<button [style.color]="color" class="profile-mini-button" [routerLink]="['/profile']">
-    <div class="circle">
-        {{ userData?.first_name?.charAt(0) }}{{ userData?.last_name?.charAt(0) }}
+<div class="profile-mini-container">
+    <button [style.color]="color" class="profile-mini-button" (click)="toggleDropdown()" >
+        <div class="circle">
+            {{ userData?.first_name?.charAt(0) }}{{ userData?.last_name?.charAt(0) }}
+        </div>
+        <div *ngIf="userData" class="user-data-profile">
+        <p>{{ userData.first_name }}</p>
+        <p>{{ userData.last_name }}</p>
+        </div>
+    </button>
+    <div class="dropdown" [class.show]="showDropdown">
+        <p class="dropdown-option" *ngIf="isAdmin" [routerLink]="['/adminPanel']">Panel Administratora</p>
+        <p class="dropdown-option" [routerLink]="['/profile']">Mój Profil</p>
+        <p class="dropdown-option" [routerLink]="['/']">Strona Główna</p>
+        <p class="dropdown-option" (click)="logout()">Wyloguj się</p>
+        <!-- Dropdown content goes here -->
     </div>
-    <div *ngIf="userData" class="user-data-profile">
-    <p>{{ userData.first_name }}</p>
-    <p>{{ userData.last_name }}</p>
-    </div>
-</button>
+</div>
 
-  
+
+
+<!-- [routerLink]="['/profile']" -->
+
+<!-- *ngIf="userData?.groups?.includes('Administratorzy')" -->
  
   

@@ -3,6 +3,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthHttpService } from './auth-http.service';
 import { LoginResponse } from './auth.models';
 import { Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 const TOKEN_KEY = 'access';
 const REFRESH_KEY = 'refresh';
@@ -12,7 +13,9 @@ const REFRESH_KEY = 'refresh';
 })
 export class AuthService {
   constructor(
-    private _authHttpService: AuthHttpService
+    private _jwtHelperService: JwtHelperService,
+    private _authHttpService: AuthHttpService,
+    private _router: Router
   ) {}
 
   login(email: string, password: string): Observable<LoginResponse> {
@@ -23,6 +26,12 @@ export class AuthService {
         }
       )
     )
+  }
+  
+  logout() {
+    window.sessionStorage.removeItem(TOKEN_KEY);
+    window.sessionStorage.removeItem(REFRESH_KEY);
+    this._router.navigate(['']); 
   }
 
   register(email:string, password: string, first_name:string, last_name:string){
