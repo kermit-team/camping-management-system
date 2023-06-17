@@ -1,0 +1,23 @@
+<app-header></app-header>
+<div class="container">
+    <main class="info">
+        <div class="info__container">
+            <div class="info__title-container">
+                <h1 class="info__title">Zarządzaj użytkownikami</h1>
+            </div>
+        </div>
+        <div class="table">
+            <div class="row">
+              <div class="cell">
+                <select class="admin-options">
+                    <option>Wybierz użytkownika</option>
+                    <option *ngFor="let user of users" [value]="user.id_card">{{ user.first_name }} {{ user.last_name }}</option>
+                </select>
+              </div>
+            </div>
+        </div>
+    </main>
+</div>
+<app-footer></app-footer>
+
+
