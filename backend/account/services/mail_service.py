@@ -76,3 +76,30 @@ class MailService:
             response = {'status': 'Error', 'errors': str(err)}
 
         return response
+
+    @staticmethod
+    def send_reservation_payment_mail(user: User, checkout_url: str) -> Dict[str, str]:
+        context = {
+            'name': user.first_name,
+            'checkout_url': checkout_url,
+        }
+        html_message = render_to_string(
+            template_name='camping/reservation_payment_template.html',
+            context=context,
+        )
+        plain_message = strip_tags(html_message)
+
+        try:
+            send_mail(
+                subject='Kemping Bajka - realizacja płatności za rezerwację',
+                message=plain_message,
+                html_message=html_message,
+                from_email=None,
+                recipient_list=[user.email],
+                fail_silently=False,
+            )
+            response = {'status': 'Success'}
+        except Exception as err:
+            response = {'status': 'Error', 'errors': str(err)}
+
+        return response

@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.utils import json
 from rest_framework.viewsets import ViewSet
 
+from account.services import MailService
 from camping.models import Reservation
 from camping.permissions import UserRelatedToObjectOrStaffPermissions
 from camping.serializers import ReservationRequestSerializer, ReservationResponseSerializer
@@ -65,15 +66,18 @@ class ReservationViewSet(ViewSet):
 
         service_response = ReservationService.create_reservation(reservation_data)
         if service_response['status'] == 'Error':
-            print(service_response['errors'])
             return Response(
                 json.loads(service_response['errors']),
                 status.HTTP_400_BAD_REQUEST,
             )
 
-        response_reservation_serializer = ReservationResponseSerializer(service_response['content'])
+        MailService.send_reservation_payment_mail(reservation_data['user'], service_response['content']['checkout_url'])
+        response_reservation_serializer = ReservationResponseSerializer(service_response['content']['reservation'])
         return Response(
-            response_reservation_serializer.data,
+            {
+                'reservation': response_reservation_serializer.data,
+                'checkout_url': service_response['content']['checkout_url'],
+            },
             status.HTTP_201_CREATED,
         )
 

@@ -3,30 +3,30 @@
 <body style="font-family: Arial, sans-serif;text-align: center;background-color: #f0f0f2;margin-top: 5%;">
 <div style="display: inline-block;border-radius: 10px;padding: 20px;max-width: 500px;margin: 0 auto;background-color: #fdfdff;">
     <h1 style="text-align: center;margin: 0;line-height: 1.5;padding: 10px;">
-        {% translate "E-mail address verification" %}
+        {% translate "Reservation payment" %}
     </h1>
     <p style="text-align: justify;">
-        {% translate "Hi" %} {{ name }}!</br>
+        {% translate "Hi" %} {{ name }}!<br>
         {% blocktranslate %}
-            To confirm your email address, please click on the link below:
+            To complete your reservation, please click on the link below to process payment:
         {% endblocktranslate %}
     </p>
     <button style="display: inline-block;justify-content: center;background-color: #007bff;color: #fff;padding: 15px 20px;border-radius: 5px;margin-top: 20px;border:0;">
-        <a href="http://localhost:4200/{{ verification_url }}"
-           style="text-decoration: None;">{% translate "Verify e-mail address" %}</a>
+        <a href="{{ checkout_url }}"
+           style="text-decoration: None;">{% translate "Process payment" %}</a>
     </button>
     <p style="text-align: justify;margin: 0;line-height: 1.5;padding: 10px;">
         <small>
             {% blocktranslate %}
                 If the button does not work for any reason, please use the link below:
             {% endblocktranslate %}<br>
-            <a href="http://localhost:4200/{{ verification_url }}">http://localhost:4200/{{ verification_url }}</a>
+            <a href="{{ checkout_url }}">{{ checkout_url }}</a>
         </small>
     </p>
     <p style="text-align: justify;margin: 0;line-height: 1.5;padding: 10px;">
         <small>
             {% blocktranslate %}
-                If you have not registered on our site, please ignore this message.
+                Payment link will work for 1 hour, after this time your reservation will be canceled.
             {% endblocktranslate %}
         </small>
     </p>

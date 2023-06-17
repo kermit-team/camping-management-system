@@ -134,16 +134,28 @@ class ReservationService:
                     reservation_data['number_of_children'],
                     (reservation_data['date_to'] - reservation_data['date_from']).days,
                 ),
+                'email': reservation_data['user'].email,
+                'date_from': reservation_data['date_from'],
+                'date_to': reservation_data['date_to'],
+                'camping_plot': reservation_data['camping_plot'],
+                'number_of_adults': reservation_data['number_of_adults'],
+                'number_of_children': reservation_data['number_of_children']
             }
 
             service_response = PaymentService.create_payment(payment_data)
             if service_response['status'] == 'Error':
-                raise Exception(json.dumps(service_response['errors']))
+                raise Exception(service_response['errors'])
 
-            reservation_data['payment'] = service_response['content']
+            reservation_data['payment'] = service_response['content']['payment']
             reservation = Reservation.objects.create(**reservation_data)
 
-            response = {'status': 'Success', 'content': reservation}
+            response = {
+                'status': 'Success',
+                'content': {
+                    'reservation': reservation,
+                    'checkout_url': service_response['content']['checkout_session']['url'],
+                },
+            }
         except Exception as err:
             response = {'status': 'Error', 'errors': str(err)}
 
@@ -152,6 +164,7 @@ class ReservationService:
     @staticmethod
     def update_reservation(pk: int, reservation_data: Dict[str, Any]) -> Dict[str, Any]:
         try:
+            checkout_url = None
             if reservation_data:
                 reservation = Reservation.objects.get(pk)
                 errors = {}
@@ -228,14 +241,29 @@ class ReservationService:
                         reservation.number_of_children,
                         (reservation.date_to - reservation.date_from).days,
                     ),
+                    'email': reservation.user.email,
+                    'date_from': reservation.date_from,
+                    'date_to': reservation.date_to,
+                    'camping_plot': reservation.camping_plot,
+                    'number_of_adults': reservation.number_of_adults,
+                    'number_of_children': reservation.number_of_children
                 }
                 service_response = PaymentService.update_payment(reservation.payment.id, payment_data)
                 if service_response['status'] == 'Error':
                     Reservation.objects.filter(pk=pk).update(**old_reservation_data)
-                    raise Exception(json.dumps(service_response['errors']))
+                    raise Exception(service_response['errors'])
+                checkout_url = service_response['checkout_session']['url']
 
             reservation = Reservation.objects.get(pk=pk)
-            response = {'status': 'Success', 'content': reservation}
+            response = {
+                'status': 'Success',
+                'content': {
+                    'reservation': reservation,
+                },
+            }
+            if checkout_url:
+                response['content']['checkout_url'] = checkout_url
+
         except Exception as err:
             response = {'status': 'Error', 'errors': str(err)}
 

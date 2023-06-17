@@ -9,7 +9,6 @@ from .car_response_serializer import CarResponseSerializer
 from .opinion_create_serializer import OpinionCreateSerializer
 from .opinion_request_serializer import OpinionRequestSerializer
 from .opinion_response_serializer import OpinionResponseSerializer
-from .payment_request_serializer import PaymentRequestSerializer
 from .payment_response_serializer import PaymentResponseSerializer
 from .reservation_create_serializer import ReservationCreateSerializer
 from .reservation_request_serializer import ReservationRequestSerializer

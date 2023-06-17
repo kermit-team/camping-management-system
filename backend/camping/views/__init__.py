@@ -6,5 +6,5 @@ from .car_view_set import CarViewSet
 from .opinion_view_set import OpinionViewSet
 from .payment_possible_methods_view import PaymentPossibleMethodsView
 from .payment_possible_statuses_view import PaymentPossibleStatusesView
-from .payment_view_set import PaymentViewSet
+from .payment_webhook import PaymentWebhookView
 from .reservation_view_set import ReservationViewSet

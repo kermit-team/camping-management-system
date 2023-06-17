@@ -187,3 +187,6 @@ EMAIL_USE_TLS = json.loads((os.getenv('EMAIL_USE_TLS').lower()))
 EMAIL_USE_SSL = json.loads((os.getenv('EMAIL_USE_SSL').lower()))
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+# Stripe config
+STRIPE_API_KEY = os.getenv('STRIPE_API_KEY')
