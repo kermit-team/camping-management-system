@@ -14,13 +14,9 @@ $primary: #ae9560;
       display: flex;
       align-items: center;
       border-bottom: 1px solid $primary;
-      width: 40%;
-      .date-input {
-        padding: 0.25rem;
-        border: none;
-        border-bottom: 1px solid $primary;
-        outline: none;
-      }
+      width: 220px;
+      margin-right: 20px;
+
     }
     .guests-input {
       display: flex;

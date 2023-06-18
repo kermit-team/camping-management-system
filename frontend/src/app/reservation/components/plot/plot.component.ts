@@ -78,14 +78,16 @@ export class PlotComponent {
     let isExpired: boolean = this._userService.isUserExpired();
     if (!isExpired && userId) {
       this._router.navigate(['/reservationsummary'], {
-        state: {
+        state: { formData: {
           number_of_adults: this.info.adults,
           number_of_children: this.info.children,
           number_of_babies: this.info.babies,
           date_from: this.startDate,
           date_to: this.endDate,
           user: userId,
-          camping_plot: this.plot.id
+          camping_plot: this.plot,
+        number_of_days: this.numberOfDays,
+      price: this.price}
         },
       });
     } else {

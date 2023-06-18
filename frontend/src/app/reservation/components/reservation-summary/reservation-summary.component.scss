@@ -1,0 +1,138 @@
+$primary: #ae9560;
+@import url("https://fonts.cdnfonts.com/css/playfair-display");
+.heading-wrapper {
+  width: fit-content;
+  margin: auto;
+  margin-top: 4vh;
+  padding: 0 60px 1vh 60px;
+  text-align: center;
+  border-bottom: 1px solid $primary;
+}
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 6vw;
+}
+.heading {
+  font-family: "Playfair Display", sans-serif;
+  font-size: 36px;
+}
+.summary {
+  margin-top: 6vh;
+  margin-bottom: 5vh;
+  width: 40vw;
+  height: auto; 
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.summary__plot {
+  width: 100%;
+}
+.summary__plot-heading {
+  display: flex;
+  border-bottom: 1px solid rgba(138, 138, 138, 0.349);
+  padding-bottom: 1vh;
+  margin-bottom: 3vh;
+}
+.summary__plot-heading-change {
+  display: flex;
+  margin-left: auto;
+  justify-content: center;
+  align-items: center;
+  color: $primary;
+  cursor: pointer;
+}
+.summary__plot-heading-change--icon {
+  height: 16px;
+  width: 16px;
+  margin-left: 5px;
+  filter: invert(56%) sepia(68%) saturate(233%) hue-rotate(3deg) brightness(94%)
+    contrast(91%);
+}
+.summary__plot-data-container {
+  display: flex;
+  margin-bottom: 3vh;
+}
+.summary__plot-user-container {
+  display: flex;
+  gap: 3vh;
+}
+.summary__plot-data {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+.summary__plot-user-headers,
+.summary__plot-user-data {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+.plot-photo {
+  width: calc(12vh + 16px * 8);
+  height: calc(12vh + 16px * 8);
+  margin-right: 4vh;
+}
+.bold {
+  font-weight: 500;
+}
+.userError {
+  color: red;
+  display: block;
+  margin-bottom: 2vh;
+}
+.summary__plot-data--cars {
+  display: flex;
+  gap: 1vh;
+}
+.summary__plot-data--car-selected {
+  border: 2px solid $primary;
+  border-radius: 2px;
+}
+.red {
+    color: red;
+}
+.payment {
+    //margin: auto;
+    margin-top: 6vh;
+    margin-bottom: 5vh;
+    width: 20vw;
+    height: auto; /* Change height to auto */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.summary__plot-payment{
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    text-align: right;
+}
+.summary__plot-payment-container {
+    display: flex;
+    border-bottom: 1px solid rgba(138, 138, 138, 0.349);
+}
+.gray {
+    color: gray;
+}
+.summary__plot-payment .summary__plot-data--text:last-child{
+    margin-bottom: 3vh;
+}
+.payment__sum-container {
+    display: flex;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+.payment__sum--text {
+    font-weight: 600;
+}
+.payment__sum--text:last-child{
+    margin-left: auto;
+}
+.payment__button {
+    width: 100%;
+}
+
+

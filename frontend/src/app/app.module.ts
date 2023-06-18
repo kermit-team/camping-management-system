@@ -24,7 +24,7 @@ import { SearchComponent } from './reservation/components/search/search.componen
 import { MAT_DATE_LOCALE } from '@angular/material/core'
 import { ReservationModule } from './reservation/reservation.module';
 import { SharedModule } from './shared/shared.module';
-import { CarComponent } from './profile/car/car.component';
+import { CarComponent } from './shared/car/car.component';
 
 
 @NgModule({
@@ -38,7 +38,6 @@ import { CarComponent } from './profile/car/car.component';
     ContactFormComponent,
     FooterComponent,
     ProfileComponent,
-    CarComponent,
   ],
   imports: [
     BrowserModule,
