@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/user.service';
 import { UserResponse } from '../shared/user.models';
+import { Groups } from '../shared/user.models';
 import { Router } from '@angular/router';
 import {
   FormBuilder,
@@ -17,6 +18,7 @@ import {
 })
 export class ProfileComponent implements OnInit {
   id: number | null = null;
+  groups: Groups[] = [];
   photoUrl:string = "localhost:8000";
   mode: number = 0;
   defaultPhotoUrl: string =
@@ -36,8 +38,10 @@ export class ProfileComponent implements OnInit {
     phone_number: 0,
     avatar: '',
     id_card: '',
-    cars: []
+    cars: [],
+    groups: []
   };
+
   editedUser: UserResponse = this.user;
 
   userNameForm: FormGroup= new FormGroup({
@@ -113,7 +117,8 @@ export class ProfileComponent implements OnInit {
         phone_number: 0,
         avatar: '',
         id_card: '',
-        cars: []
+        cars: [],
+        groups: []
       };
     }
   }
@@ -131,7 +136,8 @@ export class ProfileComponent implements OnInit {
         phone_number: 0,
         avatar: '',
         id_card: '',
-        cars: []
+        cars: [],
+        groups: []
       };
     }
   }
@@ -150,7 +156,8 @@ export class ProfileComponent implements OnInit {
         phone_number: 0,
         avatar: '',
         id_card: '',
-        cars: []
+        cars: [],
+        groups: []
       };
     }
   }
@@ -168,7 +175,8 @@ export class ProfileComponent implements OnInit {
         phone_number: 0,
         avatar: '',
         id_card: '',
-        cars: []
+        cars: [],
+        groups: []
       };
     }
   }
@@ -186,7 +194,8 @@ export class ProfileComponent implements OnInit {
         phone_number: 0,
         avatar: '',
         id_card: '',
-        cars: []
+        cars: [],
+        groups: []
       };
     }
   }

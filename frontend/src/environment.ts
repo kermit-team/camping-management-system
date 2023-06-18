@@ -3,6 +3,7 @@ export const environment = {
     baseUrl: 'http://localhost:8000/api'  
   };
 
+
 export enum ApiPaths {
     Auth = '/token/',
     Refresh = '/token/refresh/',
@@ -13,5 +14,6 @@ export enum ApiPaths {
     GetUpdateUser = '/users/',
     GetPlots = '/camping-plots/',
     GetAvailablePlots = '/camping-plots/available/',
-    CreateCar = '/cars/'
+    CreateCar = '/cars/',
+    GetAllUsers = '/users/'
  }

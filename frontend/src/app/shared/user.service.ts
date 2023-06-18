@@ -15,7 +15,10 @@ export class UserService {
 
   constructor(private _jwtHelperService: JwtHelperService,private _http: HttpClient) { }
 
-
+  getAllUsers(): Observable<UserResponse[]> {
+    return this._http
+      .get<UserResponse[]>(`${environment.baseUrl}${ApiPaths.GetAllUsers}`);
+  }
 
   getUser(id: number): Observable<UserResponse> {
     return this._http.get<UserResponse>(`${environment.baseUrl}${ApiPaths.GetUpdateUser}${id}`).pipe(
@@ -26,7 +29,8 @@ export class UserService {
         phone_number: response.phone_number,
         avatar: response.avatar,
         id_card: response.id_card,
-        cars: response.cars
+        cars: response.cars,
+        groups: response.groups
       }))
     );
   }
@@ -51,7 +55,8 @@ export class UserService {
         phone_number: response.phone_number,
         avatar: response.avatar,
         id_card: response.id_card,
-        cars: response.cars
+        cars: response.cars,
+        groups: response.groups
       }))
     );
   }
@@ -74,7 +79,8 @@ export class UserService {
         phone_number: response.drivers[0].phone_number,
         avatar: response.drivers[0].avatar,
         id_card: response.drivers[0].id_card,
-        cars: response.drivers[0].cars
+        cars: response.drivers[0].cars,
+        groups: response.drivers[0].groups
       }))
     );
     }

@@ -25,7 +25,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core'
 import { ReservationModule } from './reservation/reservation.module';
 import { SharedModule } from './shared/shared.module';
 import { CarComponent } from './shared/car/car.component';
-
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { CarComponent } from './shared/car/car.component';
     ContactFormComponent,
     FooterComponent,
     ProfileComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,

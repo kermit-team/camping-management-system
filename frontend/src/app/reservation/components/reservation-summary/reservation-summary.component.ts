@@ -22,7 +22,8 @@ export class ReservationSummaryComponent {
       phone_number: 0,
       avatar: '',
       id_card: '',
-      cars: []
+      cars: [],
+      groups: []
     }
     const state = this._router.getCurrentNavigation()?.extras.state;
     if (state) {
@@ -36,7 +37,12 @@ export class ReservationSummaryComponent {
       this._userService.getUser(id).subscribe(
         res => {
           this.user = res;
-          
+          if(this.user.id_card && this.user.phone_number){
+            this.isUserValid = true
+          }
+          else {
+            this.isUserValid = false;
+          }
         },
         err => {
           console.log(err);
@@ -47,12 +53,7 @@ export class ReservationSummaryComponent {
     else {
       console.log("brak usera")
     }  
-    if(this.user.id_card || this.user.phone_number || this.user.cars){
-      this.isUserValid = true
-    }
-    else {
-      this.isUserValid = false;
-    }
+   
     
   }
 
@@ -63,6 +64,10 @@ export class ReservationSummaryComponent {
   }
 
   createReservation(){
-    
+    let toLocaleEnd = this.summary.date_to.toLocaleDateString('en-US', { timeZone: 'Europe/Warsaw', dateStyle: 'short' }).split('/');
+    let formattedEnd = "20" + toLocaleEnd[2] + "-" + toLocaleEnd[0].toString().padStart(2, '0') + "-" + toLocaleEnd[1].toString().padStart(2, '0');
+    let toLocaleStart = this.summary.date_from.toLocaleDateString('en-US', { timeZone: 'Europe/Warsaw', dateStyle: 'short' }).split('/');
+    let formattedStart = "20" + toLocaleStart[2] + "-" + toLocaleStart[0].toString().padStart(2, '0') + "-" + toLocaleStart[1].toString().padStart(2, '0');
+
   }
 }
