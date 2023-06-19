@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     # DRF
     'rest_framework',
     'rest_framework_simplejwt',
+    # API schema generator
+    'drf_spectacular',
+    'drf_spectacular_sidecar',  # required for Django collectstatic discovery
     # Own applications
     'account',
     'camping',
@@ -169,6 +172,17 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Camping Management System API',
+    'DESCRIPTION': 'Projekt dotyczący systemu zarządzania polem kampingowym Bajka',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
 }
 
 SIMPLE_JWT = {

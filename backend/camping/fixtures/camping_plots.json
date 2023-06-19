@@ -1,0 +1,206 @@
+[
+{
+    "model": "camping.campingsection",
+    "pk": 1,
+    "fields": {
+        "name": "A",
+        "plot_price": "100.00",
+        "price_per_adult": "50.00",
+        "price_per_child": "25.00"
+    }
+},
+{
+    "model": "camping.campingsection",
+    "pk": 2,
+    "fields": {
+        "name": "B",
+        "plot_price": "100.00",
+        "price_per_adult": "50.00",
+        "price_per_child": "25.00"
+    }
+},
+{
+    "model": "camping.campingsection",
+    "pk": 3,
+    "fields": {
+        "name": "C",
+        "plot_price": "100.00",
+        "price_per_adult": "50.00",
+        "price_per_child": "25.00"
+    }
+},
+{
+    "model": "camping.campingsection",
+    "pk": 4,
+    "fields": {
+        "name": "D",
+        "plot_price": "75.00",
+        "price_per_adult": "40.00",
+        "price_per_child": "20.00"
+    }
+},
+{
+    "model": "camping.campingsection",
+    "pk": 5,
+    "fields": {
+        "name": "E",
+        "plot_price": "125.00",
+        "price_per_adult": "60.00",
+        "price_per_child": "30.00"
+    }
+},
+{
+    "model": "camping.campingsection",
+    "pk": 6,
+    "fields": {
+        "name": "F",
+        "plot_price": "200.00",
+        "price_per_adult": "100.00",
+        "price_per_child": "50.00"
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 1,
+    "fields": {
+        "position": "1",
+        "camping_section": 1
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 2,
+    "fields": {
+        "position": "2",
+        "camping_section": 1
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 3,
+    "fields": {
+        "position": "3",
+        "camping_section": 1
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 4,
+    "fields": {
+        "position": "1",
+        "camping_section": 2
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 5,
+    "fields": {
+        "position": "2",
+        "camping_section": 2
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 6,
+    "fields": {
+        "position": "3",
+        "camping_section": 2
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 7,
+    "fields": {
+        "position": "1",
+        "camping_section": 3
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 8,
+    "fields": {
+        "position": "2",
+        "camping_section": 3
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 9,
+    "fields": {
+        "position": "3",
+        "camping_section": 3
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 10,
+    "fields": {
+        "position": "1",
+        "camping_section": 4
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 11,
+    "fields": {
+        "position": "2",
+        "camping_section": 4
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 12,
+    "fields": {
+        "position": "3",
+        "camping_section": 4
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 13,
+    "fields": {
+        "position": "1",
+        "camping_section": 5
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 14,
+    "fields": {
+        "position": "2",
+        "camping_section": 5
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 15,
+    "fields": {
+        "position": "3",
+        "camping_section": 5
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 16,
+    "fields": {
+        "position": "1",
+        "camping_section": 6
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 17,
+    "fields": {
+        "position": "2",
+        "camping_section": 6
+    }
+},
+{
+    "model": "camping.campingplot",
+    "pk": 18,
+    "fields": {
+        "position": "3",
+        "camping_section": 6
+    }
+}
+]
