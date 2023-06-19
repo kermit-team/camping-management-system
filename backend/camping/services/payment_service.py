@@ -15,36 +15,40 @@ class PaymentService:
     @staticmethod
     def create_stripe_checkout_session(payment_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         try:
+            checkout_items = [
+                {
+                    "price_data": {
+                        "currency": "pln",
+                        "product_data": {
+                            "name": f"Rezerwacja parceli {payment_data['camping_plot']} w terminie {payment_data['date_from']} - {payment_data['date_to']}",
+                        },
+                        "unit_amount": int(payment_data['camping_plot'].camping_section.plot_price * 100),
+                    },
+                    "quantity": (payment_data['date_to'] - payment_data['date_from']).days,
+                },
+                {
+                    "price_data": {
+                        "currency": "pln",
+                        "product_data": {"name": "Opłata za osoby dorosłe"},
+                        "unit_amount": int(payment_data['camping_plot'].camping_section.price_per_adult * 100),
+                    },
+                    "quantity": payment_data['number_of_adults'],
+                },
+            ]
+
+            if payment_data['number_of_children']:
+                checkout_items.append({
+                    "price_data": {
+                        "currency": "pln",
+                        "product_data": {"name": "Opłata za dzieci"},
+                        "unit_amount": int(payment_data['camping_plot'].camping_section.price_per_child * 100),
+                    },
+                    "quantity": payment_data['number_of_children'],
+                })
+
             checkout_session = stripe.checkout.Session.create(
                 customer_email=payment_data['email'],
-                line_items=[
-                    {
-                        "price_data": {
-                            "currency": "pln",
-                            "product_data": {
-                                "name": f"Rezerwacja parceli {payment_data['camping_plot']} w terminie {payment_data['date_from']} - {payment_data['date_to']}",
-                            },
-                            "unit_amount": int(payment_data['camping_plot'].camping_section.plot_price * 100),
-                        },
-                        "quantity": (payment_data['date_to'] - payment_data['date_from']).days,
-                    },
-                    {
-                        "price_data": {
-                            "currency": "pln",
-                            "product_data": {"name": "Opłata za osoby dorosłe"},
-                            "unit_amount": int(payment_data['camping_plot'].camping_section.price_per_adult * 100),
-                        },
-                        "quantity": payment_data['number_of_adults'],
-                    },
-                    {
-                        "price_data": {
-                            "currency": "pln",
-                            "product_data": {"name": "Opłata za dzieci"},
-                            "unit_amount": int(payment_data['camping_plot'].camping_section.price_per_child * 100),
-                        },
-                        "quantity": payment_data['number_of_children'],
-                    },
-                ],
+                line_items=checkout_items,
                 mode="payment",
                 success_url="http://localhost:4242/payment_data/payment/success",
                 cancel_url="http://localhost:4242/payment_data/payment/cancel",

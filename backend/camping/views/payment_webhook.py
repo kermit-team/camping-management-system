@@ -24,8 +24,6 @@ class PaymentWebhookView(APIView):
             )
 
         if payload['type'] == 'checkout.session.completed':
-
-            print("Checkout completed!!")
             session = stripe.checkout.Session.retrieve(
                 payload['data']['object']['id'],
             )

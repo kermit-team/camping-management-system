@@ -23,7 +23,6 @@ class UserRequestSerializer(serializers.ModelSerializer):
         password = attrs.get('password')
         user = User(**attrs)
         if groups:
-            user.groups.set(groups)
             attrs['groups'] = groups
 
         errors = {}
