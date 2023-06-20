@@ -1,6 +1,8 @@
 # Instalacja bibliotek i zależności
 
-# Wykonaj komendy w terminalu RaspberryPi
+# Konfiguracja RaspberryPi
+
+## Wykonaj poniższe komendy
 
 pip3 install opencv-python
 
@@ -47,7 +49,9 @@ sudo apt install libtesseract-dev
 sudo pip install pytesseract
 
 
-# Wykonaj komendy w linii komend Windows
+# Konfiguracja Windows
+
+## Wykonaj poniższe komendy
 
 python -m pip install --upgrade pip
 
