@@ -12,5 +12,5 @@ class UserRelatedToObjectOrStaffPermissions(DjangoModelPermissions):
             return True
         if isinstance(obj, Reservation) and request.user == obj.user:
             return True
-        if isinstance(obj, Car) and request.user in obj.drivers:
+        if isinstance(obj, Car) and request.user in obj.drivers.all():
             return True
