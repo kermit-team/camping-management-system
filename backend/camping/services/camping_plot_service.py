@@ -139,8 +139,8 @@ class CampingPlotService:
             camping_plot = CampingPlot.objects.get(pk=pk)
 
             if CampingPlotService.is_camping_plot_in_incoming_reservations(camping_plot):
-                errors['camping_plot'] = _("Camping plot is used in reservations")
-            
+                errors['camping_plot'] = _("Camping plot is used in incoming reservations")
+
             if errors:
                 raise Exception(json.dumps(errors))
 
