@@ -20,6 +20,5 @@ class Reservation(models.Model):
 
     def __str__(self):
         return _(
-            f'{self.user.first_name} {self.user.last_name}, ' +
-            f'plot {self.camping_plot}, {self.date_from} - {self.date_to}',
+            f'{self.user.first_name} {self.user.last_name}, plot {self.camping_plot}, {self.date_from} - {self.date_to}',
         )

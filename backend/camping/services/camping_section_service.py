@@ -70,7 +70,7 @@ class CampingSectionService:
             errors = {}
             camping_section = CampingSection.objects.get(pk=pk)
             if CampingSectionService.is_camping_section_in_incoming_reservations(camping_section):
-                errors['camping_section'] = _("Camping section is used in reservations")
+                errors['camping_section'] = _("Camping section is used in incoming reservations")
 
             if errors:
                 raise Exception(json.dumps(errors))
