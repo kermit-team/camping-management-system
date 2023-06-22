@@ -1,0 +1,27 @@
+<div class="reservation__container">
+  <div class="reservation">
+    <img
+      src="../../../../assets/plot.jpg"
+      alt="Zdjęcie rezerwacji"
+      class="reservation__photo"
+    />
+    <div class="reservation__info">
+      <h2 class="reservation__info--number">
+        Parcela nr {{ reservation.camping_plot.position }}
+      </h2>
+      <p class="reservation__info--text">
+        Sektor: {{ reservation.camping_plot.camping_section.name }}
+      </p>
+      <p class="reservation__info--text">
+        Okres pobytu: {{ reservation.date_from }} - {{ reservation.date_to }}
+      </p>
+      <p class="reservation__info--text">{{ reservation.payment.status }}</p>
+    </div>
+    <div class="reservation__price">
+      <h2 class="reservation__info--number">
+        {{ reservation.payment.price }}zł
+      </h2>
+      <p class="reservation__cancel" *ngIf="canCancel">Odwołaj</p>
+    </div>
+  </div>
+</div>

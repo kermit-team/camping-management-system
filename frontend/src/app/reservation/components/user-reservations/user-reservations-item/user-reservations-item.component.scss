@@ -1,0 +1,38 @@
+$primary: #ae9560;
+
+.reservation__container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $primary;
+  border-radius: 2px;
+  margin-bottom: 2vh;
+  width: 100%;
+}
+.reservation {
+  display: flex;
+  justify-content: flex-start;
+  padding: 1.5vw;
+}
+.reservation__photo {
+  width: calc(28px + 48px + 6vh);
+  height: calc(28px + 48px + 6vh);
+  margin-right: 1.5vw;
+}
+.reservation__info--number {
+    font-weight: 500;
+    margin-bottom: 2vh;
+}
+.reservation__info--text {
+    margin-bottom: 1vh;
+}
+.reservation__price {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+}
+.reservation__cancel {
+    text-align: right;
+    margin-top: auto;
+    cursor: pointer;
+    color: $primary;
+}

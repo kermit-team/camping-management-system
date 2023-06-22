@@ -11,6 +11,7 @@
     <div class="dropdown" [class.show]="showDropdown">
         <p class="dropdown-option" *ngIf="isAdmin" [routerLink]="['/adminPanel']">Panel Administratora</p>
         <p class="dropdown-option" [routerLink]="['/profile']">Mój Profil</p>
+        <p class="dropdown-option" [routerLink]="['/reservations']">Moje Rezerwacje</p>
         <p class="dropdown-option" [routerLink]="['/']">Strona Główna</p>
         <p class="dropdown-option" (click)="logout()">Wyloguj się</p>
         <!-- Dropdown content goes here -->
