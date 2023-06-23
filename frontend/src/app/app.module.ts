@@ -40,7 +40,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     FooterComponent,
     ProfileComponent,
     CarComponent,
-    AdminPanelComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
