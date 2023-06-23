@@ -15,5 +15,7 @@ export enum ApiPaths {
     GetPlots = '/camping-plots/',
     GetAvailablePlots = '/camping-plots/available/',
     CreateCar = '/cars/',
-    GetAllUsers = '/users/'
+    GetAllUsers = '/users/',
+    DeleteUser = '/users/<string:pk>/',
+    GetAllGroups = '/groups/'
  }

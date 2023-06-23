@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { UserResponse } from './user.models';
+import { FullUserResponse, Groups, UserResponse } from './user.models';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ApiPaths, environment } from 'src/environment';
@@ -15,9 +15,14 @@ export class UserService {
 
   constructor(private _jwtHelperService: JwtHelperService,private _http: HttpClient) { }
 
-  getAllUsers(): Observable<UserResponse[]> {
+  getAllUsers(): Observable<FullUserResponse[]> {
     return this._http
-      .get<UserResponse[]>(`${environment.baseUrl}${ApiPaths.GetAllUsers}`);
+      .get<FullUserResponse[]>(`${environment.baseUrl}${ApiPaths.GetAllUsers}`);
+  }
+
+  getAllGroups(): Observable<Groups[]>{
+    return this._http
+      .get<Groups[]>(`${environment.baseUrl}${ApiPaths.GetAllGroups}`);
   }
 
   getUser(id: number): Observable<UserResponse> {
@@ -60,6 +65,26 @@ export class UserService {
       }))
     );
   }
+
+  updateFullUser(id: number,changed: any): Observable<FullUserResponse>{
+    return this._http.patch<FullUserResponse>(`${environment.baseUrl}${ApiPaths.GetUpdateUser}${id}/`,changed).pipe(
+      map(response => ({
+        email: response.email,
+        first_name: response.first_name,
+        last_name: response.last_name,
+        phone_number: response.phone_number,
+        avatar: response.avatar,
+        id_card: response.id_card,
+        cars: response.cars,
+        groups: response.groups,
+        id: response.id
+      }))
+    )
+  }
+
+  deleteUser(id: number): Observable<void> {
+  return this._http.delete<void>(`${environment.baseUrl}${ApiPaths.DeleteUser}${id}`);
+}
 
   isUserExpired(){
     const user = window.sessionStorage.getItem(TOKEN_KEY);
