@@ -34,6 +34,6 @@ export type FullUserRequest = {
     avatar: string;
     id_card: string;
     cars: number[];
-    groups: number;
+    groups: number[];
     id: number;
 }
