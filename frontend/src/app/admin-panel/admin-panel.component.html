@@ -25,7 +25,7 @@
             <th>{{user.phone_number}}</th>
             <th>{{user.groups[0]?.name}}</th>
             <th><button (click)="openModal(user)" class="edit-button">Edytuj</button></th>
-            <th><button (click)="deleteUser(user)" class="delete-button">Usuń</button></th>
+            <th><button (click)="openDeleteUserModal(user)" class="delete-button">Usuń</button></th>
           </tr>
         </tbody>
       </table>
@@ -50,7 +50,20 @@
         </option>
       </select>
     </div>
-    <button type="button" class="modal-button" (click)="closeModal()">Zamknij</button>
-    <button type="button" class="modal-button" (click)="updateUser(selectedUser?.id || 0)">Zapisz zmiany</button>
+    <div class="modal-button-container">
+      <button type="button" class="edit-modal-button" (click)="closeModal()">Zamknij</button>
+      <button type="button" class="edit-modal-button" (click)="updateUser(selectedUser?.id || 0)">Zapisz zmiany</button>
+    </div>
   </form>
 </div>
+
+<div class="delete-user-modal" *ngIf="isDeleteUserModalVisible">
+  <div class="delete-user-modal-container" *ngIf="isDeleteUserModalVisible">
+    <h1 class="modal-title">Czy napewno chcesz usunąć tego użytkownika?</h1>
+    <div class="button-container">
+      <button (click)="deleteUser(selectedUser!)" class="modal-button">Tak</button>
+      <button (click)="closeDeleteUserModal()" class="modal-button">Nie</button>
+    </div>
+  </div>
+</div>
+

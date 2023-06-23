@@ -25,6 +25,7 @@ export class ProfileMiniComponent implements OnInit {
       this._userService.getUser(userId).subscribe(
         (response: UserResponse) => {
           this.userData = response;
+          console.log(this.isAdmin)
           this.isAdmin = response.groups.some(group => group.name === 'Administratorzy');
 
         },
