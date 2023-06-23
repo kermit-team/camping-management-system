@@ -35,3 +35,7 @@ export type Payment = {
     stripe_checkout_id: string;
     price: number;
 }
+export type ReservationCreateResponse = {
+    checkout_url: string;
+    reservation: ReservationResponse
+}
