@@ -8,6 +8,7 @@ from django.utils.html import strip_tags
 from django.utils.http import urlsafe_base64_encode
 
 from account.models.user import User
+from account.serializers import errors_serializer
 from account.token_generators import EmailVerificationTokenGenerator
 
 
@@ -41,7 +42,7 @@ class MailService:
             )
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -73,7 +74,7 @@ class MailService:
             )
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -100,6 +101,6 @@ class MailService:
             )
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response

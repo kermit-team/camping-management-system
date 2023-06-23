@@ -4,6 +4,7 @@ from typing import Any, Dict, Optional
 from django.utils.translation import gettext as _
 from rest_framework.utils import json
 
+from account.serializers import errors_serializer
 from camping.models import CampingSection, Reservation
 
 
@@ -28,7 +29,7 @@ class CampingSectionService:
                 camping_sections = CampingSection.objects.all().order_by(order_by)
             response = {'status': 'Success', 'content': camping_sections}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -38,7 +39,7 @@ class CampingSectionService:
             camping_section = CampingSection.objects.get(pk=pk)
             response = {'status': 'Success', 'content': camping_section}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -48,7 +49,7 @@ class CampingSectionService:
             camping_section = CampingSection.objects.create(**camping_section_data)
             response = {'status': 'Success', 'content': camping_section}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -60,7 +61,7 @@ class CampingSectionService:
             camping_section = CampingSection.objects.get(pk=pk)
             response = {'status': 'Success', 'content': camping_section}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -78,6 +79,6 @@ class CampingSectionService:
             camping_section.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response

@@ -3,6 +3,7 @@ from typing import Any, Dict, Optional
 from django.contrib.auth.models import Group
 
 from account.models import User
+from account.serializers import errors_serializer
 
 
 class UserService:
@@ -35,7 +36,7 @@ class UserService:
 
             response = {'status': 'Success', 'content': users}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -45,7 +46,7 @@ class UserService:
             user = User.objects.get(pk=pk)
             response = {'status': 'Success', 'content': user}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -59,7 +60,7 @@ class UserService:
                 UserService.update_account_privilege_status(user)
             response = {'status': 'Success', 'content': user}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -82,7 +83,7 @@ class UserService:
             user = User.objects.get(pk=pk)
             response = {'status': 'Success', 'content': user}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -93,6 +94,5 @@ class UserService:
             user.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
-
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
         return response

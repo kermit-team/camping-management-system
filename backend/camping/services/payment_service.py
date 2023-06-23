@@ -6,6 +6,7 @@ from django.conf import settings
 from django.utils.translation import gettext as _
 from rest_framework.utils import json
 
+from account.serializers import errors_serializer
 from camping.models import Payment
 
 
@@ -98,7 +99,7 @@ class PaymentService:
 
             response = {'status': 'Success', 'content': new_status}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -114,7 +115,7 @@ class PaymentService:
                 payments = Payment.objects.all().order_by(order_by)
             response = {'status': 'Success', 'content': payments}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -124,7 +125,7 @@ class PaymentService:
             payment = Payment.objects.get(pk=pk)
             response = {'status': 'Success', 'content': payment}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -142,7 +143,7 @@ class PaymentService:
 
             response = {'status': 'Success', 'content': {'payment': payment, 'checkout_session': checkout_session}}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -169,7 +170,7 @@ class PaymentService:
             if checkout_session:
                 response['content']['checkout_session'] = checkout_session
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -180,6 +181,6 @@ class PaymentService:
             payment.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
