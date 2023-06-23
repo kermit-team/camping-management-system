@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { UserResponse } from 'src/app/shared/user.models';
 import { UserService } from 'src/app/shared/user.service';
+import { ReservationService } from '../../reservation.service';
 
 @Component({
   selector: 'app-reservation-summary',
   templateUrl: './reservation-summary.component.html',
-  styleUrls: ['./reservation-summary.component.scss']
+  styleUrls: ['./reservation-summary.component.scss'],
 })
 export class ReservationSummaryComponent {
   summary: any;
@@ -14,7 +15,11 @@ export class ReservationSummaryComponent {
   isUserValid: boolean = false;
   selectedCar: number | null = null;
 
-  constructor(private _router: Router, private _userService: UserService){
+  constructor(
+    private _router: Router,
+    private _userService: UserService,
+    private _reservationService: ReservationService
+  ) {
     this.user = {
       email: '',
       first_name: '',
@@ -23,51 +28,63 @@ export class ReservationSummaryComponent {
       avatar: '',
       id_card: '',
       cars: [],
-      groups: []
-    }
+      groups: [],
+    };
     const state = this._router.getCurrentNavigation()?.extras.state;
     if (state) {
       this.summary = state['formData'];
-      console.log(this.summary)
     } else {
       this._router.navigate(['/']);
     }
     const id: number | null = this._userService.getUserId();
-    if(id){
+    if (id) {
       this._userService.getUser(id).subscribe(
-        res => {
+        (res) => {
           this.user = res;
-          if(this.user.id_card && this.user.phone_number){
-            this.isUserValid = true
-          }
-          else {
+          if (this.user.id_card && this.user.phone_number) {
+            this.isUserValid = true;
+          } else {
             this.isUserValid = false;
           }
         },
-        err => {
+        (err) => {
           console.log(err);
-          
+        }
+      );
+    } else {
+      console.log('brak usera');
+    }
+  }
+
+  setSelectedCar(id: number) {
+    if (this.user.cars) {
+      this.selectedCar = id;
+    }
+  }
+
+  createReservation() {
+    if (this.isUserValid && this.selectedCar) {
+      const parts = this.summary.date_from.split('.');
+      const dateFrom = `${parts[2]}-${parts[1]}-${parts[0]}`;
+      const parts2 = this.summary.date_to.split('.');
+      const dateTo = `${parts2[2]}-${parts2[1]}-${parts2[0]}`;
+      const formData = {
+        date_from: dateFrom,
+        date_to: dateTo,
+        number_of_adults: this.summary.number_of_adults,
+        number_of_children: this.summary.number_of_children,
+        number_of_babies: this.summary.number_of_babies,
+        car: this.selectedCar,
+        camping_plot: this.summary.camping_plot.id,
+      };
+      this._reservationService.createReservation(formData).subscribe(
+        res => {
+            window.location.href = res.checkout_url
+        },
+        err => {
+          console.error(err);
         }
       )
     }
-    else {
-      console.log("brak usera")
-    }  
-   
-    
-  }
-
-  setSelectedCar(id: number){
-    if(this.user.cars){
-       this.selectedCar = id;
-    }
-  }
-
-  createReservation(){
-    let toLocaleEnd = this.summary.date_to.toLocaleDateString('en-US', { timeZone: 'Europe/Warsaw', dateStyle: 'short' }).split('/');
-    let formattedEnd = "20" + toLocaleEnd[2] + "-" + toLocaleEnd[0].toString().padStart(2, '0') + "-" + toLocaleEnd[1].toString().padStart(2, '0');
-    let toLocaleStart = this.summary.date_from.toLocaleDateString('en-US', { timeZone: 'Europe/Warsaw', dateStyle: 'short' }).split('/');
-    let formattedStart = "20" + toLocaleStart[2] + "-" + toLocaleStart[0].toString().padStart(2, '0') + "-" + toLocaleStart[1].toString().padStart(2, '0');
-
   }
 }

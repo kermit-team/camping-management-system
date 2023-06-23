@@ -1,0 +1,9 @@
+<app-header></app-header>
+<div class="heading-wrapper">
+    <h1 class="heading">Moje rezerwacje</h1>
+  </div>
+<main class="reservation">
+  <div class="reservation-item" *ngFor="let reservationEl of reservations">
+    <app-user-reservations-item [reservation]="reservationEl"></app-user-reservations-item>
+  </div>
+</main>

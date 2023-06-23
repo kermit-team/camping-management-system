@@ -11,6 +11,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationSummaryComponent } from './components/reservation-summary/reservation-summary.component';
+import { UserReservationsComponent } from './components/user-reservations/user-reservations.component';
+import { UserReservationsItemComponent } from './components/user-reservations/user-reservations-item/user-reservations-item.component';
 
 
 
@@ -18,7 +20,9 @@ import { ReservationSummaryComponent } from './components/reservation-summary/re
   declarations: [
     PlotComponent,
     SearchComponent,
-    ReservationSummaryComponent
+    ReservationSummaryComponent,
+    UserReservationsComponent,
+    UserReservationsItemComponent
   ],
   imports: [
     CommonModule,
