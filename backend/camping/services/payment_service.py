@@ -50,8 +50,8 @@ class PaymentService:
                 customer_email=payment_data['email'],
                 line_items=checkout_items,
                 mode="payment",
-                success_url="http://localhost:4242/payment_data/payment/success",
-                cancel_url="http://localhost:4242/payment_data/payment/cancel",
+                success_url="http://localhost:4200/payment/success",
+                cancel_url="http://localhost:4200/payment/cancel",
                 expires_at=int(time.time() + 3600),  # Configured to expire after 1 hour,
             )
             return checkout_session
