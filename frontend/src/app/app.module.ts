@@ -19,13 +19,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatNativeDateModule} from '@angular/material/core';
-import { SearchComponent } from './reservation/components/search/search.component';
-import { MAT_DATE_LOCALE } from '@angular/material/core'
+import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ReservationModule } from './reservation/reservation.module';
 import { SharedModule } from './shared/shared.module';
-import { CarComponent } from './shared/car/car.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { SuccessComponent } from './payment/success/success.component';
+import { CancelComponent } from './payment/cancel/cancel.component';
+import { UserGuard } from './guards/user-guard.guard';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     ContactFormComponent,
     FooterComponent,
     ProfileComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    SuccessComponent,
+    CancelComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,10 +55,10 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
-    SharedModule
+    SharedModule,
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'pl'}],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pl' }, UserGuard],
   bootstrap: [AppComponent],
-  exports: []
+  exports: [],
 })
-export class AppModule { }
+export class AppModule {}

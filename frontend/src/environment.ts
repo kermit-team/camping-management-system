@@ -17,5 +17,6 @@ export enum ApiPaths {
     CreateCar = '/cars/',
     GetAllUsers = '/users/',
     DeleteUser = '/users/<string:pk>/',
-    GetAllGroups = '/groups/'
+    GetAllGroups = '/groups/',
+    Reservations = '/reservations/'
  }
