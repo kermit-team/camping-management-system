@@ -5,6 +5,7 @@ from django.db.models import Q as Query
 from django.utils.translation import gettext as _
 from rest_framework.utils import json
 
+from account.serializers import errors_serializer
 from camping.models import CampingPlot, Reservation, Payment, CampingSection
 
 
@@ -54,7 +55,7 @@ class CampingPlotService:
 
             response = {'status': 'Success', 'content': camping_plots}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -70,7 +71,7 @@ class CampingPlotService:
                 camping_plots = CampingPlot.objects.all().order_by(order_by)
             response = {'status': 'Success', 'content': camping_plots}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -80,7 +81,7 @@ class CampingPlotService:
             camping_plot = CampingPlot.objects.get(pk=pk)
             response = {'status': 'Success', 'content': camping_plot}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -101,7 +102,7 @@ class CampingPlotService:
             camping_plot = CampingPlot.objects.create(**camping_plot_data)
             response = {'status': 'Success', 'content': camping_plot}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -128,7 +129,7 @@ class CampingPlotService:
             camping_plot = CampingPlot.objects.get(pk=pk)
             response = {'status': 'Success', 'content': camping_plot}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -147,6 +148,6 @@ class CampingPlotService:
             camping_plot.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response

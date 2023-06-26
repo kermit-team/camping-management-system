@@ -1,3 +1,4 @@
+from .errors_serializer import errors_serializer
 from .group_request_serializer import GroupRequestSerializer
 from .group_response_serializer import GroupResponseSerializer
 from .permission_request_serializer import PermissionRequestSerializer

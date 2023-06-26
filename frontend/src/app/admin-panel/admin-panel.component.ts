@@ -14,17 +14,7 @@ export class AdminPanelComponent implements OnInit {
   users: FullUserResponse[] = [];
   groups: Groups[] | null = null;
   isModalVisible = false;
-  // editedUser: FullUserResponse = {
-  //   email: '',
-  //   first_name: '',
-  //   last_name: '',
-  //   phone_number: 0,
-  //   avatar: '',
-  //   id_card: '',
-  //   cars: [],
-  //   groups: [],
-  //   id: 0
-  // };
+  isDeleteUserModalVisible = false;
 
   userForm: FormGroup;
 
@@ -36,7 +26,7 @@ export class AdminPanelComponent implements OnInit {
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone_number: ['', Validators.required],
+      phone_number: [''],
       groups: ['', Validators.required]
     });
   }
@@ -69,22 +59,12 @@ export class AdminPanelComponent implements OnInit {
     )
   }
 
-  // getGroupName(groups: Groups): string {
-  //   if (groups && groups.length > 0) {
-  //     return groups[0].name;
-  //   }
-  //   return '';
-  // }
-
   deleteUser(user: FullUserResponse): void {
-    this.userService.deleteUser(user.id).subscribe(
-      () => {
+    this.selectedUser = {...user}
+    console.log(this.selectedUser.id)
+    this.userService.deleteUser(this.selectedUser.id).subscribe(
+      (response) => {
         console.log(`Usunięto użytkownika: ${user.first_name} ${user.last_name}`);
-        // Usuń użytkownika z tabelki
-        const index = this.users.indexOf(user);
-        if (index !== -1) {
-          this.users.splice(index, 1);
-        }
       },
       (error) => {
         console.error('Błąd podczas usuwania użytkownika', error);
@@ -110,6 +90,15 @@ export class AdminPanelComponent implements OnInit {
     this.userForm.reset();
   }
   
+  openDeleteUserModal(user: FullUserResponse) {
+    this.isDeleteUserModalVisible = true;
+    this.selectedUser = { ...user }
+  }
+
+  closeDeleteUserModal() {
+    this.isDeleteUserModalVisible = false;
+  }
+
   updateUser(id: number) {
     if (this.userForm.valid) {
       const editedData:FullUserResponse = this.userForm.value;
@@ -119,28 +108,13 @@ export class AdminPanelComponent implements OnInit {
         last_name: this.userForm.value.last_name,
         email: this.userForm.value.email,
         phone_number: this.userForm.value.phone_number,
-        groups: parseInt(this.userForm.value.groups)
+        groups: [parseInt(this.userForm.value.groups)]
       }
-      // const updatedUser: FullUserRequest = {
-      //   first_name: this.userForm.value.first_name,
-      //   last_name: this.userForm.value.last_name,
-      //   email: this.userForm.value.email,
-      //   phone_number: this.userForm.value.phone_number,
-      //   avatar: '',
-      //   id_card: '',
-      //   cars: [],
-      //   groups: this.userForm.value.groups ? this.userForm.value.groups[0].name : null
-      // };
       
       // Wywołaj funkcję updateFullUser() z serwisu UserService
       this.userService.updateFullUser(id, updatedUser).subscribe(
         (response) => {
           console.log('Dane użytkownika zaktualizowane', response);
-          // Zaktualizuj dane wyświetlane w tabeli
-          // const index = this.users.findIndex((user) => user.id === id);
-          // if (index !== -1) {
-          //   this.users[index] = { ...updatedUser };
-          // }
           this.closeModal();
         },
         (error) => {

@@ -6,6 +6,7 @@ from django.utils.translation import gettext as _
 from rest_framework.utils import json
 
 from account.models import User
+from account.serializers import errors_serializer
 from camping.models import Reservation, Payment, CampingPlot, Car
 from camping.services import PaymentService
 
@@ -68,17 +69,17 @@ class ReservationService:
                 reservations = Reservation.objects.all().order_by(order_by)
             response = {'status': 'Success', 'content': reservations}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
     @staticmethod
     def get_reservation(pk: int) -> Dict[str, Any]:
         try:
-            reservation = Reservation.objects.get(pk)
+            reservation = Reservation.objects.get(pk=pk)
             response = {'status': 'Success', 'content': reservation}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -157,7 +158,7 @@ class ReservationService:
                 },
             }
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -166,7 +167,7 @@ class ReservationService:
         try:
             checkout_url = None
             if reservation_data:
-                reservation = Reservation.objects.get(pk)
+                reservation = Reservation.objects.get(pk=pk)
                 errors = {}
 
                 if not ReservationService.is_reservation_updatable(reservation):
@@ -265,14 +266,14 @@ class ReservationService:
                 response['content']['checkout_url'] = checkout_url
 
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
     @staticmethod
     def delete_reservation(pk: int) -> Dict[str, Any]:
         try:
-            reservation = Reservation.objects.get(pk)
+            reservation = Reservation.objects.get(pk=pk)
             if not ReservationService.is_reservation_cancelable(reservation):
                 raise Exception(json.dumps(
                     {'reservation': _("Reservation can no longer be cancelled")},
@@ -281,6 +282,6 @@ class ReservationService:
             reservation.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response

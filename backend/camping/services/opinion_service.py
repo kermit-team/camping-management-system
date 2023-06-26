@@ -5,6 +5,7 @@ from django.utils.translation import gettext as _
 from rest_framework.utils import json
 
 from account.models import User
+from account.serializers import errors_serializer
 from camping.models import Opinion, CampingPlot, Reservation
 
 
@@ -33,7 +34,7 @@ class OpinionService:
                 opinions = Opinion.objects.all().order_by(order_by)
             response = {'status': 'Success', 'content': opinions}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -43,7 +44,7 @@ class OpinionService:
             opinion = Opinion.objects.get(pk=pk)
             response = {'status': 'Success', 'content': opinion}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -61,7 +62,7 @@ class OpinionService:
             opinion = Opinion.objects.create(**opinion_data)
             response = {'status': 'Success', 'content': opinion}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -73,7 +74,7 @@ class OpinionService:
             opinion = Opinion.objects.get(pk=pk)
             response = {'status': 'Success', 'content': opinion}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
 
@@ -84,6 +85,6 @@ class OpinionService:
             opinion.delete()
             response = {'status': 'Success'}
         except Exception as err:
-            response = {'status': 'Error', 'errors': str(err)}
+            response = {'status': 'Error', 'errors': errors_serializer(err)}
 
         return response
