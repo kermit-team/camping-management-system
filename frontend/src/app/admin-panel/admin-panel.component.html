@@ -23,7 +23,7 @@
             <th>{{user.last_name}}</th>
             <th>{{user.email}}</th>
             <th>{{user.phone_number}}</th>
-            <th>{{user.groups[0]?.name}}</th>
+            <th>{{user.groups[0].name}}</th>
             <th><button (click)="openModal(user)" class="edit-button">Edytuj</button></th>
             <th><button (click)="openDeleteUserModal(user)" class="delete-button">Usuń</button></th>
           </tr>

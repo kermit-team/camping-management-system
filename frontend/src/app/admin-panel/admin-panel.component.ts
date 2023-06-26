@@ -65,6 +65,9 @@ export class AdminPanelComponent implements OnInit {
     this.userService.deleteUser(this.selectedUser.id).subscribe(
       (response) => {
         console.log(`Usunięto użytkownika: ${user.first_name} ${user.last_name}`);
+        if (window.location.href === 'http://localhost:4200/adminPanel') {
+          location.reload();
+        }
       },
       (error) => {
         console.error('Błąd podczas usuwania użytkownika', error);
@@ -116,6 +119,9 @@ export class AdminPanelComponent implements OnInit {
         (response) => {
           console.log('Dane użytkownika zaktualizowane', response);
           this.closeModal();
+          if (window.location.href === 'http://localhost:4200/adminPanel') {
+            location.reload();
+          }
         },
         (error) => {
           console.error('Błąd podczas aktualizacji danych użytkownika', error);
