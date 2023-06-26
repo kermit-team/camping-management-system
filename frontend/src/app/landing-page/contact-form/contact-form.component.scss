@@ -1,0 +1,150 @@
+.question-form {
+  width: 70%;
+  margin: 0 auto 5%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: transparent;
+  padding: 2%;
+  border-style: solid;
+  border-color: #AE9560;
+  border-width: 2px;
+
+  &__title {
+    font-size: 34px;
+    color: #4D4D4D;
+    align-self: center;
+  }
+
+  .squares {
+    width: 15%;
+    align-self: center;
+  }
+
+  &__text-side {
+    width: 100%;
+    max-width: 48%;
+    text-align: justify;
+
+    .header4 {
+      font-size: 30px;
+      margin-bottom: 10%;
+      color: #4D4D4D;
+    }
+
+    .text {
+      float: left;
+    }
+  }
+
+  &__input-group {
+    width: 100%;
+    max-width: 48%;
+    float: right;
+    margin-bottom: 10px;
+
+    input, textarea {
+      padding: 10px;
+      border: none;
+      font-size: 16px;
+      border-bottom: 2px solid #ae9560;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0px 2px 5px rgba(157, 88, 23, 0.2);
+      }
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    &__row {
+      display: flex;
+      flex-direction: column;
+     
+
+      input, textarea {
+        width: 100%;
+      }
+    }
+  }
+
+  button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center;
+    width: 13%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .question-form {
+    width: 80%;
+    height: 80%;
+  
+    &__title {
+      font-size: 18px;
+    }
+    .squares {
+      width: 20%;
+    }
+    &__text-side {
+      font-size: 11px;
+      .header4 {
+        font-size: 16px;
+        margin-bottom: 10%;
+      }
+    }
+  
+    &__input-group {
+      input, textarea {
+        padding: 8px;
+        font-size: 8px;
+      }
+    }
+  
+    button {
+      padding: 8px;
+      font-size: 12px;
+      width: 20%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .question-form {
+    width: 50%;
+    height: 70%;
+  
+    &__title {
+      font-size: 36px;
+    }
+    .squares {
+      width: 20%;
+    }
+    &__text-side {
+      font-size: 20px;
+      .header4 {
+        font-size: 30px;
+        margin-bottom: 10%;
+      }
+    }
+  
+    &__input-group {
+      input, textarea {
+        padding: 12px;
+        font-size: 20px;
+      }
+    }
+  
+    button {
+      padding: 8px;
+      font-size: 20px;
+      width: 15%;
+    }
+  }
+}

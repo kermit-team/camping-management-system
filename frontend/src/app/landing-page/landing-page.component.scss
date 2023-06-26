@@ -1,0 +1,328 @@
+.camper {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../../assets/camper.jpg) no-repeat;
+  background-position: top;
+  height: 10%;
+}
+
+.header-div {
+  padding: 5%;
+
+  .header {
+    font-family: CustomFont;
+    font-size: 5rem;
+    color: #ae9560;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .header2 {
+    font-size: 1.2rem;
+    letter-spacing: 0.3rem;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+}
+
+@font-face {
+  font-family: "CustomFont";
+  src: url("../../assets/CreattionDemo.otf");
+}
+
+
+.title {
+  color: #4D4D4D;
+  font-size: 40px;
+  text-align: center;
+  margin: 3% auto 0;
+  width: 60%;
+  position: relative;
+}
+
+.text {
+  color: #313131;
+  width: 60%;
+  margin: 3% auto 0;
+}
+
+.squares {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 13%;
+}
+
+.image-with-text {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  height: 50%;
+  margin: 3% auto;
+
+  .header3 {
+    font-size: 36px;
+    width: 50%;
+    letter-spacing: 0.3rem;
+    color: #2C2C2C;
+    text-align: left;
+
+  }
+
+  .text2 {
+    text-align: justify;
+    width: 50%;
+    height: auto;
+
+  }
+
+  .camper2 {
+    float: right;
+    width: 30%;
+    margin-bottom: 20px;
+    margin-right: 6%;
+  }
+
+  .map-pricelist-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: right;
+    clear: both;
+    margin-top: 10px;
+    background-color: transparent;
+    color: #4D4D4D;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    text-decoration-color: #ae9560;
+    width: 40%;
+    letter-spacing: 2px;
+  }
+}
+
+.perks {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  width: 50%;
+  padding-bottom: 50px;
+  margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .header-div {
+    .header {
+      font-size: 3rem;
+    }
+
+    .header2 {
+      font-size: 0.8rem;
+      letter-spacing: 0.2rem;
+    }
+  }
+
+  .title {
+    font-size: 20px;
+    width: 80%;
+    margin-top: auto;
+  }
+
+  .text {
+    width: 90%;
+    font-size: 0.5rem;
+  }
+
+  .squares {
+    width: 20%;
+  }
+
+
+  .image-with-text {
+    width: 80%;
+    height: 50%;
+    margin: 3% auto 0;
+
+    .header3 {
+      font-size: 0.8rem;
+    }
+
+    .camper2 {
+      width: 40%;
+    }
+
+    .text2 {
+      font-size: 0.5rem;
+      width: 50%;
+    }
+
+    .map-pricelist-buttons {
+      margin-top: 3px;
+      font-size: 0.5rem;
+    }
+  }
+
+}
+
+@media only screen and (min-width: 600px) {
+  .camper {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../../assets/camper.jpg) no-repeat;
+    background-position: top;
+    height: 10%;
+  }
+  
+  .header-div {
+    padding: 5%;
+  
+    .header {
+      font-family: CustomFont;
+      font-size: 5rem;
+      color: #ae9560;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
+  
+    .header2 {
+      font-size: 1.2rem;
+      letter-spacing: 0.3rem;
+      color: white;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
+  }
+  
+  @font-face {
+    font-family: "CustomFont";
+    src: url("../../assets/CreattionDemo.otf");
+  }
+  
+  
+  .title {
+    color: #4D4D4D;
+    font-size: 40px;
+    text-align: center;
+    margin: 3% auto 0;
+    width: 60%;
+    position: relative;
+  }
+  
+  .text {
+    color: #313131;
+    width: 60%;
+    margin: 3% auto 0;
+  }
+  
+  .squares {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 13%;
+  }
+  
+  .image-with-text {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 50%;
+    margin: 3% auto;
+  
+    .header3 {
+      font-size: 36px;
+      width: 50%;
+      letter-spacing: 0.3rem;
+      color: #2C2C2C;
+      text-align: left;
+  
+    }
+  
+    .text2 {
+      text-align: justify;
+      width: 50%;
+      height: auto;
+  
+    }
+  
+    .camper2 {
+      float: right;
+      width: 30%;
+      margin-bottom: 20px;
+      margin-right: 6%;
+    }
+  
+    .map-pricelist-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      float: right;
+      clear: both;
+      margin-top: 10px;
+      background-color: transparent;
+      color: #4D4D4D;
+      font-size: 0.9rem;
+      text-decoration: underline;
+      text-decoration-color: #ae9560;
+      width: 40%;
+      letter-spacing: 2px;
+    }
+  }
+  
+  .perks {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    width: 50%;
+    padding-bottom: 50px;
+    margin: auto;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .title {
+      font-size: 0.7rem;
+    }
+  
+    .text {
+      font-size: 0.6rem;
+    }
+    .image-with-text {
+      height: auto;
+  
+      .text2 {
+        font-size: 0.4rem;
+      }
+  
+      .map-pricelist-buttons {
+        margin-top: 1em;
+        font-size: 0.7rem;
+      }
+    }
+  
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+
+  .image-with-text {
+
+    .camper2 {
+      float: right;
+      width: 22%;
+      margin-right: 10%;
+    }
+
+    .map-pricelist-buttons {
+      margin-top: 10px;
+      font-size: 1.2rem;
+    }
+  }
+
+  .perks {
+    width: 50%;
+    margin-top: 7%;
+  }
+}

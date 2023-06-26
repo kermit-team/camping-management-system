@@ -6,12 +6,11 @@ from account.managers import UserManager
 
 
 class User(AbstractUser):
-
     username = None
     email = models.EmailField(
-        'E-mail', 
-        max_length = 255, 
-        unique = True,
+        'E-mail',
+        max_length=255,
+        unique=True,
     )
     first_name = models.CharField(
         max_length=150,
@@ -20,13 +19,17 @@ class User(AbstractUser):
         max_length=150,
     )
     phone_number = PhoneNumberField(
-        null = True,
-        blank = True,
-        unique = True,
+        null=True,
+        unique=True,
     )
     avatar = models.ImageField(
-        default = 'avatar.png',
-        upload_to = 'accounts_avatar',
+        default='avatar.png',
+        upload_to='accounts_avatar',
+    )
+    id_card = models.CharField(
+        null=True,
+        unique=True,
+        max_length=20,
     )
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [

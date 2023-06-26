@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1080" height="1080" viewBox="0 0 1080 1080" xml:space="preserve">
+<desc>Created with Fabric.js 5.2.4</desc>
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 540 540)" id="256a404f-7427-4e4f-a88f-ff922f7ec1f4"  >
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke"  x="-540" y="-540" rx="0" ry="0" width="1080" height="1080" />
+</g>
+<g transform="matrix(1 0 0 1 540 540)" id="4b0ac715-9bfa-494c-b02e-90046498f0fd"  >
+</g>
+<g transform="matrix(1 0 0 1 540 540)"  >
+<g style="" vector-effect="non-scaling-stroke"   >
+		<g transform="matrix(1 0 0 1 0 -7)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(-16, -9)" d="M 16 17 C 11.581722001353652 17 8 13.418277998646348 8 9 C 8 4.581722001353652 11.581722001353652 1 16 1 C 20.418277998646346 1 24 4.581722001353651 24 8.999999999999998 C 24 13.418277998646348 20.418277998646346 17 16 17 Z M 16 3 C 12.686291501015239 3 10 5.686291501015239 10 9 C 10 12.313708498984761 12.686291501015239 15 16 15 C 19.31370849898476 15 22 12.313708498984761 22 9 C 22 5.686291501015239 19.31370849898476 3 16 3 Z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(1 0 0 1 0 8.47)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(-16, -24.47)" d="M 23 31 L 9 31 C 6.238576250846033 31 4 28.761423749153966 4 26 L 4 22 C 4.000061578445583 21.646932708873354 4.186300546567348 21.320064315843318 4.49 21.14 L 9.49 18.14 C 9.957291628743832 17.928810407734755 10.508601287565753 18.105318808643744 10.76634440639331 18.548636973027143 C 11.02408752522087 18.991955137410542 10.90472214104799 19.558390888897904 10.490000000000002 19.86 L 6 22.57 L 6 26 C 6 27.65685424949238 7.343145750507619 29 9 29 L 23 29 C 24.65685424949238 29 26 27.65685424949238 26 26 L 26 22.57 L 21.490000000000002 19.86 C 21.14216286281513 19.702797134255846 20.914158801992695 19.361289243539975 20.90231843058125 18.979761760115803 C 20.89047805916981 18.598234276691635 21.096866952025408 18.243245380980003 21.434286800032513 18.064776164659637 C 21.771706648039615 17.88630694833927 22.181293929965964 17.915491698756416 22.490000000000002 18.14 L 27.490000000000002 21.14 C 27.80139637118119 21.315005110027126 27.99579881711072 21.64282099924163 28 22 L 28 26 C 28 28.761423749153966 25.761423749153966 31 23 31 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+</svg>

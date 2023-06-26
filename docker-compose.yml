@@ -7,7 +7,7 @@ services:
     ports:
       - '5432:5432'
     env_file:
-      - docker/.docker.env
+      - docker/.db.env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
@@ -16,11 +16,8 @@ services:
     build:
       context: ./
       dockerfile: docker/Dockerfile.front
-    environment:     
-      - CHOKIDAR_USEPOLLING=true
-      - WATCHPACK_POLLING=true
-      - FAST_REFRESH=false
-      - NODE_ENV=development
+    env_file:
+      - docker/.front.env
     ports:
       - '4200:4200'
     volumes:
@@ -35,7 +32,9 @@ services:
       context: ./
       dockerfile: docker/Dockerfile.back
     env_file:
-      - docker/.docker.env
+      - docker/.django.env
+      - docker/.db.env
+      - docker/.stripe.env
     ports:
       - '8000:8000'
     volumes:
@@ -45,5 +44,13 @@ services:
     links:
       - db
 
+  stripe-cli:
+    image: stripe/stripe-cli
+    container_name: stripe-cli
+    command: "listen --api-key $${STRIPE_API_KEY} --forward-to django:8000/api/payments/webhook/"
+    env_file:
+      - docker/.stripe.env
+    depends_on:
+      - django
 volumes:
   postgres_data:

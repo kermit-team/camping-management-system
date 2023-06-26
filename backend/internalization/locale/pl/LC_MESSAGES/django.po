@@ -1,0 +1,372 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-21 05:52+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: account/managers.py:9
+msgid "The Email must be set"
+msgstr "Adres e-mail musi zostać podany"
+
+#: account/managers.py:29
+msgid "Superuser must have is_staff=True."
+msgstr "Superużytkownik musi posiadać atrybut is_staff=True."
+
+#: account/managers.py:31
+msgid "Superuser must have is_superuser=True."
+msgstr "Superużytkownik musi posiadać atrybut is_staff=True."
+
+#: account/validators/lowercase_validator.py:12
+msgid "The password must contain at least 1 lowercase letter, a-z."
+msgstr "Hasło musi zawierać przynajmniej 1 małą literę, a-z."
+
+#: account/validators/lowercase_validator.py:19
+msgid "Your password must contain at least 1 lowercase letter, a-z."
+msgstr "Twoje hasło musi zawierać przynajmniej 1 małą literę, a-z."
+
+#: account/validators/special_character_validator.py:12
+msgid ""
+"The password must contain at least 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-+=;:"
+"\\'\",<>./?]"
+msgstr ""
+"Hasło musi zawierać przynajmniej 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-+=;:"
+"\\'\",<>./?]"
+
+#: account/validators/special_character_validator.py:19
+msgid ""
+"Your password must contain at least 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-"
+"+=;:\\'\",<>./?]"
+msgstr ""
+"Twoje hasło musi zawierać przynajmniej 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-"
+"+=;:\\'\",<>./?]"
+
+#: account/validators/uppercase_validator.py:12
+msgid "The password must contain at least 1 uppercase letter, A-Z."
+msgstr "Hasło musi zawierać przynajmniej 1 wielką literę, A-Z."
+
+#: account/validators/uppercase_validator.py:19
+msgid "Your password must contain at least 1 uppercase letter, A-Z."
+msgstr "Twoje hasło musi zawierać przynajmniej 1 wielką literę, A-Z."
+
+#: account/views/email_verification_resend_view.py:27
+#: account/views/password_reset_view.py:27
+msgid "The user with the specified email address was not found"
+msgstr "Nie znaleziono użytkownika o podanym adresie e-mail"
+
+#: account/views/email_verification_resend_view.py:33
+msgid "The user with the specified email address was already verified"
+msgstr "Użytkownik o podanym adresie e-mail jest już zweryfikowany"
+
+#: account/views/email_verification_resend_view.py:44
+#: account/views/password_reset_view.py:38
+msgid "The message has been sent"
+msgstr "Wiadomość została wysłana"
+
+#: account/views/email_verification_view.py:30
+#: account/views/password_reset_confirm_view.py:33
+msgid "Invalid link"
+msgstr "Nieprawidłowy link"
+
+#: account/views/email_verification_view.py:36
+#: account/views/password_reset_confirm_view.py:38
+msgid "Link is no longer valid"
+msgstr "Link jest już nieważny"
+
+#: account/views/email_verification_view.py:47
+msgid "E-mail has been successfully verified"
+msgstr "E-mail został pomyślnie zweryfikowany"
+
+#: account/views/group_view_set.py:25 account/views/user_view_set.py:25
+#: camping/views/camping_plot_view_set.py:26
+#: camping/views/camping_section_view_set.py:26
+#: camping/views/car_view_set.py:26 camping/views/opinion_view_set.py:27
+#: camping/views/reservation_view_set.py:28
+msgid "Invalid field name"
+msgstr "Nieprawidłowa nazwa pola"
+
+#: account/views/group_view_set.py:38 account/views/user_view_set.py:38
+#: camping/views/camping_plot_view_set.py:39
+#: camping/views/camping_section_view_set.py:39
+#: camping/views/car_view_set.py:39 camping/views/opinion_view_set.py:40
+#: camping/views/reservation_view_set.py:41
+msgid "Field does not exist"
+msgstr "Pole nie istnieje"
+
+#: account/views/group_view_set.py:152
+msgid "Group has been deleted"
+msgstr "Grupa została usunięta"
+
+#: account/views/password_reset_confirm_view.py:57
+msgid "Password reset successfully completed"
+msgstr "Hasło zostało zresetowane pomyślnie"
+
+#: account/views/user_view_set.py:163
+msgid "User has been deleted"
+msgstr "Użytkownik został usunięty"
+
+#: app/settings.py:137
+msgid "Polish"
+msgstr "Polski"
+
+#: app/settings.py:138
+msgid "English"
+msgstr "Angielski"
+
+#: camping/models/opinion.py:10
+msgid "Bad"
+msgstr "Zły"
+
+#: camping/models/opinion.py:11
+msgid "Decent"
+msgstr "Średni"
+
+#: camping/models/opinion.py:12
+msgid "Ok"
+msgstr "Ok"
+
+#: camping/models/opinion.py:13
+msgid "Great"
+msgstr "Świetny"
+
+#: camping/models/opinion.py:14
+msgid "Awesome"
+msgstr "Niesamowity"
+
+#: camping/models/payment.py:7
+msgid "Waiting for payment"
+msgstr "Oczekiwanie na płatność"
+
+#: camping/models/payment.py:8
+msgid "Canceled"
+msgstr "Anulowana"
+
+#: camping/models/payment.py:9
+msgid "Unpaid"
+msgstr "Nieopłacona"
+
+#: camping/models/payment.py:10
+msgid "Paid"
+msgstr "Opłacona"
+
+#: camping/models/payment.py:11
+msgid "Returned"
+msgstr "Zwrócona"
+
+#: camping/models/reservation.py:23
+msgid ""
+"{self.user.first_name} {self.user.last_name}, plot {self.camping_plot}, "
+"{self.date_from} - {self.date_to}"
+msgstr ""
+"{self.user.first_name} {self.user.first_name}, parcel {self.camping_plot}, "
+"{self.date_from}-{self.date_from}"
+
+#: camping/services/camping_plot_service.py:35
+#: camping/services/reservation_service.py:105
+#: camping/services/reservation_service.py:208
+msgid "Unable to create reservation for date in past tense"
+msgstr "Nie można utworzyć rezerwacji dla daty w czasie przeszłym"
+
+#: camping/services/camping_plot_service.py:96
+#: camping/services/camping_plot_service.py:122
+msgid "Given position already exists in this camping section"
+msgstr "Dana pozycja już istnieje w tej sekcji kempingu"
+
+#: camping/services/camping_plot_service.py:142
+msgid "Camping plot is used in incoming reservations"
+msgstr "Parcela jest używana w nadchodzących rezerwacjach"
+
+#: camping/services/camping_section_service.py:73
+msgid "Camping section is used in incoming reservations"
+msgstr "Sekcja kempingowa jest używana w nadchodzących rezerwacjach"
+
+#: camping/services/opinion_service.py:58
+msgid "User is unable to create opinion for the given camping plot"
+msgstr "Użytkownik nie może utworzyć opinii dla danej parceli"
+
+#: camping/services/payment_service.py:81
+msgid "Payment with given checkout id doesn't exist"
+msgstr "Płatność o podanym identyfikatorze kasy nie istnieje"
+
+#: camping/services/payment_service.py:136
+#: camping/services/payment_service.py:159
+msgid "Error occurred while trying to create payment page"
+msgstr "Wystąpił błąd podczas próby utworzenia strony płatności"
+
+#: camping/services/reservation_service.py:91
+#: camping/services/reservation_service.py:184
+msgid ""
+"User needs to have an assigned car and id card in order to make reservation"
+msgstr ""
+"Aby dokonać rezerwacji, użytkownik musi posiadać przypisany samochód i kartę identyfikacyjną"
+
+#: camping/services/reservation_service.py:123
+#: camping/services/reservation_service.py:226
+msgid "This parcel isn't available on the specified date"
+msgstr "Ta parcel nie jest dostępna w podanym terminie"
+
+#: camping/services/reservation_service.py:278
+msgid "Reservation can no longer be cancelled"
+msgstr "Rezerwacji nie można już anulować"
+
+#: camping/views/camping_plot_view_set.py:153
+msgid "Camping plot has been deleted"
+msgstr "Parcel został usunięty"
+
+#: camping/views/camping_section_view_set.py:153
+msgid "Camping section has been deleted"
+msgstr "Sekcja kempingowa została usunięta"
+
+#: camping/views/car_view_set.py:177
+msgid "Car has been deleted"
+msgstr "Samochód został usunięty"
+
+#: camping/views/car_view_set.py:189
+msgid "User has been removed from car"
+msgstr "Użytkownik został usunięty z kierowców danego pojazdu"
+
+#: camping/views/opinion_view_set.py:154
+msgid "Opinion has been deleted"
+msgstr "Opinia została usunięta"
+
+#: camping/views/reservation_view_set.py:162
+msgid "Reservation has been deleted"
+msgstr "Rezerwacja została usunięta"
+
+#: templates/account/email_verification_template.html:6
+msgid "E-mail address verification"
+msgstr "Weryfikacja adresu e-mail"
+
+#: templates/account/email_verification_template.html:9
+#: templates/account/password_reset_template.html:9
+#: templates/camping/reservation_payment_template.html:9
+msgid "Hi"
+msgstr "Cześć"
+
+#: templates/account/email_verification_template.html:10
+msgid ""
+"\n"
+"            To confirm your email address, please click on the link below:\n"
+"        "
+msgstr ""
+"\n"
+"            Aby potwierdzić swój adres e-mail, proszę kliknąć na link poniżej:\n"
+"            "
+
+#: templates/account/email_verification_template.html:16
+msgid "Verify e-mail address"
+msgstr "Zweryfikuj adres e-mail"
+
+#: templates/account/email_verification_template.html:20
+#: templates/camping/reservation_payment_template.html:20
+msgid ""
+"\n"
+"                If the button does not work for any reason, please use the "
+"link below:\n"
+"            "
+msgstr ""
+"\n"
+"                Jeśli przycisk z jakiegoś powodu nie działa, proszę użyć "
+"poniższego linku:\n"
+"                "
+
+#: templates/account/email_verification_template.html:28
+msgid ""
+"\n"
+"                If you have not registered on our site, please ignore this "
+"message.\n"
+"            "
+msgstr ""
+"\n"
+"                Jeśli nie zarejestrowałeś się na naszej stronie, prosimy "
+"o zignorowanie tej wiadomości.\n"
+"                "
+
+#: templates/account/email_verification_template.html:34
+#: templates/account/password_reset_template.html:26
+#: templates/camping/reservation_payment_template.html:34
+msgid "Regards"
+msgstr "Z wyrazami szacunku"
+
+#: templates/account/password_reset_template.html:6
+msgid "Password reset"
+msgstr "Resetowanie hasła"
+
+#: templates/account/password_reset_template.html:10
+msgid ""
+"\n"
+"                We sent you this email because we received information that "
+"you want to reset your password. \n"
+"                Once you have set your password, don't forget to log in to "
+"the application.\n"
+"            "
+msgstr ""
+"\n"
+"                Wysłaliśmy Ci tego maila, ponieważ otrzymaliśmy informację, "
+"że chcesz zresetować swoje hasło. \n"
+"                Po ustawieniu hasła nie zapomnij zalogować się do "
+"aplikacji.\n"
+"            "
+
+#: templates/account/password_reset_template.html:16
+msgid "Reset password"
+msgstr "Resetowanie hasła"
+
+#: templates/account/password_reset_template.html:19
+msgid ""
+"\n"
+"                    If the button does not work for any reason, please use "
+"the link below:\n"
+"                "
+msgstr ""
+"\n"
+"                    Jeśli przycisk z jakiegoś powodu nie działa, proszę użyć "
+"poniższego linku:\n"
+"                "
+
+#: templates/camping/reservation_payment_template.html:6
+msgid "Reservation payment"
+msgstr "Opłata rezerwacyjna"
+
+#: templates/camping/reservation_payment_template.html:10
+msgid ""
+"\n"
+"            To complete your reservation, please click on the link below to "
+"process payment:\n"
+"        "
+msgstr ""
+"\n"
+"            Aby zatwierdzić swoją rezerwację, proszę kliknąć na link "
+"poniżej w celu realizacji płatności:\n"
+"        "
+
+#: templates/camping/reservation_payment_template.html:16
+msgid "Process payment"
+msgstr "Zrealizuj płatność"
+
+#: templates/camping/reservation_payment_template.html:28
+msgid ""
+"\n"
+"                Payment link will work for 1 hour, after this time your "
+"reservation will be canceled.\n"
+"            "
+msgstr ""
+"\n"
+"                Link do płatności będzie działał przez 1 godzinę, po tym czasie "
+"rezerwacja zostanie anulowana.\n"
+"            "

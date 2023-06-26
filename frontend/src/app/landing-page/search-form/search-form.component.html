@@ -1,0 +1,48 @@
+<div class="search-container">
+    <form class="search-form" (ngSubmit)="onSubmit()" [formGroup]="search">
+        <div class="date-range-input">
+
+                <mat-date-range-input  [rangePicker]="picker" [min]="minDate" >
+                  <input [min]="minDate" matStartDate formControlName="start" placeholder="Data zameldowan..." [value]="minDate">
+                  <input matEndDate formControlName="end" placeholder="Data wymeldowan...">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+
+            <!-- <input type="date" id="check-in" class="date-input" [min]="firstDate" [value]="firstDate" [(ngModel)]="firstDate" (ngModelChange)="updateSecondDate()"/>
+            <input type="date" id="check-out" class="date-input"  [min]="minSecondDate" [value]="tomorrow"/> -->
+        </div>
+        <div class="guests-input">
+            <label for="adults">
+                <img src="..\..\assets\3643745_human_man_people_person_profile_icon.svg" alt=""
+                    class="guests-item-icon" />
+                Dorośli:</label>
+            <select id="adults" class="guests-select" formControlName="adults">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <!-- Dodaj więcej opcji, jeśli to konieczne -->
+            </select>
+            <label for="children">Dzieci:</label>
+            <select id="children" class="guests-select" formControlName="children">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <!-- Dodaj więcej opcji, jeśli to konieczne -->
+            </select>
+        </div>
+
+        <button class="search-button" type="submit">Szukaj</button>
+    </form>
+</div>

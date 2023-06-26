@@ -1,0 +1,6 @@
+{
+	"appId": "com.camping.app",
+	"appName": "Camping Bajka",
+	"webDir": "dist/frontend",
+	"bundledWebRuntime": false
+}

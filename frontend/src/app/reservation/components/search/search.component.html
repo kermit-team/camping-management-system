@@ -1,0 +1,66 @@
+<app-header></app-header>
+<div class="search">
+  <aside class="search__parameters">
+    <form class="search-form" (ngSubmit)="onSubmit()" [formGroup]="search">
+      <div class="date-range-input">
+        <mat-date-range-input [rangePicker]="picker" [min]="minDate">
+          <input
+            [min]="minDate"
+            matStartDate
+            formControlName="start"
+            [value]="minDate"
+          />
+          <input matEndDate formControlName="end" />
+        </mat-date-range-input>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </div>
+      <div class="guests-input">
+        <div class="guests-wrapper">
+          <label for="adults"> Dorośli:</label>
+          <select id="adults" class="guests-select" formControlName="adults">
+            <option *ngFor="let number of numberOfAdults" [value]="number">
+              {{ number }}
+            </option>
+          </select>
+        </div>
+        <div class="guests-wrapper">
+          <label for="children">Dzieci:</label>
+          <select
+            id="children"
+            class="guests-select"
+            formControlName="children"
+          >
+            <option *ngFor="let number of numberOfChildren" [value]="number">
+              {{ number }}
+            </option>
+          </select>
+        </div>
+        <div class="guests-wrapper">
+          <label for="babies"> Dzieci poniżej 3 roku życia:</label>
+          <select id="babies" class="guests-select" formControlName="babies">
+            <option *ngFor="let number of numberOfChildren" [value]="number">
+              {{ number }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <button class="search-button" type="submit">Szukaj</button>
+    </form>
+    <div class="map-container">
+      <a class="map-text">Zobacz mapę kempingu</a>
+    </div>
+  </aside>
+
+  <main class="search__results">
+    <app-plot
+      *ngFor="let plotEl of allPlots"
+      [plot]="plotEl"
+      [info]="this.formData"
+    ></app-plot>
+  </main>
+</div>

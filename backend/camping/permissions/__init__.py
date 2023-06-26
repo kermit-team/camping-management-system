@@ -1,0 +1,3 @@
+from .user_related_to_object_or_staff_and_anon_read_only_permissions import \
+    UserRelatedToObjectOrStaffAndAnonReadOnlyPermissions
+from .user_related_to_object_or_staff_permissions import UserRelatedToObjectOrStaffPermissions

@@ -1,0 +1,50 @@
+[
+{
+    "model": "camping.reservation",
+    "pk": 1,
+    "fields": {
+        "date_from": "2023-06-21",
+        "date_to": "2023-06-27",
+        "number_of_adults": 2,
+        "number_of_children": 0,
+        "number_of_babies": 0,
+        "user": 3,
+        "car": 1,
+        "camping_plot": 1,
+        "payment": 1
+    }
+},
+{
+    "model": "camping.reservation",
+    "pk": 2,
+    "fields": {
+        "date_from": "2023-07-01",
+        "date_to": "2023-07-11",
+        "number_of_adults": 3,
+        "number_of_children": 4,
+        "number_of_babies": 2,
+        "user": 3,
+        "car": 2,
+        "camping_plot": 6,
+        "payment": 2
+    }
+},
+{
+    "model": "camping.payment",
+    "pk": 1,
+    "fields": {
+        "status": "P",
+        "stripe_checkout_id": "cs_test_b17zDHBHhhtMmlZaVNh65s4c0j6xurt0yCD0CEdbriLd3JyAhx2yCrf6om",
+        "price": "700.00"
+    }
+},
+{
+    "model": "camping.payment",
+    "pk": 2,
+    "fields": {
+        "status": "C",
+        "stripe_checkout_id": "cs_test_b1B8unv5e0ifOFLtpfnT8PGaUPCdf2WC0ufuoY5uyHzSsQn8kHG3jMzMsL",
+        "price": "1250.00"
+    }
+}
+]

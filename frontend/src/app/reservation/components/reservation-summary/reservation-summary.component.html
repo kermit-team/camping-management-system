@@ -1,0 +1,143 @@
+<app-header></app-header>
+<div class="heading-wrapper">
+  <h1 class="heading">Podsumowanie rezerwacji</h1>
+</div>
+<main class="content-wrapper">
+  <div class="summary">
+    <section class="summary__plot">
+      <div class="summary__plot-heading">
+        <h2 class="summary__plot-heading--text">Dane parceli</h2>
+        <div class="summary__plot-heading-change" [routerLink]="['/searchresults']">
+          <h4 class="summary__plot-heading-change--text">Zmień</h4>
+          <img
+            src="../../../../assets/8666681_edit_icon.svg"
+            alt="Edit"
+            class="summary__plot-heading-change--icon"
+          />
+        </div>
+      </div>
+      <div class="summary__plot-data-container">
+        <img src="../../../../assets/plot.jpg" alt="Plot" class="plot-photo" />
+        <div class="summary__plot-data">
+          <p class="summary__plot-data--text">
+            Numer parceli:
+            <span class="bold">{{ summary.camping_plot.position }}</span>
+          </p>
+          <p class="summary__plot-data--text">
+            Sektor:
+            <span class="bold">{{
+              summary.camping_plot.camping_section.name
+            }}</span>
+          </p>
+          <p class="summary__plot-data--text">
+            Okres pobytu:
+            <span class="bold"
+              >{{ summary.date_from }} - {{ summary.date_to }}</span
+            >
+          </p>
+          <p class="summary__plot-data--text">
+            Liczba nocy: <span class="bold">{{ summary.number_of_days }}</span>
+          </p>
+          <p class="summary__plot-data--text">
+            Liczba dorosłych:
+            <span class="bold">{{ summary.number_of_adults }}</span>
+          </p>
+          <p class="summary__plot-data--text">
+            Liczba dzieci:
+            <span class="bold">{{ summary.number_of_children }}</span>
+          </p>
+          <p class="summary__plot-data--text">
+            Liczba niemowli:
+            <span class="bold">{{ summary.number_of_babies }}</span>
+          </p>
+        </div>
+      </div>
+      <div class="summary__plot-heading">
+        <h2 class="summary__plot-heading--text">Dane osobowe</h2>
+        <div class="summary__plot-heading-change" [routerLink]="['/profile']">
+          <h4 class="summary__plot-heading-change--text">Zmień</h4>
+          <img
+            src="../../../../assets/8666681_edit_icon.svg"
+            alt="Edit"
+            class="summary__plot-heading-change--icon"
+          />
+        </div>
+      </div>
+      <p class="userError" *ngIf="!isUserValid">Uzupełnij swoje dane</p>
+      <div class="summary__plot-user-container">
+        <div class="summary__plot-user-headers">
+          <p class="summary__plot-data--text">Imię i nazwisko</p>
+          <p class="summary__plot-data--text">Adres email</p>
+          <p class="summary__plot-data--text">Numer telefonu</p>
+          <p class="summary__plot-data--text">Numer dowodu osobistego</p>
+          <p class="summary__plot-data--text">Samochody</p>
+        </div>
+        <div class="summary__plot-user-data">
+          <p class="summary__plot-data--text">
+            {{ user.first_name }} {{ user.last_name }}
+          </p>
+          <p class="summary__plot-data--text">{{ user.email }}</p>
+          <p class="summary__plot-data--text">
+            {{ user.phone_number ? user.phone_number : "Brak numeru telefonu" }}
+          </p>
+          <p class="summary__plot-data--text">
+            {{ user.id_card ? user.id_card : "Brak numeru dowodu" }}
+          </p>
+          <div class="summary__plot-data--cars">
+            <div
+              *ngFor="let car of user.cars"
+              (click)="setSelectedCar(car)"
+              [class]="
+                selectedCar == car
+                  ? 'summary__plot-data--car-selected'
+                  : 'summary__plot-data--car'
+              "
+            >
+              <app-car [carId]="car"></app-car>
+            </div>
+          </div>
+          <p class="summary__plot-data--cars-text red" *ngIf="!selectedCar">
+            Wybierz samochód, którym wjedziesz na kemping
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="payment">
+    <div class="payment__container">
+      <div class="summary__plot-heading">
+        <h2 class="summary__plot-heading--text">Płatność</h2>
+      </div>
+      <div class="summary__plot-payment-container">
+        <div class="summary__plot-user-headers">
+          <p class="summary__plot-data--text">Kwota wynajmu parceli</p>
+          <p class="summary__plot-data--text">Kwota za dorosłych</p>
+          <p class="summary__plot-data--text">Kwota za dzieci</p>
+          <p class="summary__plot-data--text">Kwota za niemowlęta</p>
+        </div>
+        <div class="summary__plot-payment">
+          <p class="summary__plot-data--text">
+            <span class="gray">{{ summary.number_of_days }}x </span
+              >{{ summary.camping_plot.camping_section.plot_price }}zł
+          </p>
+          <p class="summary__plot-data--text">
+            <span class="gray">{{ summary.number_of_adults }}x </span
+            >{{ summary.camping_plot.camping_section.price_per_adult }}zł
+          </p>
+          <p class="summary__plot-data--text">
+            <span class="gray">{{ summary.number_of_children }}x </span
+            >{{ summary.camping_plot.camping_section.price_per_child }}zł
+          </p>
+          <p class="summary__plot-data--text">
+            <span class="gray">{{ summary.number_of_babies }}x </span>0zł
+          </p>
+        </div>
+      </div>
+      <div class="payment__sum-container">
+        <h3 class="payment__sum--text">Łączna kwota</h3>
+        <h3 class="payment__sum--text">{{ summary.price }}zł</h3>
+      </div>
+      <button class="payment__button" (click)="createReservation()">Zapłać</button>
+    </div>
+  </div>
+</main>

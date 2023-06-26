@@ -1,0 +1,22 @@
+[
+{
+    "model": "camping.car",
+    "pk": 1,
+    "fields": {
+        "registration_plate": "SPS12345",
+        "drivers": [
+            3
+        ]
+    }
+},
+{
+    "model": "camping.car",
+    "pk": 2,
+    "fields": {
+        "registration_plate": "SJ98123",
+        "drivers": [
+            3
+        ]
+    }
+}
+]

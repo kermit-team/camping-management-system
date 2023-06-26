@@ -1,0 +1,46 @@
+[
+{
+    "model": "account.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$MWyes0aqT61YW2mjpOQeRJ$KWE7T3NqTQKdbT0YbC1GMbenmnsM/xAFkaYOIvttai0=",
+        "last_login": null,
+        "is_superuser": false,
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-06-18T21:56:10.217Z",
+        "email": "mateuszdwyk@gmail.com",
+        "first_name": "Mateusz",
+        "last_name": "Dworaczyk",
+        "phone_number": null,
+        "avatar": "avatar.png",
+        "id_card": "XYZ987654",
+        "groups": [
+            3
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "account.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$hT8D2fejdJr1z8SS7I54cm$V5VUzxGtaSNm0M9fMmfXkkn8N8PNKe2v2QujU7u4cbo=",
+        "last_login": null,
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-18T21:56:38.590Z",
+        "email": "walasikszymon@gmail.com",
+        "first_name": "Szymon",
+        "last_name": "Walasik",
+        "phone_number": null,
+        "avatar": "avatar.png",
+        "id_card": "ABC123456",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+}
+]

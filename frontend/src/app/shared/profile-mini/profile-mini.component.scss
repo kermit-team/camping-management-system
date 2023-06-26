@@ -1,0 +1,64 @@
+.profile-mini-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 4.5em;
+    right: 3rem;
+    font-size: 1em;
+    .profile-mini-button{
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        .circle {
+            width: auto;
+            height: auto;
+            padding: 0.6em;
+            border-radius: 50%;
+            background-color: #ae9560;
+            align-self: flex-end;
+        }
+        .user-data-profile {
+            margin-left: 1em;
+        }
+    }
+    .dropdown {
+        display: none;
+        color: white;
+        position: absolute;
+        top: 100%;
+        left: 10%;
+        background-color: #ae9560;
+    }
+    &:hover .dropdown {
+        display: block;
+    }
+    .dropdown-option{
+        padding: 1em;
+        cursor: pointer;
+        border: 1px solid white;
+        text-align: center;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .profile-mini-container{
+        top: 1.5em;
+        right: 0.5rem;
+        font-size: 0.6em;
+        .dropdown {
+            left: 20%;
+        }
+        .dropdown-option{
+            padding: 0.5em;
+        }
+    }
+}
+@media only screen and (min-width: 1600px) {
+    .profile-mini-button{
+        top: 5em;
+        right: 8rem;
+    }
+}
+

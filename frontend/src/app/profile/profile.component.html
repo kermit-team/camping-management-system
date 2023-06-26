@@ -1,0 +1,193 @@
+<app-header></app-header>
+<div class="container">
+  <nav class="navigation">
+    <ul class="navigation__list">
+      <li class="navigation__list-item">
+        <img
+          src="../../assets/185082_man_user_people_icon.svg"
+          alt=""
+          class="navigation__list-item--icon"
+        />
+        <span class="navigation__list-item--text">Dane osobowe</span>
+      </li>
+      <li class="navigation__list-item">
+        <img
+          src="../../assets/3687823_adventure_automotive_car_transport_transportation_icon.svg"
+          alt="Avatar"
+          class="navigation__list-item--icon"
+        />
+        <span class="navigation__list-item--text">Samochód</span>
+      </li>
+    </ul>
+  </nav>
+  <main class="info">
+    <div class="info__container">
+      <div class="info__title-container">
+        <h1 class="info__title">Dane osobowe</h1>
+        <h3 class="info__subtitle">Zaktualizuj swoje dane</h3>
+      </div>
+      <div class="info__photo-container">
+        <img [src]="defaultPhotoUrl" alt="camera" class="info__photo" />
+      </div>
+    </div>
+    <div class="table">
+      <div class="row">
+        <div class="cell">Imię</div>
+        <div class="cell" *ngIf="!isEditingName">
+          {{ user.first_name }}
+        </div>
+        <div class="cell" *ngIf="isEditingName">
+          <form [formGroup]="userNameForm">
+            <input type="text" formControlName="first_name" class="input" />
+          </form>
+        </div>
+        <div class="cell">
+          <button
+            class="submit"
+            *ngIf="isEditingName"
+            (click)="submitForm('name')"
+          >
+            Zapisz</button
+          ><a class="edit" (click)="toggleEditingName()">{{
+            this.isEditingName ? "Anuluj" : "Edytuj"
+          }}</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">Nazwisko</div>
+        <div class="cell" *ngIf="!isEditingLastName">
+          {{ user.last_name }}
+        </div>
+        <div class="cell" *ngIf="isEditingLastName">
+          <form [formGroup]="userLastNameForm" class="input-form">
+            <input type="text" formControlName="last_name" class="input" />
+          </form>
+        </div>
+        <div class="cell">
+          <button
+            class="submit"
+            *ngIf="isEditingLastName"
+            (click)="submitForm('lastname')"
+          >
+            Zapisz</button
+          ><a class="edit" (click)="toggleEditingLastName()">{{
+            this.isEditingLastName ? "Anuluj" : "Edytuj"
+          }}</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">Adres email</div>
+        <div class="cell">
+          {{ user.email }}
+        </div>
+        <div class="cell email"></div>
+      </div>
+      <div class="row">
+        <div class="cell">Numer telefonu</div>
+        <div class="cell" *ngIf="!isEditingPhone">
+          {{ user.phone_number ? user.phone_number : "Brak numeru telefonu" }}
+        </div>
+        <div class="cell" *ngIf="isEditingPhone">
+          <form [formGroup]="userPhoneForm">
+            <input type="text" formControlName="phone_number" class="input" />
+          </form>
+        </div>
+        <div class="cell">
+          <button
+            class="submit"
+            *ngIf="isEditingPhone"
+            (click)="submitForm('phone')"
+          >
+            Zapisz</button
+          ><a class="edit" (click)="toggleEditingPhone()">{{
+            this.isEditingPhone ? "Anuluj" : "Edytuj"
+          }}</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">Numer dowodu</div>
+        <div class="cell" *ngIf="!isEditingId">
+          {{
+            user.id_card
+              ? user.id_card.substr(0, 2) + "******" + user.id_card.slice(-1)
+              : "Brak numeru dowodu osobistego"
+          }}
+        </div>
+        <div class="cell" *ngIf="isEditingId">
+          <form [formGroup]="userIdForm">
+            <input type="text" formControlName="id_card" class="input" />
+          </form>
+        </div>
+        <div class="cell">
+          <button class="submit" *ngIf="isEditingId" (click)="submitForm('id')">
+            Zapisz</button
+          ><a class="edit" (click)="toggleEditingId()">{{
+            this.isEditingId ? "Anuluj" : "Edytuj"
+          }}</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">Hasło</div>
+        <div class="cell" *ngIf="!isEditingPassword">*******</div>
+        <div class="cell" *ngIf="isEditingPassword">
+          <form [formGroup]="userPasswordForm">
+            <input type="text" formControlName="password" />
+          </form>
+        </div>
+        <div class="cell">
+          <!-- <button
+            class="submit"
+            *ngIf="isEditingPassword"
+            (click)="submitForm('password')"
+          >
+            Zapisz</button
+          ><a class="edit" (click)="toggleEditingPassword()">{{
+            this.isEditingPassword ? "Anuluj" : "Edytuj"
+          }}</a> -->
+        </div>
+      </div>
+    </div>
+    <div class="info__container">
+      <div class="info__title-container">
+        <h1 class="info__title">Samochody</h1>
+        <h3 class="info__subtitle">
+          Zarządzaj danymi samochodów przypisanych do konta
+        </h3>
+      </div>
+    </div>
+    <div class="car__wrap">
+      <div class="car__container">
+        <app-car
+          *ngFor="let carEl of user.cars"
+          [carId]="carEl"
+          [mode]="mode"
+          (carDeleted)="onCarDeleted($event)"
+        ></app-car>
+        <div class="car" *ngIf="mode == 2">
+          <div class="car__add" (click)="addCar()">
+            <img
+              src="../../assets/8666749_plus_add_icon.svg"
+              class="car-check"
+              alt="X"
+            />
+          </div>
+          <img
+            src="../../assets/3687823_adventure_automotive_car_transport_transportation_icon.svg"
+            alt="car"
+            class="car-icon"
+          />
+          <form  class="car__add-form" [formGroup]="carAddForm">
+            <input type="text" class="car-input" formControlName="registration_plate"/>
+          </form>
+        </div>
+      </div>
+      <div class="car__button">
+        <button class="car__button--add" (click)="addCarMode()">Dodaj</button>
+        <button class="car__button--delete" (click)="deleteCarMode()">
+          Usuń
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
+<app-footer></app-footer>

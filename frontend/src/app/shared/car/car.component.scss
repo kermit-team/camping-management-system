@@ -1,0 +1,38 @@
+$primary: #ae9560;
+.car {
+  position: relative;
+    width:110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid $primary;
+    border-radius: 2px;
+    padding: 1.2em;
+    min-width: 100px;
+  }
+  .car-icon {
+    width: 60px;
+    height: 60px;
+    filter: invert(56%) sepia(68%) saturate(233%) hue-rotate(3deg) brightness(94%) contrast(91%);
+  }
+  .car-text {
+    padding-top: .5em;
+  }
+  .car__delete {
+    position: absolute;
+    background-color: rgb(148, 54, 54);
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    right: -7px;
+    top: -7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+.car-check {
+  filter: invert(1);
+  width: 15px;
+  height: 15px;
+}

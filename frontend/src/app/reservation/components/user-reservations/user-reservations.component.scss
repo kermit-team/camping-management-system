@@ -1,0 +1,33 @@
+$primary: #ae9560;
+@import url("https://fonts.cdnfonts.com/css/playfair-display");
+.heading-wrapper {
+    width: fit-content;
+    margin: auto;
+    margin-top: 4vh;
+    padding: 0 60px 1vh 60px;
+    text-align: center;
+    border-bottom: 1px solid $primary;
+  }
+  .heading {
+    font-family: "Playfair Display", sans-serif;
+    font-size: 36px;
+  }
+  .reservation {
+    width: 50vw;
+    margin: auto;
+    margin-top: 6vh;
+  }
+  .reservation-item {
+    width: 100%;
+    margin-bottom: 2vh;
+  }
+
+  @media only screen and (max-width: 1400px) {
+    .heading-wrapper {
+        margin-top: 7vh;
+        padding: 0 40px 1vh 40px;
+    }
+    .reservation {
+      width: 90vw;
+    }
+  }
