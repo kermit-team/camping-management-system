@@ -22,4 +22,8 @@ export class ReservationService {
     const params = new HttpParams().set('user_id',bodyString);
     return this._http.get<ReservationResponse[]>(`${environment.baseUrl}${ApiPaths.Reservations}`,{params});
   }
+
+  deleteReservation(id: number): Observable<any>{
+    return this._http.delete<any>(`${environment.baseUrl}${ApiPaths.Reservations}${id}/`)
+  }
 }

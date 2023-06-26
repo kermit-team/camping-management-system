@@ -21,3 +21,13 @@ $primary: #ae9560;
     width: 100%;
     margin-bottom: 2vh;
   }
+
+  @media only screen and (max-width: 1400px) {
+    .heading-wrapper {
+        margin-top: 7vh;
+        padding: 0 40px 1vh 40px;
+    }
+    .reservation {
+      width: 90vw;
+    }
+  }

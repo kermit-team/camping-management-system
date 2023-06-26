@@ -64,3 +64,16 @@ $primary: #ae9560;
  button {
    box-shadow: 8px 8px 36px -11px rgba(174, 149, 96, 1);
  }
+
+ @media only screen and (max-width: 1400px) {
+.plot__wrapper {
+  display: block;
+}
+.plot__info--show-more {
+  display: none;
+}
+.plot__photo {
+  width: 100%;
+  height: auto;
+}
+}

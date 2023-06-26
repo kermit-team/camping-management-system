@@ -21,7 +21,7 @@
       <h2 class="reservation__info--number">
         {{ reservation.payment.price }}zł
       </h2>
-      <p class="reservation__cancel" *ngIf="canCancel">Odwołaj</p>
+      <p class="reservation__cancel" *ngIf="canCancel && reservation.payment.status == 'Opłacona'" (click)="cancelReservation()">Odwołaj</p>
     </div>
   </div>
 </div>

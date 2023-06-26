@@ -80,8 +80,7 @@
         <div class="cell">
           {{ user.email }}
         </div>
-
-        <div class="cell"></div>
+        <div class="cell email"></div>
       </div>
       <div class="row">
         <div class="cell">Numer telefonu</div>
@@ -136,7 +135,7 @@
           </form>
         </div>
         <div class="cell">
-          <button
+          <!-- <button
             class="submit"
             *ngIf="isEditingPassword"
             (click)="submitForm('password')"
@@ -144,7 +143,7 @@
             Zapisz</button
           ><a class="edit" (click)="toggleEditingPassword()">{{
             this.isEditingPassword ? "Anuluj" : "Edytuj"
-          }}</a>
+          }}</a> -->
         </div>
       </div>
     </div>

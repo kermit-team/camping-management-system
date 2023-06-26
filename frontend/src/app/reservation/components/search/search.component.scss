@@ -1,110 +1,121 @@
 $primary: #ae9560;
 .search {
-    margin: auto;
-    margin-top: 6vh;
-    margin-bottom: 5vh;
-    width: 70vw;
-    height: auto; /* Change height to auto */
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
+  margin: auto;
+  margin-top: 6vh;
+  margin-bottom: 5vh;
+  width: 70vw;
+  height: auto; /* Change height to auto */
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
 }
 .search__results {
-width: 80%;
+  width: 80%;
 }
 .search__parameters {
-    min-width: 300px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-right: 20px;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 20px;
 }
 .search-form {
-    display: flex;
-    flex-direction: column;
-      background-color: white;
-      display: flex;
-      width: 100%;
-      background-color: $primary;
-      padding: 20px;
-      height: fit-content;
-      box-shadow: 8px 8px 31px -9px rgba(174, 149, 96, 1);
-}      
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  display: flex;
+  width: 100%;
+  background-color: $primary;
+  padding: 20px;
+  height: fit-content;
+  box-shadow: 8px 8px 31px -9px rgba(174, 149, 96, 1);
+}
 .date-range-input {
-    display: flex;
-    align-items: center;
-    color: white;
+  display: flex;
+  align-items: center;
+  color: white;
 }
 button {
-    background-color: white;
-    color: $primary;
-    
+  background-color: white;
+  color: $primary;
 }
 mat-datepicker-toggle {
-    color: white !important;
+  color: white !important;
 }
 .mat-date-range-input-separator {
-    color: white !important;
+  color: white !important;
 }
 .guests-input {
-    color: white;
+  color: white;
 }
 .guests-item-icon {
-    width: 20px;
-    height: 20px;
-    filter: invert(1);
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
 }
-.guests-wrapper{
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
+.guests-wrapper {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 }
 .guests-select {
-    margin-left: auto;
-    border: 1px white solid;
-    padding: 5px;
-    width:20%;
-    border-radius: 2px;
-    
+  margin-left: auto;
+  border: 1px white solid;
+  padding: 5px;
+  width: 20%;
+  border-radius: 2px;
 }
-.map-container{
+.map-container {
+  margin-top: 40px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $primary;
+  width: fit-content;
+}
+//   .date-range-input {
+//     display: flex;
+//     align-items: center;
+//     border-bottom: 1px solid $primary;
+//     .date-input {
+//       padding: 0.25rem;
+//       border: none;
+//       border-bottom: 1px solid $primary;
+//       outline: none;
+//     }
+//   }
+//   .guests-input {
+//     display: flex;
+//     align-items: center;
+//     border-bottom: 1px solid $primary;
+//     .guests-item-icon{
+//       margin-left: 2rem;
+//       width: 1rem;
+//       height: 1rem;
+//     }
+//     .guests-select {
+//       padding: 0.25rem;
+//       border: none;
+//       background-color: white;
+//       margin-right: 1rem;
+
+//     }
+//   }
+//   .search-button {
+//     font-size: 1rem;
+//     text-align: center;
+//     padding: 0 0.5rem 0 0.5rem;
+//     margin-left: 1rem;
+//   }
+@media only screen and (max-width: 1400px) {
+  .search {
+    margin-top: 10vh;
+    display: block;
+    width: 90vw;
+  }
+  .search__parameters {
+    width: 100%;
+  }
+  .search__results {
     margin-top: 40px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid $primary;
-    width: fit-content;
+    width: 100%;
+  }
 }
-    //   .date-range-input {
-    //     display: flex;
-    //     align-items: center;
-    //     border-bottom: 1px solid $primary;
-    //     .date-input {
-    //       padding: 0.25rem;
-    //       border: none;
-    //       border-bottom: 1px solid $primary;
-    //       outline: none;
-    //     }
-    //   }
-    //   .guests-input {
-    //     display: flex;
-    //     align-items: center;
-    //     border-bottom: 1px solid $primary;
-    //     .guests-item-icon{
-    //       margin-left: 2rem;
-    //       width: 1rem;
-    //       height: 1rem;
-    //     }
-    //     .guests-select {
-    //       padding: 0.25rem;
-    //       border: none;
-    //       background-color: white;
-    //       margin-right: 1rem;
-          
-    //     }
-    //   }
-    //   .search-button {
-    //     font-size: 1rem;
-    //     text-align: center;
-    //     padding: 0 0.5rem 0 0.5rem;
-    //     margin-left: 1rem;
-    //   }
-    

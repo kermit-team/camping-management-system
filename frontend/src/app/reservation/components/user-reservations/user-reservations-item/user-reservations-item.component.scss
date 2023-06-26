@@ -29,10 +29,32 @@ $primary: #ae9560;
     margin-left: auto;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 .reservation__cancel {
     text-align: right;
     margin-top: auto;
     cursor: pointer;
     color: $primary;
+}
+@media only screen and (max-width: 1400px) {
+  .reservation {
+    padding: 3vw;
+  }
+  .reservation__photo {
+    width: 100%;
+    height: calc(28px + 48px + 6vh);
+    margin-right: 1.5vw;
+  }
+  .reservation__info--number {
+    font-size: 20px;
+    margin-bottom: 0;
+}
+.reservation {
+  display: block;
+}
+.reservation__cancel {
+  position: absolute;
+  right: 0;
+}
 }

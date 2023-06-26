@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Car, Payment, PlotResponse, ReservationResponse } from 'src/app/reservation/reservation.models';
+import { ReservationService } from 'src/app/reservation/reservation.service';
 import { UserResponse } from 'src/app/shared/user.models';
 
 @Component({
@@ -8,6 +9,7 @@ import { UserResponse } from 'src/app/shared/user.models';
   styleUrls: ['./user-reservations-item.component.scss']
 })
 export class UserReservationsItemComponent implements OnInit {
+  constructor(private _reservationService: ReservationService){}
 
   @Input() reservation: ReservationResponse = {
     id: 0,
@@ -22,6 +24,7 @@ export class UserReservationsItemComponent implements OnInit {
     number_of_babies: 0,
 };
 canCancel: boolean = false;
+message: string = '';
 
 ngOnInit(): void {
   const targetDate = new Date(this.reservation.date_from);
@@ -31,12 +34,20 @@ ngOnInit(): void {
   
   if (currentDate.getTime() <= minDate.getTime()) {
     this.canCancel = true;
-    console.log(this.canCancel)
   } else {
     this.canCancel = false;
-    console.log(this.canCancel)
   }
 }
 
+cancelReservation(){
+  this._reservationService.deleteReservation(this.reservation.id).subscribe(
+    res => {
+this.message = "Pomyślnie usunięto"
+    },
+    err => {
+      this.message = "Błąd"
+    }
+  )
+}
 
 }

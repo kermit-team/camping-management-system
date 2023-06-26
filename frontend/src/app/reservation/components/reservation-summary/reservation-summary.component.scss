@@ -9,9 +9,10 @@ $primary: #ae9560;
   border-bottom: 1px solid $primary;
 }
 .content-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 6vw;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  gap: 6vw;
 }
 .heading {
   font-family: "Playfair Display", sans-serif;
@@ -21,7 +22,7 @@ $primary: #ae9560;
   margin-top: 6vh;
   margin-bottom: 5vh;
   width: 40vw;
-  height: auto; 
+  height: auto;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -70,8 +71,8 @@ $primary: #ae9560;
   gap: 2vh;
 }
 .plot-photo {
-  width: calc(12vh + 16px * 8);
-  height: calc(12vh + 16px * 8);
+  width: calc(12vh + 16px * 9);
+  height: calc(12vh + 16px * 9);
   margin-right: 4vh;
 }
 .bold {
@@ -91,48 +92,73 @@ $primary: #ae9560;
   border-radius: 2px;
 }
 .red {
-    color: red;
+  color: red;
 }
 .payment {
-    //margin: auto;
-    margin-top: 6vh;
-    margin-bottom: 5vh;
-    width: 20vw;
-    height: auto; /* Change height to auto */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  //margin: auto;
+  margin-top: 6vh;
+  margin-bottom: 5vh;
+  width: 20vw;
+  height: auto; /* Change height to auto */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
-.summary__plot-payment{
-    margin-left: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2vh;
-    text-align: right;
+.summary__plot-payment {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  text-align: right;
 }
 .summary__plot-payment-container {
-    display: flex;
-    border-bottom: 1px solid rgba(138, 138, 138, 0.349);
+  display: flex;
+  border-bottom: 1px solid rgba(138, 138, 138, 0.349);
 }
 .gray {
-    color: gray;
+  color: gray;
 }
-.summary__plot-payment .summary__plot-data--text:last-child{
-    margin-bottom: 3vh;
+.summary__plot-payment .summary__plot-data--text:last-child {
+  margin-bottom: 3vh;
 }
 .payment__sum-container {
-    display: flex;
-    margin-top: 3vh;
-    margin-bottom: 3vh;
+  display: flex;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
 }
 .payment__sum--text {
-    font-weight: 600;
+  font-weight: 600;
 }
-.payment__sum--text:last-child{
-    margin-left: auto;
+.payment__sum--text:last-child {
+  margin-left: auto;
 }
 .payment__button {
-    width: 100%;
+  width: 100%;
 }
 
-
+@media only screen and (max-width: 1400px) {
+  .heading-wrapper {
+    margin-top: 10vh;
+    padding: 0 35px 1vh 35px;
+  }
+  .content-wrapper {
+    display: block;
+    width: 90vw;
+  }
+  .summary {
+    width: 100%;
+  }
+  .summary__plot-data-container {
+    display: block;
+  }
+  .plot-photo {
+    width: 100%;
+    margin-bottom: 2vh;
+  }
+  .summary__plot-data--cars {
+    gap: calc(1vh - 2px);
+  }
+  .payment {
+    width: 100%;
+  }
+}
