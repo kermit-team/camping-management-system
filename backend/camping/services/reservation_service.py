@@ -15,7 +15,7 @@ class ReservationService:
 
     @staticmethod
     def is_reservation_cancelable(reservation: Reservation) -> bool:
-        delta = date.today() - reservation.date_from
+        delta = reservation.date_from - date.today()
         return delta.days >= 7
 
     @staticmethod
