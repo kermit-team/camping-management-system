@@ -76,7 +76,7 @@ class ReservationService:
     @staticmethod
     def get_reservation(pk: int) -> Dict[str, Any]:
         try:
-            reservation = Reservation.objects.get(pk)
+            reservation = Reservation.objects.get(pk=pk)
             response = {'status': 'Success', 'content': reservation}
         except Exception as err:
             response = {'status': 'Error', 'errors': errors_serializer(err)}
@@ -167,7 +167,7 @@ class ReservationService:
         try:
             checkout_url = None
             if reservation_data:
-                reservation = Reservation.objects.get(pk)
+                reservation = Reservation.objects.get(pk=pk)
                 errors = {}
 
                 if not ReservationService.is_reservation_updatable(reservation):
@@ -273,7 +273,7 @@ class ReservationService:
     @staticmethod
     def delete_reservation(pk: int) -> Dict[str, Any]:
         try:
-            reservation = Reservation.objects.get(pk)
+            reservation = Reservation.objects.get(pk=pk)
             if not ReservationService.is_reservation_cancelable(reservation):
                 raise Exception(json.dumps(
                     {'reservation': _("Reservation can no longer be cancelled")},
